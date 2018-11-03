@@ -387,6 +387,6 @@ nnoremap <C-l> :nohl<CR><C-l>:echo "Search Cleared"<CR>
 	  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 
-#copy and past with gvim
+" copy and past with gvim
 vnoremap <C-c> "+y
 map <C-v> "+p
