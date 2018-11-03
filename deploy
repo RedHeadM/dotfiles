@@ -19,8 +19,8 @@ prompt_install() {
 			sudo pacman -S $1
 
 		else
-			echo "I'm not sure what your package manager is! Please install $1 on your own and run this deploy script again. Tests for package managers are in the deploy script you just ran starting at line 13. Feel free to make a pull request at https://github.com/parth/dotfiles :)" 
-		fi 
+			echo "I'm not sure what your package manager is! Please install $1 on your own and run this deploy script again. Tests for package managers are in the deploy script you just ran starting at line 13. Feel free to make a pull request at https://github.com/parth/dotfiles :)"
+		fi
 	fi
 }
 
@@ -51,10 +51,10 @@ check_default_shell() {
 }
 
 echo "We're going to do the following:"
-echo "1. Check to make sure you have zsh, vim, and tmux installed"
+echo "1. Check to make sure you have zsh, nvim, and tmux installed"
 echo "2. We'll help you install them if you don't"
 echo "3. We're going to check to see if your default shell is zsh"
-echo "4. We'll try to change it if it's not" 
+echo "4. We'll try to change it if it's not"
 
 echo "Let's get started? (y/n)"
 old_stty_cfg=$(stty -g)
@@ -62,7 +62,7 @@ stty raw -echo
 answer=$( while ! head -c 1 | grep -i '[ny]' ;do true ;done )
 stty $old_stty_cfg
 if echo "$answer" | grep -iq "^y" ;then
-	echo 
+	echo
 else
 	echo "Quitting, nothing was changed."
 	exit 0
@@ -70,8 +70,8 @@ fi
 
 
 check_for_software zsh
-echo 
-check_for_software vim
+echo
+check_for_software nvim
 echo
 check_for_software tmux
 echo
@@ -87,14 +87,19 @@ stty $old_stty_cfg
 if echo "$answer" | grep -iq "^y" ;then
 	mv ~/.zshrc ~/.zshrc.old
 	mv ~/.tmux.conf ~/.tmux.conf.old
-	mv ~/.vimrc ~/.vimrc.old
+	if [ ! -f ~/.config/nvim/init.vim ]
+	then
+			mkdir ~/.config/nvim/
+			touch ~/.config/nvim/init.vim
+	fi
+	mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.old
 else
 	echo -e "\nNot backing up old dotfiles."
 fi
 
 printf "source '$HOME/dotfiles/zsh/zshrc_manager.sh'" > ~/.zshrc
-printf "so $HOME/dotfiles/vim/vimrc.vim" > ~/.vimrc
 printf "source-file $HOME/dotfiles/tmux/tmux.conf" > ~/.tmux.conf
+printf "so $HOME/dotfiles/nvim/init.vim" > ~/.config/nvim/init.vim
 
 echo
 echo "Please log out and log back in for default shell to be initialized."
