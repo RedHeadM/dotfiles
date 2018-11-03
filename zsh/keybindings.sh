@@ -10,12 +10,12 @@
 	function git_prepare() {
 		if [ -n "$BUFFER" ];
 			then
-				BUFFER="git add -A && git commit -m \"$BUFFER\" && git push"
+				BUFFER="git commit -a -m \"$BUFFER\" && git push"
 		fi
 
 		if [ -z "$BUFFER" ];
 			then
-				BUFFER="git add -A && git commit -v && git push"
+				BUFFER="git add -u && git commit -v && git push"
 		fi
 				
 		zle accept-line
