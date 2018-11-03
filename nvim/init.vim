@@ -385,3 +385,8 @@ nnoremap <C-l> :nohl<CR><C-l>:echo "Search Cleared"<CR>
 	" https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
 	autocmd FileChangedShellPost *
 	  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+
+
+#copy and past with gvim
+vnoremap <C-c> "+y
+map <C-v> "+p
