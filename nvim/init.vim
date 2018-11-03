@@ -392,3 +392,5 @@ vnoremap <C-c> "+y
 map <C-v> "+p
 
 	set mouse=a
+" caps lock to esc
+nnoremap <Tab> <Esc>
