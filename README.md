@@ -94,4 +94,7 @@ Each plugin is sensitive to where you are and what you're doing, they reveal the
 * Copy buffer is coppied to xclip.
 * Status bar tells you date, time, user, and hostname. Especially useful with nested ssh sessions.
 *
-* setxkbmap -option caps:escape 
+*
+## nvvim installation:
+- http://nvim.fisadev.com/
+

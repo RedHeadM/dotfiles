@@ -43,8 +43,8 @@ Plug 'arielrossanigo/dir-configs-override.vim'
 Plug 'scrooloose/nerdcommenter'
 
 " Better file browser
-Plug 'scrooloose/nerdtree'
-
+"Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Class/module browser
 Plug 'majutsushi/tagbar'
 " TODO known problems:
@@ -136,7 +136,8 @@ Plug 'neomake/neomake'
 " to avoid that)
 Plug 'myusuf3/numbers.vim'
 
-
+" displaying thin vertical lines at each indentation level for code indented with spaces
+Plug 'Yggdroot/indentLine'
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
@@ -168,7 +169,9 @@ set nobackup
 set noswapfile
 set nowrap
 syntax on
-
+" Vim
+let g:indentLine_char = '|'
+let g:indentLine_color_term = 239
 
 " show line numbers
 set nu
