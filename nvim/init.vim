@@ -430,3 +430,7 @@ nnoremap <Tab> <Esc>
 
 " theme
 set background=dark
+
+vnoremap // y/<C-R>"<CR>
+"Map leader key to , NerdCommenter, you DO have to hold down the <leader> key
+let mapleader = ","
