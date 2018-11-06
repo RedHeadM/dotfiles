@@ -139,6 +139,9 @@ Plug 'myusuf3/numbers.vim'
 " displaying thin vertical lines at each indentation level for code indented with spaces
 Plug 'Yggdroot/indentLine'
 
+" multi curser 
+Plug 'terryma/vim-multiple-cursors'
+
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
@@ -434,3 +437,28 @@ set background=dark
 vnoremap // y/<C-R>"<CR>
 "Map leader key to , NerdCommenter, you DO have to hold down the <leader> key
 let mapleader = ","
+
+" selction with comment
+:nnoremap <Leader>q" ciw""<Esc>P
+:nnoremap <Leader>q' ciw''<Esc>P
+
+" MULIT cursor
+let g:multi_cursor_use_default_mapping=0
+" let g:multi_cursor_exit_from_insert_mode =1 
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+" Disable deoplete when in multi cursor mode
+function! Multiple_cursors_before()
+    let b:deoplete_disable_auto_complete = 1
+endfunction
+
+function! Multiple_cursors_after()
+    let b:deoplete_disable_auto_complete = 0
+endfunction
