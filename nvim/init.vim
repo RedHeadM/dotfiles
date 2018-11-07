@@ -462,3 +462,14 @@ endfunction
 function! Multiple_cursors_after()
     let b:deoplete_disable_auto_complete = 0
 endfunction
+" Mappings to move lines alt +
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>=Aj=
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-1<CR>==gi
+vnoremap <A-j> :m '>+4<CR>gv=gv
+vnoremap <A-k> :m '<0<CR>gv=gv
+
+" python of a word in an new line 
+nnoremap <A-d> viwy'>oprint('<C-r>": {}'.format(<C-r>"))<Esc>
+"nnoremap <A-d> viwy'>oconsole.log(<C-r>")<Esc>
