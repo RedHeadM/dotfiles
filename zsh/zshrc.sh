@@ -88,3 +88,4 @@ export PATH=$PATH:$HOME/dotfiles/utils
 
 # caps to esc
 setxkbmap -option caps:escape
+source ~/dotfiles/zsh/fzf_func.sh

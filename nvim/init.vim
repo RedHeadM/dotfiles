@@ -172,7 +172,7 @@ set nobackup
 set noswapfile
 set nowrap
 syntax on
-" Vim
+" line ident 
 let g:indentLine_char = '|'
 let g:indentLine_color_term = 239
 
@@ -226,6 +226,8 @@ set shell=/bin/bash
 " ============================================================================
 " Plugins settings and mappings
 " Edit them as you wish.
+
+
 
 " Tagbar -----------------------------
 
@@ -462,7 +464,8 @@ endfunction
 function! Multiple_cursors_after()
     let b:deoplete_disable_auto_complete = 0
 endfunction
-" Mappings to move lines alt +
+
+" Mappings to move lines alt un or down with j and k
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>=Aj=
 inoremap <A-j> <Esc>:m .+1<CR>==gi
@@ -473,3 +476,9 @@ vnoremap <A-k> :m '<0<CR>gv=gv
 " python of a word in an new line 
 nnoremap <A-d> viwy'>oprint('<C-r>": {}'.format(<C-r>"))<Esc>
 "nnoremap <A-d> viwy'>oconsole.log(<C-r>")<Esc>
+" save with ctrl c, if freezes press ctrl q
+noremap <silent> <C-S>          :update<CR>
+vnoremap <silent> <C-S>         <C-C>:update<CR>
+inoremap <silent> <C-S>         <C-O>:update<CR>
+" ctrl-D to dublicate line
+map <C-d> YP
