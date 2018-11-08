@@ -185,7 +185,8 @@ set fillchars+=vert:\
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
 	let &t_Co = 256
-    colorscheme solarized8_flat
+    "colorscheme solarized8_flat
+    colorscheme fisa
 else
     colorscheme delek
 endif
