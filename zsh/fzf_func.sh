@@ -4,8 +4,8 @@
 # usage: fd ; fd .
 fcd() {
       local dir
-    dir=$(find ${1:-~} -path '*/\.*' \
-                  -o -print 2> /dev/null | fzf +m) &&
+    dir=$(find ${1:-~} -not -path '*/\.*' -not -path "bin/*"  \
+                   -not -path "lib/*" -print 2> /dev/null | fzf +m) &&
     if [[ -d $dir ]]
     then
         cd -- $dir
