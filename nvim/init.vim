@@ -470,9 +470,9 @@ endfunction
 
 " Mappings to move lines alt un or down with j and k
 nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>=Aj=
+map <A-k> :m .-2<CR>=Aj=
 inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-1<CR>==gi
+map <A-k> <Esc>:m .-1<CR>==gi
 vnoremap <A-j> :m '>+4<CR>gv=gv
 vnoremap <A-k> :m '<0<CR>gv=gv
 
