@@ -469,13 +469,12 @@ function! Multiple_cursors_after()
 endfunction
 
 " Mappings to move lines alt un or down with j and k
-nnoremap <A-j> :m .+1<CR>==
-map <A-k> :m .-2<CR>=Aj=
+noremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
 inoremap <A-j> <Esc>:m .+1<CR>==gi
-map <A-k> <Esc>:m .-1<CR>==gi
-vnoremap <A-j> :m '>+4<CR>gv=gv
-vnoremap <A-k> :m '<0<CR>gv=gv
-
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 " python of a word in an new line 
 nnoremap <A-d> viwy'>oprint('<C-r>": {}'.format(<C-r>"))<Esc>
 "nnoremap <A-d> viwy'>oconsole.log(<C-r>")<Esc>
