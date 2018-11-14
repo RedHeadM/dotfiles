@@ -483,7 +483,7 @@ noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <C-O>:update<CR>
 " ctrl-D to dublicate line
-map <C-d> YP
+map <C-S-d> YP
 
 " remap  capital HJKL to move line
 noremap H ^
