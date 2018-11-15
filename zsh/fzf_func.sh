@@ -1,14 +1,16 @@
 # from https://github.com/junegunn/fzf/wiki/examples
 
 # fd - cd to selected directory
-# usage: fd ; fd .
+# usage: fcd ; fcd .
 fcd() {
-      local dir
+    local dir
+    # default ~ if not arg 1 
     dir=$(find ${1:-~} -not -path '*/\.*' -not -path "bin/*"  \
-                   -not -path "lib/*" -print 2> /dev/null | fzf +m) &&
-    if [[ -d $dir ]]
+                   -not -path "lib/*" -type d -print 2> /dev/null | fzf +m) &&
+        if [[ -d "$dir" ]]
     then
-        cd -- $dir
+        #cd -- $dir
+        cd  $dir
     else
         cd $(dirname $dir)
     fi 
