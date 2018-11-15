@@ -8,6 +8,7 @@
 
 # Aliases
 	alias vim="nvim"
+	alias py="python"
 	alias v="nvim -p"
 	mkdir -p /tmp/log
 
