@@ -1,7 +1,7 @@
 # Reference for colors: http://stackoverflow.com/questions/689765/how-can-i-change-the-color-of-my-prompt-in-zsh-different-from-normal-text
 
 autoload -U colors && colors
-
+source ~/dotfiles/zsh/plugins/zsh-git-prompt/zshrc.sh
 setopt PROMPT_SUBST
 
 set_prompt() {
@@ -16,14 +16,15 @@ set_prompt() {
 	PS1+='%(?.., %{$fg[red]%}%?%{$reset_color%})'
 
 	# Git
-	if git rev-parse --is-inside-work-tree 2> /dev/null | grep -q 'true' ; then
-		PS1+=', '
-		PS1+="%{$fg[blue]%}$(git rev-parse --abbrev-ref HEAD 2> /dev/null)%{$reset_color%}"
-		if [ $(git status --short | wc -l) -gt 0 ]; then 
-			PS1+="%{$fg[red]%}+$(git status --short | wc -l | awk '{$1=$1};1')%{$reset_color%}"
-		fi
-	fi
-
+   # If git rev-parse --is-inside-work-tree 2> /dev/null | grep -q 'true' ; then
+		#PS1+=', '
+		#PS1+="%{$fg[blue]%}$(git rev-parse --abbrev-ref HEAD 2> /dev/null)%{$reset_color%}"
+		#if [ $(git status --short | wc -l) -gt 0 ]; then 
+			#PS1+="%{$fg[red]%}+$(git status --short | wc -l | awk '{$1=$1};1')%{$reset_color%}"
+		#fi
+	#fi
+    PS1+=', '
+    PS1+='$(git_super_status)'
     #if [ -v $VIRTUAL_ENV ]
     #then
 		#PS1+=', '
