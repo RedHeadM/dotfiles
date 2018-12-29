@@ -5,7 +5,7 @@ autoload -U colors && colors
 setopt PROMPT_SUBST
 
 set_prompt() {
-
+    # PS1 is a special variable that controls what a shell's prompt will look like.
 	# [
 	PS1="%{$fg[white]%}[%{$reset_color%}"
 
@@ -24,7 +24,22 @@ set_prompt() {
 		fi
 	fi
 
+    #if [ -v $VIRTUAL_ENV ]
+    #then
+		#PS1+=', '
+        #echo "Variable somevar exists!"
+        #PS1+="%{`basename \"$VIRTUAL_ENV\"`}"
+        #PS1+="%{${fg_bold[white]}%}(env: %{${fg[green]}%}`basename \"$VIRTUAL_ENV\"`%{${fg_bold[white]}%})%{${reset_color}%} $RPROMPT"
+    #else
 
+
+    if [ ${#VIRTUAL_ENV} -gt 3 ]
+    then
+        PS1+=', '
+        PS1+=$'%{$fg[magenta]%}[${VIRTUAL_ENV:t}]%{$reset_color%} '
+    else
+        venv=$''
+    fi
 	# Timer: http://stackoverflow.com/questions/2704635/is-there-a-way-to-find-the-running-time-of-the-last-executed-command-in-the-shel
 	if [[ $_elapsed[-1] -ne 0 ]]; then
 		PS1+=', '
