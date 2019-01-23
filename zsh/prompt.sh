@@ -16,16 +16,6 @@ set_prompt() {
 	#PS1+='%(?.., %{$fg[red]%}%?%{$reset_color%})'
 
 	# Git
-   # If git rev-parse --is-inside-work-tree 2> /dev/null | grep -q 'true' ; then
-		#PS1+=', '
-		#PS1+="%{$fg[blue]%}$(git rev-parse --abbrev-ref HEAD 2> /dev/null)%{$reset_color%}"
-		#if [ $(git status --short | wc -l) -gt 0 ]; then 
-			#PS1+="%{$fg[red]%}+$(git status --short | wc -l | awk '{$1=$1};1')%{$reset_color%}"
-		#fi
-	#fi
-
-    # Informative git prompt for zsh
-    #PS1+=', '
     PS1+='$(git_super_status)'
     #if [ -v $VIRTUAL_ENV ]
     #then
@@ -35,7 +25,7 @@ set_prompt() {
         #PS1+="%{${fg_bold[white]}%}(env: %{${fg[green]}%}`basename \"$VIRTUAL_ENV\"`%{${fg_bold[white]}%})%{${reset_color}%} $RPROMPT"
     #else
 
-
+    #py VIRTUAL  ENV
     if [ ${#VIRTUAL_ENV} -gt 3 ]
     then
         PS1+=','
@@ -43,6 +33,7 @@ set_prompt() {
     else
         venv=$''
     fi
+
 	# Timer: http://stackoverflow.com/questions/2704635/is-there-a-way-to-find-the-running-time-of-the-last-executed-command-in-the-shel
 	#if [[ $_elapsed[-1] -ne 0 ]]; then
 		#PS1+=', '
