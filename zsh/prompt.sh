@@ -44,10 +44,10 @@ set_prompt() {
         venv=$''
     fi
 	# Timer: http://stackoverflow.com/questions/2704635/is-there-a-way-to-find-the-running-time-of-the-last-executed-command-in-the-shel
-	if [[ $_elapsed[-1] -ne 0 ]]; then
-		PS1+=', '
-		PS1+="%{$fg[magenta]%}$_elapsed[-1]s%{$reset_color%}"
-	fi
+	#if [[ $_elapsed[-1] -ne 0 ]]; then
+		#PS1+=', '
+		#PS1+="%{$fg[magenta]%}$_elapsed[-1]s%{$reset_color%}"
+	#fi
 
 	# PID
    # if [[ $! -ne 0 ]]; then
