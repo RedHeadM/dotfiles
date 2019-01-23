@@ -38,8 +38,8 @@ set_prompt() {
 
     if [ ${#VIRTUAL_ENV} -gt 3 ]
     then
-        PS1+=', '
-        PS1+=$'%{$fg[magenta]%}[${VIRTUAL_ENV:t}]%{$reset_color%} '
+        PS1+=','
+        PS1+=$'%{$fg[magenta]%}[${VIRTUAL_ENV:t}]%{$reset_color%}'
     else
         venv=$''
     fi
