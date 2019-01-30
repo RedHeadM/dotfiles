@@ -163,19 +163,21 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 ""'search: incremental search
-set incsearch
-set ignorecase
+set ignorecase        " ignore case in searches<Paste>
 set smartcase
 set nohlsearch
 
-set nobackup
+set termguicolors     " enable true colorsHet nobackup
 set noswapfile
 set nowrap
 syntax on
+set ttyfast           " should make scrolling faster
+set lazyredraw        " should make scrolling fasterV "
 " line ident 
 let g:indentLine_char = '|'
 let g:indentLine_color_term = 239
-
+" interactive find replace preview
+set inccommand=nosplit
 " show line numbers
 set nu
 
@@ -263,6 +265,14 @@ let g:neomake_python_python_maker.exe = 'python3 -m py_compile'
 let g:neomake_python_flake8_maker.exe = 'python3 -m flake8'
 
 " Fzf ------------------------------
+
+" set fzf's default input to ripgrep instead of find. This also removes
+" gitignore etc
+ " let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --color=always --exclude .git --ignore-file ~/.gitignore'
+let $FZF_DEFAULT_OPTS='--ansi'
+"let g:fzf_files_options = '--preview "(bat --color \"always\" --line-range 0:100 {} || head -'.&lines.' {})"''
+
 
 " file finder mapping
 nmap ,e :Files<CR>
@@ -467,6 +477,15 @@ let mapleader = ","
 "function! Multiple_cursors_after()
     "let b:deoplete_disable_auto_complete = 0
 "endfunction
+"augroup VimMultiCursors
+  "autocmd!
+  "autocmd User MultipleCursorsPre let g:deoplete#disable_auto_complete=1
+  "autocmd User MultipleCursorsPost let g:deoplete#disable_auto_complete=0
+"augroup END
+
+
+
+
 
 " Mappings to move lines alt un or down with j and k
 noremap <A-j> :m .+1<CR>==
@@ -491,4 +510,14 @@ noremap L g_
 noremap J 5j
 noremap K 5k
 
+" replace word under cursor, globally, with confirmation
+nnoremap <Leader>k :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+vnoremap <Leader>k y :%s/<C-r>"//gc<Left><Left><Left>
 
+" remove highlighting on escape>u
+"map <silent> <esc> :nohlsearch<cr>
+
+
+" Keep selection when indenting/outdenting.
+vnoremap > >gv
+vnoremap < <gv
