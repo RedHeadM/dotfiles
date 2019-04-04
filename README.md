@@ -94,7 +94,8 @@ Each plugin is sensitive to where you are and what you're doing, they reveal the
 * Use vim movement keys for moving between panes. 
 * Copy buffer is coppied to xclip.
 * Status bar tells you date, time, user, and hostname. Especially useful with nested ssh sessions.
-*
+* hjkl to navigate windows
+* HJKL to resize window
 *
 ## nvvim installation:
 - http://nvim.fisadev.com/
