@@ -407,6 +407,7 @@ set cursorline
 hi Cursor ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
 
 set hlsearch
+"  ctrl l to clear search heilight
 nnoremap <C-l> :nohl<CR><C-l>:echo "Search Cleared"<CR>
 
 " Return to the same line you left off at
@@ -497,9 +498,6 @@ let mapleader = ","
 "augroup END
 
 
-
-
-
 " Mappings to move lines alt un or down with j and k
 noremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
@@ -510,10 +508,12 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 " python of a word in an new line 
 nnoremap <A-d> viwy'>oprint('<C-r>": {}'.format(<C-r>"))<Esc>
 "nnoremap <A-d> viwy'>oconsole.log(<C-r>")<Esc>
+
 " save with ctrl c, if freezes press ctrl q
 noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <C-O>:update<CR>
+
 " ctrl-D to dublicate line
 map <C-S-d> YP
 
