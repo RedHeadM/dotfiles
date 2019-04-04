@@ -83,7 +83,8 @@ Each plugin is sensitive to where you are and what you're doing, they reveal the
 * [vimode-zsh](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/vi-mode) allows you to hit `esc` and navigate the current buffer using vim movement keys.
 
 ## [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor))
-
+* neovim is used
+* [install fzf] (https://github.com/junegunn/fzf) 
 * Leader key has ben remapped to `,`
 
 ## [Tmux](https://en.wikipedia.org/wiki/Tmux)
