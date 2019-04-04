@@ -535,3 +535,7 @@ vnoremap <Leader>k y :%s/<C-r>"//gc<Left><Left><Left>
 " Keep selection when indenting/outdenting.
 vnoremap > >gv
 vnoremap < <gv
+
+" Open tag in new tab, used with gutentags
+:nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
+
