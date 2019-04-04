@@ -86,7 +86,10 @@ Each plugin is sensitive to where you are and what you're doing, they reveal the
 * neovim is used
 * [install fzf] (https://github.com/junegunn/fzf) 
 * Leader key has ben remapped to `,`
-
+ 
+### fzf update
+* git: cd ~/.fzf && git pull && ./install
+* vim-plug: :PlugUpdate fzf
 ## [Tmux](https://en.wikipedia.org/wiki/Tmux)
 
 * Ctrl-B has been remapped to the backtick character (&#96;). If you want to type the actual backtick character (&#96;) itself, just hit the key twice.

@@ -142,7 +142,8 @@ Plug 'Yggdroot/indentLine'
 
 " multi curser 
 "Plug 'terryma/vim-multiple-cursors'
-
+" auto ctags C-] to jump to definition
+Plug 'ludovicchabant/vim-gutentags'
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
