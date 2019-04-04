@@ -1,20 +1,6 @@
-# Awesome Dotfiles
+# Dotfiles
 
-Simple, but extensive customization of ZSH, TMUX, and Vim. 
-
-[![VideoWalkthrough](https://img.youtube.com/vi/UgDz_9i2nwc/0.jpg)](https://www.youtube.com/watch?v=UgDz_9i2nwc)
-
-## Setup Options
-
-There's 3 ways in which you can use this, depending on how much you think you'll be customizing.
-
-One of the key features is that this implementation stays in sync across all your machines. So depending on how much you'd like to customize your configuration, you have a few options:
-
-* Little Customization: Just clone this repo and jump to [Installation](#installation).
-* Mild Customization: [Fork]() this repo, and clone your own fork. Keep an eye on this repo for bugfixes and other improvements that you'd like to incorporate into your fork. Then jump to [Installation](#installation).
-* Most Customization: Building your own dotfiles from scratch! Read through these docs, watch the video above, star this repo, and create your own dotfiles! You can add this repository as a [git module](https://git-scm.com/book/en/v2/Git-Tools-Submodules) and source the parts you like. 
-
-If you're unsure, just read the docs, watch the video, clone this repository, and jump to [Installation](#installation).
+ZSH, TMUX, and Vim. 
 
 ## Installation
 
@@ -60,8 +46,8 @@ Each plugin is sensitive to where you are and what you're doing, they reveal the
 * `Status code plugin`: appears anytime a program returns with a non-zero status code. Tells you what status code the program completed with. 
 * `Git plugin`: appears when you're in a git repository. Tells you what branch you're on, and how many files have been changed since the last commit.
 * `Sudo plugin`: tells you when you can sudo without a password. Or when you're logged in as root.
-* `Time plugin`: appears when a program took more than 1s to execute. Tells you how long it took to execute.
-* `PID plugin`: appears when you background a task. Tells you what the PID of the task is.
+* REMOVED `Time plugin`: appears when a program took more than 1s to execute. Tells you how long it took to execute.
+* `REMOVED PID plugin`: appears when you background a task. Tells you what the PID of the task is.
 
 ### Keybindings
 | Key Stroke | What It Does |
@@ -82,7 +68,7 @@ Each plugin is sensitive to where you are and what you're doing, they reveal the
 * [ohmyzsh](https://github.com/robbyrussell/oh-my-zsh/tree/291e96dcd034750fbe7473482508c08833b168e3): Borrowed things like tab completion, fixing ls, tmux's vi-mode plugin.
 * [vimode-zsh](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/vi-mode) allows you to hit `esc` and navigate the current buffer using vim movement keys.
 
-## [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor))
+## [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor)
 * neovim is used
 * [install fzf] (https://github.com/junegunn/fzf) 
 * Leader key has ben remapped to `,`

@@ -217,6 +217,8 @@ set completeopt-=preview
 " (complete only the common part, list the options that match)
 set wildmode=list:longest
 
+" ignore file patterns 
+set wildignore=*.o,*~,*.pyc,*/__pycache__/
 " save as sudo
 ca w!! w !sudo tee "%"
 
@@ -258,9 +260,12 @@ let g:tagbar_autofocus = 1
 " toggle nerdtree display
 map <F3> :NERDTreeToggle<CR>
 " open nerdtree with the current file selected
-nmap ,t :NERDTreeFind<CR>
+"nmap ,t :NERDTreeFind<CR>
+nmap ,t :NERDTreeToggle<CR>
 " don;t show these file types
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
+let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '^__pycache__$']
+" show current root as relative path from $HOME in status bar
+let NERDTreeStatusline="%{exists('b:NERDTree')?fnamemodify(b:NERDTree.root.path.str(), ':~'):''}"
 
 " Tasklist ------------------------------
 
