@@ -85,7 +85,8 @@ Plug 'Shougo/context_filetype.vim'
 Plug 'Townk/vim-autoclose'
 
 " Surround
-Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-surround'
+Plug 'machakann/vim-sandwich'
 
 " Indent text object
 Plug 'michaeljsmith/vim-indent-object'
