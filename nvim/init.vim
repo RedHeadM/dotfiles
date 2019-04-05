@@ -394,7 +394,8 @@ let g:yankring_history_dir = '~/.config/nvim/'
 let g:airline_powerline_fonts = 0
 let g:airline_theme = 'bubblegum'
 let g:airline#extensions#whitespace#enabled = 0
-
+" show tabs at the top if open
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 " to use fancy symbols for airline, uncomment the following lines and use a
 " patched font (more info on docs/fancy_symbols.rst)
 "if !exists('g:airline_symbols')
