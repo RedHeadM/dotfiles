@@ -184,6 +184,10 @@ set inccommand=nosplit
 " show line numbers
 set nu
 
+" undofunction after reopening
+set undofile
+set undodir=/tmp
+
 " remove ugly vertical lines on window division
 set fillchars+=vert:\
 
