@@ -57,7 +57,7 @@ Plug 'vim-scripts/IndexedSearch'
 "Plug 'fisadev/fisa-vim-colorscheme'
 Plug 'drewtempelmeyer/palenight.vim'
 
-" Airline
+" Airline, info line at bottom
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -115,7 +115,7 @@ Plug 'fisadev/vim-isort'
 Plug 'valloric/MatchTagAlways'
 
 " Generate html in a simple way
-Plug 'mattn/emmet-vim'
+"Plug 'mattn/emmet-vim'
 
 " Git integration
 Plug 'tpope/vim-fugitive'
@@ -145,6 +145,8 @@ Plug 'Yggdroot/indentLine'
 "Plug 'terryma/vim-multiple-cursors'
 " auto ctags C-] to jump to definition
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'machakann/vim-highlightedyank'
+
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
