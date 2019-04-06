@@ -174,8 +174,6 @@ set termguicolors     " enable true colorsHet nobackup
 set noswapfile
 set nowrap
 syntax on
-set ttyfast           " should make scrolling faster
-set lazyredraw        " should make scrolling fasterV "
 " line ident 
 let g:indentLine_char = '|'
 let g:indentLine_color_term = 239
@@ -238,7 +236,8 @@ imap <M-Left> <ESC>:tabp<CR>
 
 " when scrolling, keep cursor 3 lines away from screen border
 set scrolloff=3
-
+" make scroll faster
+set scrolljump=-15
 " clear search results
 nnoremap <silent> // :noh<CR>
 
