@@ -102,7 +102,7 @@ Plug 'mileszs/ack.vim'
 " TODO is there a way to prevent the progress which hides the editor?
 
 " Paint css colors with the real color
-Plug 'lilydjwg/colorizer'
+"Plug 'lilydjwg/colorizer'
 " TODO is there a better option for neovim?
 
 " Window chooser
@@ -145,6 +145,8 @@ Plug 'Yggdroot/indentLine'
 "Plug 'terryma/vim-multiple-cursors'
 " auto ctags C-] to jump to definition
 Plug 'ludovicchabant/vim-gutentags'
+
+" Highlight last yank for a shork time
 Plug 'machakann/vim-highlightedyank'
 
 " Tell vim-plug we finished declaring plugins, so it can load them
