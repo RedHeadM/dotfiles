@@ -276,7 +276,12 @@ nmap ,t :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '^__pycache__$']
 " show current root as relative path from $HOME in status bar
 let NERDTreeStatusline="%{exists('b:NERDTree')?fnamemodify(b:NERDTree.root.path.str(), ':~'):''}"
-
+" hide press for help
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+" close nerdtree if the lastwindow
+"autocmd bufenter * if (winnr(“$”) == 1 && exists(“b:NERDTreeType”) && b:NERDTreeType == “primary”) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Tasklist ------------------------------
 
 " show pending tasks list
