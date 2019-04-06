@@ -106,7 +106,7 @@ Plug 'lilydjwg/colorizer'
 " TODO is there a better option for neovim?
 
 " Window chooser
-Plug 't9md/vim-choosewin'
+"Plug 't9md/vim-choosewin'
 
 " Automatically sort python imports
 Plug 'fisadev/vim-isort'
@@ -359,11 +359,9 @@ nmap ,r :Ack
 nmap ,wr :Ack <cword><CR>
 
 " Window Chooser ------------------------------
-
-" mapping
-nmap  -  <Plug>(choosewin)
+"nmap  -  <Plug>(choosewin)
 " show big letters
-let g:choosewin_overlay_enable = 1
+"let g:choosewin_overlay_enable = 1
 
 " Signify ------------------------------
 
