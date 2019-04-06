@@ -183,11 +183,13 @@ let g:indentLine_color_term = 239
 set inccommand=nosplit
 " show line numbers
 set nu
-
+    
 " undofunction after reopening
 set undofile
 set undodir=/tmp
-
+ 
+"mac osx clipboard sharing
+set clipboard=unnamed
 " remove ugly vertical lines on window division
 set fillchars+=vert:\
 
