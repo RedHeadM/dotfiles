@@ -45,6 +45,8 @@ Plug 'scrooloose/nerdcommenter'
 " Better file browser
 "Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " on demand
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' } " on demand
+
 " Class/module browser
 Plug 'majutsushi/tagbar'
 " TODO known problems:
@@ -282,6 +284,18 @@ let NERDTreeDirArrows = 1
 " close nerdtree if the lastwindow
 "autocmd bufenter * if (winnr(“$”) == 1 && exists(“b:NERDTreeType”) && b:NERDTreeType == “primary”) | q | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "~",
+    \ "Staged"    : "+",
+    \ "Untracked" : "x",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "x",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
 " Tasklist ------------------------------
 
 " show pending tasks list
