@@ -58,7 +58,7 @@ Each plugin is sensitive to where you are and what you're doing, they reveal the
 | Ctrl-V     | Runs ``fc``. Takes last command and puts it in a vim buffer. |
 | Ctrl-S     | Add's ``sudo`` to the beginning of the buffer. |
 | Ctrl-L     | Run's ``ls``. |
-| Ctrl-O     | Equivalent to hitting ``Enter``. |
+| Ctrl-O     | open finder|
 | Ctrl-P     | Equivalent to pressing ``up arrow``. |
 
 ### Plugins
