@@ -62,3 +62,15 @@
 	}
 	zle -N add_sudo
 	bindkey "^s" add_sudo
+# open finder
+	function open_finder() {
+        # open finder gui window for the current dir 
+        if [ -x "$(command -v nautilus)" ]; then
+            nautilus .
+        elif [ -x "$(command -v open)" ]; then
+            # open on max osx
+            open .
+        fi
+	}
+	zle -N open_finder
+	bindkey "^o" open_finder
