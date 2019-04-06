@@ -171,7 +171,7 @@ set softtabstop=4
 set shiftwidth=4
 ""'search: incremental search
 set ignorecase        " ignore case in searches<Paste>
-set smartcase
+set smartcase " but case-sensitive if expression contains a capital letter
 set nohlsearch
 
 set termguicolors     " enable true colorsHet nobackup
