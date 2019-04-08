@@ -2,6 +2,9 @@
 
 ZSH, TMUX, and Vim. 
 
+## TODO
+- use https://github.com/tmux-plugins/tpm
+- install https://github.com/tmux-plugins/tmux-yank
 ## Installation
 
 Once the repo is cloned, execute the deploy script:
