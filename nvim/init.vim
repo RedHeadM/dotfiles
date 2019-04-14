@@ -78,10 +78,10 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Completion from other opened files
 Plug 'Shougo/context_filetype.vim'
 " Python autocompletion
-Plug 'zchee/deoplete-jedi', { 'do': ':UpdateRemotePlugins' }
-" Just to add the python go-to-definition and similar features, autocompletion
-" from this plugin is disabled
-Plug 'davidhalter/jedi-vim'
+Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+
+" Python completion, goto definition etc.
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
  
 " bestter pyton text objects and motions 
 Plug 'jeetsukumaran/vim-pythonsense'
@@ -185,7 +185,9 @@ set noswapfile
 set nowrap
 syntax on
 " line ident 
-let g:indentLine_char = '|'
+" the character used for indicating indentation
+let g:indentLine_char = '┊'
+" let g:indentLine_char = '│'
 let g:indentLine_color_term = 239
 " interactive find replace preview
 set inccommand=nosplit
@@ -257,6 +259,8 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 " fix problems with uncommon shells (fish, xonsh) and plugins running commands
 " (neomake, ...)
 set shell=/bin/bash
+set omnifunc=syntaxcomplete#Complete
+
 "*****************************************************************************
 " functions
 "*****************************************************************************
@@ -275,8 +279,10 @@ function! s:ToggleSpellLang()
         :set spelllang=en
     endif
 endfunction
-" ============================================================================
+"
+"*****************************************************************************
 " Plugins settings and mappings
+"*****************************************************************************
 
 " toggle spell on or off
 nnoremap <F4> :setlocal spell!<CR>
@@ -335,7 +341,9 @@ let g:neomake_python_python_maker = neomake#makers#ft#python#python()
 let g:neomake_python_flake8_maker = neomake#makers#ft#python#flake8()
 let g:neomake_python_python_maker.exe = 'python3 -m py_compile'
 let g:neomake_python_flake8_maker.exe = 'python3 -m flake8'
-
+" pyton Virtual Environments package:
+"let g:python_host_prog = '/usr/bin/python2.7'
+"let g:python3_host_prog = '/usr/bin/python3.5'
 " Fzf ------------------------------
 
 " set fzf's default input to ripgrep instead of find. This also removes
@@ -377,19 +385,41 @@ nmap ,B :Buffers<CR>
 
 " Deoplete -----------------------------
 
-" Use deoplete.
+" Use deoplete for autocompletion
 
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
+let g:deoplete#auto_complete=0
 " complete with words from any opened file
 let g:context_filetype#same_filetypes = {}
 let g:context_filetype#same_filetypes._ = '_'
+"let g:deoplete#deoplete_onmni_patterns = get(g:, 'deoplete#force_omni_input_patterns', {})
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr> <C-n>  deoplete#mappings#manual_complete()
+"inoremap <silent><expr> <TAB>
+    "\ pumvisible() ? "\<C-n>" :
+    "\ <SID>check_back_space() ? "\<TAB>" :
+    "\ deoplete#mappings#manual_complete()
+"function! s:check_back_space() abort "{{{
+    "let col = col('.') - 1
+    "return !col || getline('.')[col - 1]  =~ '\s'
+"endfunction"}}}
+"""""""""""""""""""deoplete-jedi settings"""""""""""""""""""""""""""
+
+" whether to show doc string
+let g:deoplete#sources#jedi#show_docstring = 0
+
+" do not use typeinfo (for faster completion)
+let g:deoplete#sources#jedi#enable_typeinfo = 0
+
+" for large package, set autocomplete wait time longer
+let g:deoplete#sources#jedi#server_timeout = 50
 
 " Jedi-vim ------------------------------
 
 " Disable autocompletion (using deoplete instead)
-let g:jedi#completions_enabled = 0
+let g:jedi#completions_enabled = 1
 
 " All these mappings work only for python code:
 " Go to definition
@@ -581,8 +611,12 @@ noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <C-O>:update<CR>
 
+" yank from current cursor position to end of line
+"noremap Y y$
+
+
 " ctrl-D to dublicate line
-map <C-S-d> YP
+map <C-S-d> yyP
 
 " remap  capital HJKL to move line
 noremap H ^
