@@ -304,7 +304,7 @@ map <F3> :NERDTreeToggle<CR>
 "nmap ,t :NERDTreeFind<CR>
 nmap ,t :NERDTreeToggle<CR>
 " don;t show these file types
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '^__pycache__$']
+let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '^__pycache__$',"\.egg-info$"]
 " show current root as relative path from $HOME in status bar
 let NERDTreeStatusline="%{exists('b:NERDTree')?fnamemodify(b:NERDTree.root.path.str(), ':~'):''}"
 " hide press for help
