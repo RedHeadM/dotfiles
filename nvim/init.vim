@@ -82,7 +82,10 @@ Plug 'zchee/deoplete-jedi', { 'do': ':UpdateRemotePlugins' }
 " Just to add the python go-to-definition and similar features, autocompletion
 " from this plugin is disabled
 Plug 'davidhalter/jedi-vim'
-
+ 
+" bestter pyton text objects and motions 
+"Plug 'jeetsukumaran/vim-pythonsense'
+"Plug 'python-mode/python-mode', { 'branch': 'develop' }
 
 " Automatically close parenthesis, etc
 Plug 'Townk/vim-autoclose'
@@ -257,16 +260,18 @@ set shell=/bin/bash
 
 " ============================================================================
 " Plugins settings and mappings
-" Edit them as you wish.
 
-
+" toggle spell on or off
+nnoremap <F4> :setlocal spell!<CR>
+" toggle language
+nnoremap <F5> :call <SID>ToggleSpellLang()<CR>
 
 " Tagbar -----------------------------
 
 " toggle tagbar display
-map <F4> :TagbarToggle<CR>
-" autofocus on tagbar open
-let g:tagbar_autofocus = 1
+"map <F4> :TagbarToggle<CR>
+"" autofocus on tagbar open
+"let g:tagbar_autofocus = 1
 
 " NERDTree -----------------------------
 
@@ -285,6 +290,7 @@ let NERDTreeDirArrows = 1
 " close nerdtree if the lastwindow
 "autocmd bufenter * if (winnr(“$”) == 1 && exists(“b:NERDTreeType”) && b:NERDTreeType == “primary”) | q | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" nerdtree show git status
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "~",
     \ "Staged"    : "+",
@@ -335,6 +341,8 @@ nmap ,f :BLines<CR>
 nmap ,F :Lines<CR>
 " commands finder mapping
 nmap ,c :Commands<CR>
+" commands show all open buffers
+nmap ,B :Buffers<CR>
 " to be able to call CtrlP with default search text
 "function! CtrlPWithSearchText(search_text, ctrlp_command_end)
     "execute ':CtrlP' . a:ctrlp_command_end
@@ -540,9 +548,16 @@ inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
-" python of a word in an new line 
+
+" python print word unter cursor 
 nnoremap <A-d> viwy'>oprint('<C-r>": {}'.format(<C-r>"))<Esc>
-"nnoremap <A-d> viwy'>oconsole.log(<C-r>")<Esc>
+" python print selected word 
+vnoremap <A-d> y'>oprint('<C-r>": {}'.format(<C-r>"))<Esc>
+nnoremap <A-l> viwy'>olog.info('<C-r>": {}'.format(<C-r>"))<Esc>
+vnoremap <A-l> y'>olog.info('<C-r>": {}'.format(<C-r>"))<Esc>
+" brackpoints in Python 3.6 and below
+nnoremap <A-b> oimport pdb; pdb.set_trace() # BREAKPOINT<Esc>
+
 
 " save with ctrl c, if freezes press ctrl q
 noremap <silent> <C-S>          :update<CR>
