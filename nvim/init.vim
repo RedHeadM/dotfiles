@@ -84,7 +84,7 @@ Plug 'zchee/deoplete-jedi', { 'do': ':UpdateRemotePlugins' }
 Plug 'davidhalter/jedi-vim'
  
 " bestter pyton text objects and motions 
-"Plug 'jeetsukumaran/vim-pythonsense'
+Plug 'jeetsukumaran/vim-pythonsense'
 "Plug 'python-mode/python-mode', { 'branch': 'develop' }
 
 " Automatically close parenthesis, etc
