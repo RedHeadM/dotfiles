@@ -257,7 +257,24 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 " fix problems with uncommon shells (fish, xonsh) and plugins running commands
 " (neomake, ...)
 set shell=/bin/bash
+"*****************************************************************************
+" functions
+"*****************************************************************************
+function! s:FixWhitespace(line1,line2)
+    let l:save_cursor = getpos(".")
+    silent! execute ':' . a:line1 . ',' . a:line2 . 's/\\\@<!\s\+$//'
+    call setpos('.', l:save_cursor)
+endfunction
 
+" Toggle spell checking
+function! s:ToggleSpellLang()
+    " toggle between en and fr
+    if &spelllang =~# 'en'
+        :set spelllang=de
+    else
+        :set spelllang=en
+    endif
+endfunction
 " ============================================================================
 " Plugins settings and mappings
 
