@@ -149,11 +149,16 @@ Plug 'Yggdroot/indentLine'
 
 " multi curser 
 "Plug 'terryma/vim-multiple-cursors'
+
 " auto ctags C-] to jump to definition
 Plug 'ludovicchabant/vim-gutentags'
 
 " Highlight last yank for a shork time
 Plug 'machakann/vim-highlightedyank'
+
+" better replace
+Plug 'wincent/scalpel'
+
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
@@ -365,7 +370,7 @@ nmap ,f :BLines<CR>
 " general code finder in all files mapping
 nmap ,F :Lines<CR>
 " commands finder mapping
-nmap ,c :Commands<CR>
+nmap ,C :Commands<CR>
 " commands show all open buffers
 nmap ,B :Buffers<CR>
 " to be able to call CtrlP with default search text
@@ -523,7 +528,8 @@ nnoremap <C-l> :nohl<CR><C-l>:echo "Search Cleared"<CR>
 
 " copy and past with gvim
 vnoremap <C-c> "+y
-map <C-v> "+p
+"map <C-v> "+p
+"map <leader>v "+p
 
 if has('mouse')
    set mouse=a
@@ -625,8 +631,9 @@ noremap J 5j
 noremap K 5k
 
 " replace word under cursor, globally, with confirmation
-nnoremap <Leader>k :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
-vnoremap <Leader>k y :%s/<C-r>"//gc<Left><Left><Left>
+"nnoremap <Leader>k :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+"vnoremap <Leader>k y :%s/<C-r>"//gc<Left><Left><Left>
+nmap <Leader>k <Plug>(Scalpel)
 
 " remove highlighting on escape>u
 "map <silent> <esc> :nohlsearch<cr>
