@@ -528,7 +528,7 @@ nnoremap <C-l> :nohl<CR><C-l>:echo "Search Cleared"<CR>
 
 " copy and past with gvim
 vnoremap <C-c> "+y
-"map <C-v> "+p
+map <C-v> "+p
 "map <leader>v "+p
 
 if has('mouse')
