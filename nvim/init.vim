@@ -101,7 +101,7 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'jeetsukumaran/vim-indentwise'
 
 " Better language packs
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 
 " Ack code search (requires ack installed in the system)
 Plug 'mileszs/ack.vim'
@@ -118,12 +118,12 @@ Plug 'mileszs/ack.vim'
 Plug 'fisadev/vim-isort'
 
 " Highlight matching html tags
-Plug 'valloric/MatchTagAlways'
+"Plug 'valloric/MatchTagAlways'
 
 " Generate html in a simple way
 "Plug 'mattn/emmet-vim'
 
-" Git integration
+" Git integration nerdtree
 Plug 'tpope/vim-fugitive'
 
 " Git/mercurial/others diff icons on the side of the file lines
@@ -156,10 +156,10 @@ Plug 'ludovicchabant/vim-gutentags'
 " Highlight last yank for a shork time
 Plug 'machakann/vim-highlightedyank'
 
-" better replace
+" better replace mapped to leader k
 Plug 'wincent/scalpel'
 
-
+Plug 'vim-latex/vim-latex'
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
@@ -191,8 +191,8 @@ set nowrap
 syntax on
 " line ident 
 " the character used for indicating indentation
-let g:indentLine_char = '┊'
-" let g:indentLine_char = '│'
+"let g:indentLine_char = '┊'
+ let g:indentLine_char = '│'
 let g:indentLine_color_term = 239
 " interactive find replace preview
 set inccommand=nosplit
@@ -593,6 +593,10 @@ let mapleader = ","
   "autocmd User MultipleCursorsPost let g:deoplete#disable_auto_complete=0
 "augroup END
 
+" latex not code folding
+let g:Tex_FoldedSections     = ""
+let g:Tex_FoldedEnvironments = ""
+let g:Tex_FoldedMisc         = ""
 
 " Mappings to move lines alt un or down with j and k
 noremap <A-j> :m .+1<CR>==
@@ -619,6 +623,7 @@ inoremap <silent> <C-S>         <C-O>:update<CR>
 
 " yank from current cursor position to end of line
 "noremap Y y$
+"nnoremap Y y$
 
 
 " ctrl-D to dublicate line
