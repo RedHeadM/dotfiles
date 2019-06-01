@@ -593,11 +593,6 @@ let mapleader = ","
   "autocmd User MultipleCursorsPost let g:deoplete#disable_auto_complete=0
 "augroup END
 
-" latex not code folding
-let g:Tex_FoldedSections     = ""
-let g:Tex_FoldedEnvironments = ""
-let g:Tex_FoldedMisc         = ""
-
 " Mappings to move lines alt un or down with j and k
 noremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
