@@ -99,6 +99,7 @@ fi
 
 printf "source '$HOME/dotfiles/zsh/zshrc_manager.sh'" > ~/.zshrc
 printf "source-file $HOME/dotfiles/tmux/tmux.conf" > ~/.tmux.conf
+mkdir -p $HOME/dotfiles/nvim/
 printf "so $HOME/dotfiles/nvim/init.vim" > ~/.config/nvim/init.vim
 
 echo
