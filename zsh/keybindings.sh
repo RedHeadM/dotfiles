@@ -4,7 +4,7 @@
 		zle accept-line
 	}
 	zle -N up_widget
-	bindkey "^[[A" up_widget
+	bindkey "^U" up_widget
 
 # git
 	function git_prepare() {
