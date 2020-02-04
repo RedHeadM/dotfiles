@@ -160,6 +160,9 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'wincent/scalpel'
 
 Plug 'vim-latex/vim-latex'
+
+Plug 'christoomey/vim-tmux-navigator'
+
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
