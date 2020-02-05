@@ -123,7 +123,7 @@ Plug 'fisadev/vim-isort'
 " Generate html in a simple way
 "Plug 'mattn/emmet-vim'
 
-" Git integration nerdtree
+" Git integration nerdtree:  status 
 Plug 'tpope/vim-fugitive'
 
 " Git/mercurial/others diff icons on the side of the file lines
@@ -161,6 +161,7 @@ Plug 'wincent/scalpel'
 
 Plug 'vim-latex/vim-latex'
 
+" vim and panel movement with <C-h/j/k/l>
 Plug 'christoomey/vim-tmux-navigator'
 
 " Tell vim-plug we finished declaring plugins, so it can load them
@@ -614,6 +615,7 @@ vnoremap <A-l> y'>olog.info('<C-r>": {}'.format(<C-r>"))<Esc>
 nnoremap <A-b> oimport pdb; pdb.set_trace() # BREAKPOINT<Esc>
 
 
+
 " save with ctrl c, if freezes press ctrl q
 noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
@@ -637,6 +639,8 @@ noremap K 5k
 "nnoremap <Leader>k :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 "vnoremap <Leader>k y :%s/<C-r>"//gc<Left><Left><Left>
 nmap <Leader>k <Plug>(Scalpel)
+vmap <Leader>k "xy:Scalpel/\v<<C-R>=@x<CR>>//<Left>
+"<CR>
 
 " remove highlighting on escape>u
 "map <silent> <esc> :nohlsearch<cr>
