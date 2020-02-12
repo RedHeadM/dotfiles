@@ -356,7 +356,7 @@ let g:neomake_python_flake8_maker.exe = 'python3 -m flake8'
 " Fzf ------------------------------
 
 " set fzf's default input to ripgrep instead of find. This also removes
-" gitignore etc
+" gitignore etc 
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 "let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --color=always --exclude .git --ignore-file ~/.gitignore'
 "let $FZF_DEFAULT_OPTS='--ansi'
