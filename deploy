@@ -105,14 +105,12 @@ printf "so $HOME/dotfiles/nvim/init.vim" > ~/.config/nvim/init.vim
 
 
 # Install the Vim-plug Plugin ManagerPermalink
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-echo
-echo "Please log out and log back in for default shell to be initialized."
+#curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    #https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#echo
+#echo "Please log out and log back in for default shell to be initialized."
 
 
-pip2 install --user neovim
-pip3 install --user neovim
 
 # tmux
 

@@ -4,7 +4,7 @@ FROM ubuntu:latest
 
 WORKDIR /root
 
-RUN apt-get update && \
+run apt-get update && \
   apt-get -y upgrade
 
 # make and xz-utils are required to build ghc 7.10.3, which is required by
@@ -16,11 +16,8 @@ RUN apt-get install -y \
   wget \
   xz-utils \
   zsh \
+  tmux \
   libtool autoconf automake cmake libncurses5-dev g++ pkg-config unzip git libtool-bin gettext
-  #install libtool libtool-bin autoconf automake cmake libncurses5-dev g++ gettext
-  #python-dev python-pip python3-dev python3-pip
-  #python3.8 
-  # python3.8-venv python3.8-dev
 
 #ENV LD_LIBRARY_PATH=/usr/local/lib
 # Need to set these to successfully install oh-my-zsh
@@ -30,8 +27,11 @@ ENV SHELL=/bin/bash
 # Install oh-my-zsh
 #RUN \
   #sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-ADD ./install.sh .
-RUN bash install.sh
+#ADD ./install.sh .
+#ADD ../* $HOME/dotfiles/
+ADD ./* ./dotfiles/
+#RUN git clone https://github.com/RedHeadM/dotfiles.git $HOME/dotfiles
+RUN bash dotfiles/install.sh
 #RUN \
   #git clone https://github.com/olivierverdier/zsh-git-prompt.git && \
   #cd zsh-git-prompt && \
