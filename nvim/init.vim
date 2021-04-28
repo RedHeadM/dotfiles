@@ -77,11 +77,14 @@ Plug 'fisadev/FixedTaskList.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Completion from other opened files
 Plug 'Shougo/context_filetype.vim'
-" Python autocompletion
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 
+" Python autocompletion
+"Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 " Python completion, goto definition etc.
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+"Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+" Python autocompletion
+" :CocInstall coc-python
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
  
 " bestter pyton text objects and motions 
 Plug 'jeetsukumaran/vim-pythonsense'
@@ -417,29 +420,30 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 """""""""""""""""""deoplete-jedi settings"""""""""""""""""""""""""""
 
 " whether to show doc string
-let g:deoplete#sources#jedi#show_docstring = 0
+"let g:deoplete#sources#jedi#show_docstring = 0
 
 " do not use typeinfo (for faster completion)
-let g:deoplete#sources#jedi#enable_typeinfo = 0
+"let g:deoplete#sources#jedi#enable_typeinfo = 0
 
 " for large package, set autocomplete wait time longer
-let g:deoplete#sources#jedi#server_timeout = 50
+"let g:deoplete#sources#jedi#server_timeout = 50
 
 " Jedi-vim ------------------------------
 
 " Disable autocompletion (using deoplete instead)
-let g:jedi#completions_enabled = 1
+"let g:jedi#completions_enabled = 1
 
 " All these mappings work only for python code:
 " Go to definition
-let g:jedi#goto_command = ',d'
+"let g:jedi#goto_command = ',d'
 " Find ocurrences
-let g:jedi#usages_command = ',o'
+"let g:jedi#usages_command = ',o'
 " Find assignments
-let g:jedi#goto_assignments_command = ',a'
+"let g:jedi#goto_assignments_command = ',a'
 " Go to definition in new tab
-nmap ,D :tab split<CR>:call jedi#goto()<CR>
-let g:jedi#documentation_command = ",,d"
+"nmap ,D :tab split<CR>:call jedi#goto()<CR>
+"let g:jedi#documentation_command = ",,d"
+
 " Ack.vim ------------------------------
 
 " mappings

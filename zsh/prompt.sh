@@ -1,6 +1,8 @@
+# termal promt with extra info: git, dir, virtenv
 # Reference for colors: http://stackoverflow.com/questions/689765/how-can-i-change-the-color-of-my-prompt-in-zsh-different-from-normal-text
 
 autoload -U colors && colors
+# git hub integration 
 source ~/dotfiles/zsh/plugins/zsh-git-prompt/zshrc.sh
 setopt PROMPT_SUBST
 
@@ -27,13 +29,6 @@ set_prompt() {
     # Informative git prompt for zsh
     #PS1+=', '
     PS1+='$(git_super_status)'
-    #if [ -v $VIRTUAL_ENV ]
-    #then
-		#PS1+=', '
-        #echo "Variable somevar exists!"
-        #PS1+="%{`basename \"$VIRTUAL_ENV\"`}"
-        #PS1+="%{${fg_bold[white]}%}(env: %{${fg[green]}%}`basename \"$VIRTUAL_ENV\"`%{${fg_bold[white]}%})%{${reset_color}%} $RPROMPT"
-    #else
 
 
     if [ ${#VIRTUAL_ENV} -gt 3 ]
@@ -62,7 +57,7 @@ set_prompt() {
 		#PS1+=', '
 		#PS1+="%{$fg_bold[red]%}SUDO%{$reset_color%}"
 	#fi
-
+    # end with white ]
 	PS1+="%{$fg[white]%}]: %{$reset_color%}% "
 }
 
