@@ -94,7 +94,7 @@ else
     echo "[ -s \"\$NVM_DIR/bash_completion\" ] && \. \"\$NVM_DIR/bash_completion\"  # This loads nvm bash_completion" >> ~/.zshrc
 
     # set for local installation
-    npm set prefix ~/.npm
+    #npm set prefix ~/.npm
     write_pathmunge "./node_modules/.bin:$PATH" ~/.bashrc
     write_pathmunge "$HOME/.npm/bin:$PATH" ~/.bashrc
     write_pathmunge "$HOME/.npm/bin:$PATH" ~/.zshrc
