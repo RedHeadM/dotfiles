@@ -14,6 +14,7 @@ RUN apt-get install -y \
   curl \
   make \
   wget \
+  #shopt \
   grep \
   xz-utils \
   zsh \

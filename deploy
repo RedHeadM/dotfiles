@@ -1,5 +1,10 @@
 #!/bin/bash
 
+write_pathmunge () {
+    # 1 path to bin 
+    # 2 file
+    echo "[[ ! "echo" \"\$"PATH"\" | grep -Eq \"(^|:)"$1"(\$|:)\" ]]" "&& PATH="\$PATH:$1"" >> $2
+}
 check_default_shell_root() {
 	if [ -z "${SHELL##*zsh*}" ] ;then
 			echo "Default shell is zsh."

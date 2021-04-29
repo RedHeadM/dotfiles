@@ -1,4 +1,9 @@
-
+write_pathmunge () {
+    # only append to path if not set
+    # 1 path to bin 
+    # 2 file
+    echo "[[ \":\$PATH:\" != *":$1:"* ]]" "&& export PATH="\$PATH:$1"" >> $2
+}
 
 # creat ~/.zshrc if not exitsts
 if [ ! -d "~/.zshrc" ]; then
@@ -9,9 +14,6 @@ if [ ! -d "~/.bashrc" ]; then
 	touch ~/.bashrc
 fi
 
-if [ ! -d "~/.bashrc" ]; then
-	touch ~/.bashrc
-fi
 
 # 0. oh-my-zsh shell 
 # requires zsh to be installed
@@ -28,14 +30,20 @@ echo "[step 1] installing neovim"
 if command -v nvim > /dev/null; then
 	echo "nvim has been installed"
 else
+    # neovim form source with no root
 	NVIM_HOME="$HOME/.modules/neovim" # /usr/local/nvim
+	NVIM_TMP="$HOME/.modules/neovim_tmp" # /usr/local/nvim
 	printf "Neovim will be installed into this location:\\n"
 	printf "%s\\n" "${NVIM_HOME}"
 
-	git clone https://github.com/neovim/neovim.git ${NVIM_HOME} && \
-	cd ${NVIM_HOME} && \
+	git clone https://github.com/neovim/neovim.git ${NVIM_TMP} && \
+	cd ${NVIM_TMP} && \
+    make CMAKE_INSTALL_PREFIX=${NVIM_HOME} &&\
 	make && make install && \
-	cd ../ && rm -rf ${NVIM_HOME}
+	cd ../ && rm -rf ${NVIM_TMP}
+    write_pathmunge "${NVIM_HOME}/bin" ~/.bashrc
+    write_pathmunge "${NVIM_HOME}/bin" ~/.zshrc
+	source ~/.bashrc
 fi
 
 
@@ -68,13 +76,12 @@ else
 					&& nvm use default
 
 	# add node and npm to path so the commands are available
-	echo "export NODE_PATH=\"\${NVM_DIR}/v{$NODE_VERSION}/lib/node_modules\"" >> $HOME/.bashrc
-	echo "export PATH=\"\$PATH:${NVM_DIR}/versions/node/v$NODE_VERSION/bin\"" >> $HOME/.bashrc
+    echo "export NODE_PATH=\"\${NVM_DIR}/v{$NODE_VERSION}/lib/node_modules\"" >> $HOME/.bashrc
+    write_pathmunge "${NVM_DIR}/versions/node/v${NODE_VERSION}/bin" ~/.bashrc
 	source $HOME/.bashrc
 
 	echo "export NODE_PATH=\"\${NVM_DIR}/v{$NODE_VERSION}/lib/node_modules\"" >> $HOME/.zshrc
-	echo "export PATH=\"\$PATH:${NVM_DIR}/versions/node/v$NODE_VERSION/bin\"" >> $HOME/.zshrc
-
+    write_pathmunge "${NVM_DIR}/versions/node/v${NODE_VERSION}/bin" ~/.zshrc
 fi
 
 # 3. install node.js packages via npm
