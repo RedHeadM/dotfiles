@@ -77,26 +77,16 @@ fi
 #check_for_software tmux
 #echo
 
-check_default_shell
+#check_default_shell
 
-echo
-echo -n "Would you like to backup your current dotfiles? (y/n) "
-old_stty_cfg=$(stty -g)
-stty raw -echo
-answer=$( while ! head -c 1 | grep -i '[ny]' ;do true ;done )
-stty $old_stty_cfg
-if echo "$answer" | grep -iq "^y" ;then
-	mv ~/.zshrc ~/.zshrc.old
-	mv ~/.tmux.conf ~/.tmux.conf.old
-	if [ ! -f ~/.config/nvim/init.vim ]
-	then
-			mkdir -p ~/.config/nvim/
-			touch ~/.config/nvim/init.vim
-	fi
-	mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.old
-else
-	echo -e "\nNot backing up old dotfiles."
+mv ~/.zshrc ~/.zshrc.old
+mv ~/.tmux.conf ~/.tmux.conf.old
+if [ ! -f ~/.config/nvim/init.vim ]
+then
+        mkdir -p ~/.config/nvim/
+        touch ~/.config/nvim/init.vim
 fi
+mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.old
 
 printf "source '$HOME/dotfiles/zsh/zshrc_manager.sh'" > ~/.zshrc
 printf "source-file $HOME/dotfiles/tmux/tmux.conf" > ~/.tmux.conf
