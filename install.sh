@@ -56,7 +56,7 @@ fi
 # 2. install node.js
 
 echo "[step 2] installing and node.js"
-if command -v node > /dev/null; then
+if command -v nvm > /dev/null; then
 	echo "node has been installed"
 else
 	# nvm environment variables
