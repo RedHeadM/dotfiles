@@ -53,9 +53,8 @@ else
     mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.old
 fi #
 
-printf "source '$HOME/dotfiles/zsh/zshrc_manager.sh'" > ~/.zshrc
-printf "source-file $HOME/dotfiles/tmux/tmux.conf" > ~/.tmux.conf
-mkdir -p $HOME/dotfiles/nvim/
+printf "source '$HOME/dotfiles/zsh/zshrc_manager.sh'" >> ~/.zshrc
+printf "source-file $HOME/dotfiles/tmux/tmux.conf" >> ~/.tmux.conf
 # only append to nvim config file,  
 printf "so $HOME/dotfiles/nvim/init.vim" >> ~/.config/nvim/init.vim
 
