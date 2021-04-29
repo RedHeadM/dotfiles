@@ -93,6 +93,13 @@ else
     echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\"  # This loads nvm" >> ~/.zshrc
     echo "[ -s \"\$NVM_DIR/bash_completion\" ] && \. \"\$NVM_DIR/bash_completion\"  # This loads nvm bash_completion" >> ~/.zshrc
 
+    # set for local installation
+    npm set prefix ~/.npm
+    write_pathmunge "./node_modules/.bin:$PATH" ~/.bashrc
+    write_pathmunge "$HOME/.npm/bin:$PATH" ~/.bashrc
+    write_pathmunge "$HOME/.npm/bin:$PATH" ~/.zshrc
+    write_pathmunge "./node_modules/.bin:$PATH" ~/.zshrc
+	source $HOME/.bashrc
 fi
 
 # 3. install node.js packages via npm
