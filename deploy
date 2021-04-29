@@ -36,15 +36,14 @@ check_default_shell() {
             echo "exec "$SHELL >> ~/.bash_profile
             touch ~/.profile
             echo "export SHELL="$SHELL >> ~/.profile
-            echo "[ -z "$ZSH_VERSION" ] && exec $SHELL -l" >> ~/.profile
-        fi
-	fi
-}
+            echo "[ -z "$ZSH_VERSION" ] && exec $SHELL -l" >> ~/.profile #
+        fi #
+	fi #
+} #
 #check_default_shell
-check_default_shell
+check_default_shell #
 
 # backup old files
-
 [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.old
 [ -f ~/.tmux.conf ] && mv ~/.tmux.conf ~/.tmux.conf.old
 if [ ! -f ~/.config/nvim/init.vim ]; then
@@ -57,7 +56,8 @@ fi #
 printf "source '$HOME/dotfiles/zsh/zshrc_manager.sh'" > ~/.zshrc
 printf "source-file $HOME/dotfiles/tmux/tmux.conf" > ~/.tmux.conf
 mkdir -p $HOME/dotfiles/nvim/
-printf "so $HOME/dotfiles/nvim/init.vim" > ~/.config/nvim/init.vim
+# only append to nvim config file,  
+printf "so $HOME/dotfiles/nvim/init.vim" >> ~/.config/nvim/init.vim
 
 
 # Install the Vim-plug Plugin ManagerPermalink

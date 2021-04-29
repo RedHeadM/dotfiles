@@ -2,7 +2,10 @@ write_pathmunge () {
     # only append to path if not set
     # 1 path to bin 
     # 2 file
-    echo "[[ \":\$PATH:\" != *":$1:"* ]]" "&& export PATH="\$PATH:$1"" >> $2
+    #echo "[ \":\$PATH:\" != *":$1:"* ]" "&& export PATH="\$PATH:$1"" >> $2
+    echo "if ! echo \$PATH | /bin/egrep -q \"(^|:)$1($|:)\" ; then" >> $2
+          echo "    export PATH=\$PATH:"$1 >> $2
+    echo fi >> $2
 }
 
 # creat ~/.zshrc if not exitsts
@@ -14,6 +17,7 @@ if [ ! -d "~/.bashrc" ]; then
 	touch ~/.bashrc
 fi
 
+source ~/.bashrc
 
 # 0. oh-my-zsh shell 
 # requires zsh to be installed
@@ -43,7 +47,9 @@ else
 	cd ../ && rm -rf ${NVIM_TMP}
     write_pathmunge "${NVIM_HOME}/bin" ~/.bashrc
     write_pathmunge "${NVIM_HOME}/bin" ~/.zshrc
-	source ~/.bashrc
+	#source ~/.bashrc
+	source $HOME/.bashrc
+    echo "path ${PATH}"
 fi
 
 
@@ -82,6 +88,11 @@ else
 
 	echo "export NODE_PATH=\"\${NVM_DIR}/v{$NODE_VERSION}/lib/node_modules\"" >> $HOME/.zshrc
     write_pathmunge "${NVM_DIR}/versions/node/v${NODE_VERSION}/bin" ~/.zshrc
+    # auto added to bashrc
+    echo "export NVM_DIR=$NVM_DIR" >> ~/.zshrc
+    echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\"  # This loads nvm" >> ~/.zshrc
+    echo "[ -s \"\$NVM_DIR/bash_completion\" ] && \. \"\$NVM_DIR/bash_completion\"  # This loads nvm bash_completion" >> ~/.zshrc
+
 fi
 
 # 3. install node.js packages via npm
@@ -127,14 +138,17 @@ export FZF=$HOME/.fzf
 if [ ! -d $FZF ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git $FZF
     $FZF/install --all --no-fish
-	echo "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh" >> $HOME/.zshrc
-    [ -f $FZF ] && source $FZF
+	echo "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh" >> $FZF
+    #[ -f $FZF ] && source $FZF
+	source $HOME/.bashrc
 fi
 
 
+echo "shell ${SHELL}"
+echo "path ${PATH}"
 echo "[step END] print versions"
 echo $(zsh --version)
-echo "nvm "$(command -v nvm)
+echo "nvm "$(nvm --version)
 echo $(nvim --version)
 echo $(fzf --version)
 echo $(tmux -V)

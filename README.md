@@ -80,7 +80,8 @@ Each plugin is sensitive to where you are and what you're doing, they reveal the
 * git: cd ~/.fzf && git pull && ./install
 * vim-plug: :PlugUpdate fzf
 ## [Tmux](https://en.wikipedia.org/wiki/Tmux)
-* isntall plugins: install with PREFIX+I
+
+* isntall [plugins](https://github.com/tmux-plugins/tpm): install with PREFIX+I
 * `%` has been remapped to `v`.
 * Use vim movement keys for moving between panes. 
 * Copy buffer is coppied to xclip.
