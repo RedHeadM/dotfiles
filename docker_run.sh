@@ -8,7 +8,8 @@ main() {
 		-it \
 		--rm \
 		--name zsh-git-prompt \
-		yanhan/zsh-git-prompt:0.1.0
+		nvim
+		#readhead/zsh-git-prompt:0.1.0
 }
 
 main "$@"

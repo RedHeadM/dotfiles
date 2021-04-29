@@ -30,11 +30,9 @@ ENV SHELL=/bin/bash
 #RUN \
   #sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 #ADD ./install.sh .
-ADD ./* $HOME/dotfiles/
-#COPY ./* $HOME/dotfiles/
-#RUN git clone https://github.com/RedHeadM/dotfiles.git $HOME/dotfiles
-RUN bash $HOME/dotfiles/deploy
-RUN bash $HOME/dotfiles/install.sh
+COPY . ./dotfiles
+RUN bash dotfiles/deploy
+RUN bash dotfiles/install.sh
 #RUN \
   #git clone https://github.com/olivierverdier/zsh-git-prompt.git && \
   #cd zsh-git-prompt && \
