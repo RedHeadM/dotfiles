@@ -1,11 +1,5 @@
 
-# 0. oh-my-zsh shell 
-# requires zsh to be installed
-echo "[step 10] zsh"
-export ZSH=$HOME/.oh-my-zsh
-if [ ! -d $ZSH ]; then
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
+
 # creat ~/.zshrc if not exitsts
 if [ ! -d "~/.zshrc" ]; then
 	touch ~/.zshrc
@@ -18,6 +12,15 @@ fi
 if [ ! -d "~/.bashrc" ]; then
 	touch ~/.bashrc
 fi
+
+# 0. oh-my-zsh shell 
+# requires zsh to be installed
+echo "[step 10] zsh"
+export ZSH=$HOME/.oh-my-zsh
+if [ ! -d $ZSH ]; then
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
+
 # 1. install neovim
 
 echo "[step 1] installing neovim"
@@ -118,6 +121,7 @@ if [ ! -d $FZF ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git $FZF
     $FZF/install --all --no-fish
 	echo "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh" >> $HOME/.zshrc
+    [ -f $FZF ] && source $FZF
 fi
 
 

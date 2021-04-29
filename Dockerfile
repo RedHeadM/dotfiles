@@ -9,15 +9,17 @@ run apt-get update && \
 
 # make and xz-utils are required to build ghc 7.10.3, which is required by
 # zsh-git-prompt
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get install -y \
   curl \
   make \
   wget \
+  grep \
   xz-utils \
   zsh \
   tmux \
-  libtool autoconf automake cmake libncurses5-dev g++ pkg-config unzip git libtool-bin gettext
+  silversearcher-ag ctags \
+  libtool autoconf automake cmake libncurses5-dev g++ pkg-config unzip git libtool-bin gettext  
 
 #ENV LD_LIBRARY_PATH=/usr/local/lib
 # Need to set these to successfully install oh-my-zsh
@@ -28,11 +30,11 @@ ENV SHELL=/bin/bash
 #RUN \
   #sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 #ADD ./install.sh .
-#ADD ../* $HOME/dotfiles/
-COPY ./* ./dotfiles/
+ADD ./* $HOME/dotfiles/
+#COPY ./* $HOME/dotfiles/
 #RUN git clone https://github.com/RedHeadM/dotfiles.git $HOME/dotfiles
-RUN bash dotfiles/install.sh
-RUN bash dotfiles/deploy
+RUN bash $HOME/dotfiles/deploy
+RUN bash $HOME/dotfiles/install.sh
 #RUN \
   #git clone https://github.com/olivierverdier/zsh-git-prompt.git && \
   #cd zsh-git-prompt && \
@@ -47,3 +49,4 @@ RUN bash dotfiles/deploy
   #rm append-to-zshrc.sh
 
 ENTRYPOINT ["zsh"]
+#ENTRYPOINT ["bash"]
