@@ -1,35 +1,49 @@
 #!/bin/bash
-check_default_shell_root() {
-	if [ -z "${SHELL##*zsh*}" ] ;then
-			echo "Default shell is zsh."
-	else
-		echo -n "Default shell is not zsh. Do you want to chsh -s \$(which zsh)? (y/n)"
-		old_stty_cfg=$(stty -g)
-		stty raw -echo
-		answer=$( while ! head -c 1 | grep -i '[ny]' ;do true ;done )
-		stty $old_stty_cfg && echo
-		if echo "$answer" | grep -iq "^y" ;then
-			chsh -s $(which zsh)
-		else
-			echo "Warning: Your configuration won't work properly. If you exec zsh, it'll exec tmux which will exec your default shell which isn't zsh."
-		fi
-	fi
-}
+# requires npm, neovim, tmux, zsh
 
-install_tmux_plugin() {
-    if [ ! -f ~/.tmux.conf ]; then
-        echo "installing tmux plugin"
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-        tmux source ~/.tmux.conf
+if ! command -v nvim &> /dev/null; then
+    echo "nvim not found, use default installation"
+    NVIM_HOME="$HOME/.modules/neovim"
+    # neovim form source with no root
+    PATH=$PATH:$NVIM_HOME/bin/
+fi
+
+if ! command -v npm &> /dev/null; then
+    # nvm environment variables
+    echo "npm not found, use default installation"
+	export NVM_DIR="$HOME/.modules/node"
+	NODE_VERSION=14.15.0
+    bash $NVM_DIR/nvm.sh # this loads nvm
+    export $PATH=$PATH:${NVM_DIR}/versions/node/v${NODE_VERSION}/bin/
+	export NODE_PATH=${NVM_DIR}/v{$NODE_VERSION}/lib/node_modules/
+    source $HOME/.bashrc
+fi
+
+echo "path ${PATH}"
+
+check_default_shell_root() {
+    echo "setup defualt shell root"
+    if [ -z "${SHELL##*zsh*}" ] ;then
+        echo "Default shell is zsh."
     else
-        echo "tmux already plugin installed "
-    if
+        echo -n "Default shell is not zsh. Do you want to chsh -s \$(which zsh)? (y/n)"
+        old_stty_cfg=$(stty -g)
+        stty raw -echo
+        answer=$( while ! head -c 1 | grep -i '[ny]' ;do true ;done )
+        stty $old_stty_cfg && echo
+        if echo "$answer" | grep -iq "^y" ;then
+            chsh -s $(which zsh)
+        else
+            echo "Warning: Your configuration won't work properly. If you exec zsh, it'll exec tmux which will exec your default shell which isn't zsh."
+        fi
+    fi
 }
 
 check_default_shell() {
-	if [ -z "${SHELL##*zsh*}" ] ;then
-			echo "Default shell is zsh."
-	else
+    echo "setup defualt shell no root"
+    if [ -z "${SHELL##*zsh*}" ] ;then
+            echo "Default shell is zsh."
+    else
         touch ~/.bash_profile
         if grep -Fxq "SHELL" ~/.bash_profile; then
             echo "SHELL in pash_profile"
@@ -42,38 +56,104 @@ check_default_shell() {
             echo "export SHELL="$SHELL >> ~/.profile
             echo "[ -z "$ZSH_VERSION" ] && exec $SHELL -l" >> ~/.profile #
         fi #
-	fi #
+    fi #
 } #
 
+install_tmux_plugin_manager() {
+    echo "install tmux plugin manager"
+    #if [ -z "${SHELL##*zsh*}" ] ;then
+    if [ ! -f ~/.tmux/plugins/tpm ]; then
+            echo "Default shell is zsh."
+        echo "installing tmux plugin"
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+        # Initialize TMUX plugin manager is done in dotfiles 
+    else
+        echo "tmux plugin was installed"
+    fi #
+} #
+
+install_nvim_plugin_manager() {
+    echo "nvim installing plug"
+    if [ ! -f ~/.local/share/nvim/site/autoload/plug.vim]; then
+        sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+               https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+    else
+        echo "nvim plug plugin was installed"
+    fi #
+}
 
 
+setup_dotfiles() {
+    echo "setup for dotfile path: nvim, tmux, zsh "
+
+    # backup old files
+    #[ ! -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.old
+    #[ ! ~/.tmux.conf ] && mv ~/.tmux.conf ~/.tmux.conf.old
+    if [ ! -f ~/.tmux.conf ]; then
+        # no tmux conf
+        touch ~/.tmux.conf
+    else
+        echo "create tmux conf backup"
+        mv ~/.tmux.conf ~/.tmux.conf.old
+    fi #
+    if [ ! -f ~/.config/nvim/init.vim ]; then
+        # no nvim conf 
+        mkdir -p ~/.config/nvim/
+        touch ~/.config/nvim/init.vim
+    else
+        echo "create nvim init backup"
+        mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.old
+    fi #
+
+    # only append to nvim config file,  
+    printf "source '$HOME/dotfiles/zsh/zshrc_manager.sh'" >> ~/.zshrc
+    # overwrite
+    printf "source-file $HOME/dotfiles/tmux/tmux.conf" > ~/.tmux.conf
+    printf "so $HOME/dotfiles/nvim/init.vim" > ~/.config/nvim/init.vim
+}
 
 #check_default_shell
-check_default_shell #
+check_default_shell 
+install_tmux_plugin_manager
+install_nvim_plugin_manager
+setup_dotfiles
 
-# backup old files
-[ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.old
-[ -f ~/.tmux.conf ] && mv ~/.tmux.conf ~/.tmux.conf.old
-if [ ! -f ~/.config/nvim/init.vim ]; then
-    mkdir -p ~/.config/nvim/
-    touch ~/.config/nvim/init.vim
-else
-    mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.old
-fi #
+# Initialize TMUX plugin manager is done in dotfiles 
+tmux source ~/.tmux.conf
 
-printf "source '$HOME/dotfiles/zsh/zshrc_manager.sh'" >> ~/.zshrc
-printf "source-file $HOME/dotfiles/tmux/tmux.conf" >> ~/.tmux.conf
-# only append to nvim config file,  
-printf "so $HOME/dotfiles/nvim/init.vim" >> ~/.config/nvim/init.vim
+echo "[step 3] installing node.js packages: neovim and yarn"
+npm install -g neovim yarn
+#npm install -g neovim yarn
+
+# 4. install Plug
+
+# 5. install plugins via Plug
+echo "[step 5] installing plugins"
+if [[ ! -d $HOME/.config/nvim ]]; then
+    mkdir -p $HOME/.config/nvim
+fi
+#if [[ ! -f $HOME/.config/nvim/init.vim ]]; then
+    #wget https://gist.githubusercontent.com/wsntxxn/5bbe7856a472985d82f62e1b0895ce60/raw/fc7db25e1af2b9dae8969021c52c21ce06be3bb5/init.vim -P $HOME/.config/nvim/
+#fi
+
+nvim +'PlugInstall --sync' +qa
+
+# 6. install packages via pip
+echo "[step 6] installing python packages: neovim"
+#pip install --user neovim notedown
+# TODO https://www.hassanaskary.com/vim/conda/python/2020/04/27/how-to-setup-neovim-with-python-provider-using-conda.html
+pip3 install --user neovim pynvim pep8 flake8 pyflakes pylint isort
+pip install --user neovim pynvim pep8 flake8 pyflakes pylint isort
+
+# 7. postprocessing for semshi
+echo "[step 7] post processing step for installing semshi"
+nvim +'UpdateRemotePlugins' +qa 
+
+# 8. install coc plugins
+echo "[step 8] installing coc plugins"
+nvim +'CocInstall coc-python coc-json coc-jedi'
 
 
-# Install the Vim-plug Plugin ManagerPermalink
-#curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    #https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-#echo
-#echo "Please log out and log back in for default shell to be initialized."
-
-
-
-# tmux
+echo "deploy finished"
 

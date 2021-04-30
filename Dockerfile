@@ -19,6 +19,7 @@ RUN apt-get install -y \
   xz-utils \
   zsh \
   tmux \
+  neovim \ 
   silversearcher-ag ctags \
   libtool autoconf automake cmake libncurses5-dev g++ pkg-config unzip git libtool-bin gettext  
 
@@ -32,8 +33,8 @@ ENV SHELL=/bin/bash
   #sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 #ADD ./install.sh .
 COPY . ./dotfiles
-#RUN bash dotfiles/deploy
 RUN bash dotfiles/install.sh
+RUN bash dotfiles/deploy
 #RUN \
   #git clone https://github.com/olivierverdier/zsh-git-prompt.git && \
   #cd zsh-git-prompt && \
