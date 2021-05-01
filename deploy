@@ -1,6 +1,20 @@
 #!/bin/bash
 # requires npm, neovim, tmux, zsh
 
+write_pathmunge () {
+    # only append to path if not set
+    # 1 path to bin 
+    # 2 file
+    #echo "[ \":\$PATH:\" != *":$1:"* ]" "&& export PATH="\$PATH:$1"" >> $2
+    echo "if ! echo \$PATH | /bin/egrep -q \"(^|:)$1($|:)\" ; then" >> $2
+          echo "    export PATH=\$PATH:"$1 >> $2
+    echo fi >> $2
+    # add for skript
+    if ! echo $PATH | /bin/egrep -q "(^|:)$1($|:)" ; then
+          PATH=$PATH:$1
+    fi
+}
+
 if ! command -v nvim &> /dev/null; then
     echo "nvim not found, use default installation"
     NVIM_HOME="$HOME/.modules/neovim"
@@ -74,7 +88,7 @@ install_tmux_plugin_manager() {
 
 install_nvim_plugin_manager() {
     echo "nvim installing plug"
-    if [ ! -f ~/.local/share/nvim/site/autoload/plug.vim]; then
+    if [ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]; then
         sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
                https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
@@ -83,6 +97,20 @@ install_nvim_plugin_manager() {
     fi #
 }
 
+install_zsh_plugin_manager() {
+    echo "zsh antigen installing plug"
+	#ANT_DIR=~/.modules/antigen/antigen.zsh
+	export ZPLUG_HOME=~/.zplug
+    if [ ! -d $ZPLUG_HOME ]; then
+        echo "zsh plugin install to $ZPLUG_HOME"
+		#curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+		git clone https://github.com/zplug/zplug $ZPLUG_HOME
+		#write_pathmunge $ZPLUG_HOME ~/.zshrc
+		eval $ZPLUG_HOME/init.zsh
+    else
+        echo "zsh plug plugin was installed"
+    fi #
+}
 
 setup_dotfiles() {
     echo "setup for dotfile path: nvim, tmux, zsh "
@@ -90,34 +118,44 @@ setup_dotfiles() {
     # backup old files
     #[ ! -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.old
     #[ ! ~/.tmux.conf ] && mv ~/.tmux.conf ~/.tmux.conf.old
-    if [ ! -f ~/.tmux.conf ]; then
-        # no tmux conf
-        touch ~/.tmux.conf
-    else
-        echo "create tmux conf backup"
-        mv ~/.tmux.conf ~/.tmux.conf.old
-    fi #
-    if [ ! -f ~/.config/nvim/init.vim ]; then
-        # no nvim conf 
-        mkdir -p ~/.config/nvim/
-        touch ~/.config/nvim/init.vim
-    else
-        echo "create nvim init backup"
-        mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.old
-    fi #
 
-    # only append to nvim config file,  
-    printf "source '$HOME/dotfiles/zsh/zshrc_manager.sh'" >> ~/.zshrc
-    # overwrite
-    printf "source-file $HOME/dotfiles/tmux/tmux.conf" > ~/.tmux.conf
-    printf "so $HOME/dotfiles/nvim/init.vim" > ~/.config/nvim/init.vim
+	if [ ! -f ~/.config/nvim/init.vim ]; then
+		# no nvim conf 
+		mkdir -p ~/.config/nvim/
+		touch ~/.config/nvim/init.vim
+	fi 
+
+	if grep -Fxq "so $HOME/dotfiles/nvim/init.vim" ~/.config/nvim/init.vim
+	then
+        echo "dotfiles was deployed"
+	else
+		if [ ! -f ~/.tmux.conf ]; then
+			# no tmux conf
+			touch ~/.tmux.conf
+		else
+			echo "create tmux conf backup"
+			mv ~/.tmux.conf ~/.tmux.conf.old
+		fi #
+		if [ -f ~/.config/nvim/init.vim ]; then
+			echo "create nvim init backup"
+			mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.old
+		fi #
+
+		# only append to nvim config file,  
+		printf "source '$HOME/dotfiles/zsh/zshrc_manager.sh'\n" >> ~/.zshrc
+		# overwrite
+		printf "source-file $HOME/dotfiles/tmux/tmux.conf" > ~/.tmux.conf
+		printf "so $HOME/dotfiles/nvim/init.vim" > ~/.config/nvim/init.vim
+    fi
 }
 
 #check_default_shell
 check_default_shell 
 install_tmux_plugin_manager
 install_nvim_plugin_manager
+install_zsh_plugin_manager
 setup_dotfiles
+zplug install
 
 # Initialize TMUX plugin manager is done in dotfiles 
 tmux source ~/.tmux.conf
@@ -144,7 +182,7 @@ echo "[step 6] installing python packages: neovim"
 #pip install --user neovim notedown
 # TODO https://www.hassanaskary.com/vim/conda/python/2020/04/27/how-to-setup-neovim-with-python-provider-using-conda.html
 pip3 install --user neovim pynvim pep8 flake8 pyflakes pylint isort
-pip install --user neovim pynvim pep8 flake8 pyflakes pylint isort
+#pip install --user neovim pynvim pep8 flake8 pyflakes pylint isort
 
 # 7. postprocessing for semshi
 echo "[step 7] post processing step for installing semshi"

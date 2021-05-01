@@ -18,10 +18,16 @@ RUN apt-get install -y \
   grep \
   xz-utils \
   zsh \
+  gawk \
   tmux \
+  xsel \
   neovim \ 
+  libevent-dev libncurses-dev build-essential libssl-dev libffi-dev bison byacc\
   silversearcher-ag ctags \
+  python3 python3-dev python3-pip \
   libtool autoconf automake cmake libncurses5-dev g++ pkg-config unzip git libtool-bin gettext  
+# xsel for tmux-yank, copy to clipboard
+# awk is zplug:  zsh plugin manger 
 
 #ENV LD_LIBRARY_PATH=/usr/local/lib
 # Need to set these to successfully install oh-my-zsh
@@ -35,18 +41,6 @@ ENV SHELL=/bin/bash
 COPY . ./dotfiles
 RUN bash dotfiles/install.sh
 RUN bash dotfiles/deploy
-#RUN \
-  #git clone https://github.com/olivierverdier/zsh-git-prompt.git && \
-  #cd zsh-git-prompt && \
-  #stack setup && \
-  #stack build && \
-  #stack install
-
-#ADD append-to-zshrc.sh .
-
-#RUN \
-  #tee -a ~/.zshrc < append-to-zshrc.sh && \
-  #rm append-to-zshrc.sh
 
 ENTRYPOINT ["zsh"]
 #ENTRYPOINT ["bash"]

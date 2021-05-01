@@ -52,7 +52,6 @@ else
     write_pathmunge "${NVIM_HOME}/bin/" ~/.zshrc
 	#source ~/.bashrc
 	source $HOME/.bashrc
-    echo "path ${PATH}"
 fi
 
 
@@ -98,10 +97,10 @@ else
 
     # set for local installation
     #npm set prefix ~/.npm
-    write_pathmunge "./node_modules/.bin:$PATH" ~/.bashrc
-    write_pathmunge "$HOME/.npm/bin:$PATH" ~/.bashrc
-    write_pathmunge "$HOME/.npm/bin:$PATH" ~/.zshrc
-    write_pathmunge "./node_modules/.bin:$PATH" ~/.zshrc
+    write_pathmunge "./node_modules/.bin" ~/.bashrc
+    write_pathmunge "$HOME/.npm/bin" ~/.bashrc
+    write_pathmunge "$HOME/.npm/bin" ~/.zshrc
+    write_pathmunge "./node_modules/.bin" ~/.zshrc
 	source $HOME/.bashrc
 fi
 
@@ -115,8 +114,53 @@ export FZF=$HOME/.fzf
 if [ ! -d $FZF ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git $FZF
     $FZF/install --all --no-fish
-	echo "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh" >> $FZF
+	#echo "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh" >> $FZF
 fi
+
+
+# PathPicker
+if ! command -v fpp &> /dev/null    
+then
+	export FPP_DIR="$HOME/.modules/fpp"                                 
+	echo "fpp will be installed to $FPP_DIR"
+	git clone https://github.com/facebook/PathPicker.git $FPP_DIR
+	#cd $FPP_DIR/debian && \
+	#./package.sh && \
+	#ls ../fpp_0.7.2_noarch.deb && \
+	write_pathmunge $FPP_DIR ~/.zshrc
+	write_pathmunge $FPP_DIR ~/.bashrc
+fi
+
+if ! command -v tmux &> /dev/null    
+then
+	export tmux_dir="$home/.modules/tmux"                                 
+	echo "tmux will be installed to $tmux_dir"
+	git clone https://github.com/tmux/tmux.git $tmux_dir && \
+	cd $tmux_dir && \
+    sh autogen.sh && \
+    ./configure && make
+	#cd $fpp_dir/debian && \
+	#./package.sh && \
+	#ls ../fpp_0.7.2_noarch.deb && \
+	write_pathmunge $tmux_dir ~/.zshrc
+	write_pathmunge $tmux_dir ~/.bashrc
+fi
+
+if ! command -v conda --version &> /dev/null
+then
+	CONDA_DIR=~/.modules/conda 
+	echo "conda will be installed to $CONDA_DIR"
+	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O conda.sh
+	bash conda.sh -b -p $CONDA_DIR
+	rm -f conda.sh
+	$CONDA_DIR/bin/conda init bash
+	$CONDA_DIR/bin/conda init zshrc
+	write_pathmunge $CONDA_DIR/bin ~/.bashrc
+	write_pathmunge $CONDA_DIR/bin ~/.zshrc
+	conda init bash
+	conda init zsh
+fi
+
 
 
 echo "shell ${SHELL}"
@@ -127,6 +171,7 @@ echo "nvm "$(nvm --version)
 echo $(nvim --version)
 #echo $(fzf --version)
 echo $(tmux -V)
+echo $(fpp --verion)
 
 
 echo "Finish installing neovim and coc.nvim!"

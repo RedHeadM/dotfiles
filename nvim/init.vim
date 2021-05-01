@@ -34,11 +34,6 @@ endif
 " want to use
 call plug#begin('~/.config/nvim/plugged')
 
-" Now the actual plugins:
-
-" Override configs by directory
-Plug 'arielrossanigo/dir-configs-override.vim'
-
 " Code commenter
 Plug 'scrooloose/nerdcommenter'
 
@@ -46,18 +41,10 @@ Plug 'scrooloose/nerdcommenter'
 "Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " on demand
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' } " on demand
-
 " Class/module browser
 Plug 'majutsushi/tagbar'
 " TODO known problems:
 " * current block not refreshing
-
-" Search results counter
-Plug 'vim-scripts/IndexedSearch'
-
-" Terminal Vim with 256 colors colorscheme
-"Plug 'fisadev/fisa-vim-colorscheme'
-Plug 'drewtempelmeyer/palenight.vim'
 
 " Airline, info line at bottom
 Plug 'vim-airline/vim-airline'
@@ -70,28 +57,30 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Pending tasks list
+" Pending tasks list: mapped to <F2>
 Plug 'fisadev/FixedTaskList.vim'
 
 " Async autocompletion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Completion from other opened files
-Plug 'Shougo/context_filetype.vim'
+"Plug 'Shougo/context_filetype.vim'
 
 " Python autocompletion
-"Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-" Python completion, goto definition etc.
-"Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-" Python autocompletion
-" :CocInstall coc-python
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
- 
-" bestter pyton text objects and motions 
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
+" Mulitcusur
+Plug 'mg979/vim-visual-multi', {'branch': 'master'} 
+
+" bestter pyton text objects and motions
+" eg. <vaf>: select around fn, <yac> copy around class  
 Plug 'jeetsukumaran/vim-pythonsense'
 "Plug 'python-mode/python-mode', { 'branch': 'develop' }
 
 " Automatically close parenthesis, etc
-Plug 'Townk/vim-autoclose'
+"Plug 'Townk/vim-autoclose'
+
+" python auto doc stirng
+Plug 'heavenshell/vim-pydocstring'
 
 " Surround
 "Plug 'tpope/vim-surround'
@@ -102,6 +91,10 @@ Plug 'michaeljsmith/vim-indent-object'
 
 " Indentation based movements
 Plug 'jeetsukumaran/vim-indentwise'
+
+" Indentation based movements
+" alig test vipga=
+Plug 'junegunn/vim-easy-align'
 
 " Better language packs
 "Plug 'sheerun/vim-polyglot'
@@ -117,14 +110,8 @@ Plug 'mileszs/ack.vim'
 " Window chooser
 "Plug 't9md/vim-choosewin'
 
-" Automatically sort python imports
-Plug 'fisadev/vim-isort'
-
 " Highlight matching html tags
 "Plug 'valloric/MatchTagAlways'
-
-" Generate html in a simple way
-"Plug 'mattn/emmet-vim'
 
 " Git integration nerdtree:  status 
 Plug 'tpope/vim-fugitive'
@@ -159,13 +146,22 @@ Plug 'ludovicchabant/vim-gutentags'
 " Highlight last yank for a shork time
 Plug 'machakann/vim-highlightedyank'
 
-" better replace mapped to leader k
-Plug 'wincent/scalpel'
-
 Plug 'vim-latex/vim-latex'
 
 " vim and panel movement with <C-h/j/k/l>
 Plug 'christoomey/vim-tmux-navigator'
+
+
+"COLOR and themes 
+Plug 'drewtempelmeyer/palenight.vim' " Theme
+Plug 'ryanoasis/vim-devicons' " filetype glyphs (icons) to various vim plugins
+"Plug 'fisadev/fisa-vim-colorscheme'
+"Plug 'morhetz/gruvbox'
+"Plug 'dracula/vim'
+"Plug 'kaicataldo/material.vim'
+"Plug 'ayu-theme/ayu-vim'
+"Plug 'sonph/onehalf', {'rtp': 'vim/'}
+"Plug 'rakr/vim-one'
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
@@ -235,6 +231,8 @@ endif
 "else
     "colorscheme delek
 "endif
+
+" THEME
 colorscheme palenight
 " needed so deoplete can auto select the first suggestion
 set completeopt+=noinsert
@@ -394,6 +392,13 @@ nmap ,B :Buffers<CR>
 "nmap ,wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
 "nmap ,wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
 
+" EasyAlign -----------------------------
+
+"Start interactive EasyAlign in visual mode (e.g. vipga=)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " Deoplete -----------------------------
 
@@ -545,7 +550,7 @@ if has('mouse')
 " caps lock to esc
 "nnoremap <Tab> <Esc>
 
-
+" True Colors
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
@@ -575,31 +580,6 @@ let mapleader = ","
 :nnoremap <Leader>q" ciw""<Esc>P
 :nnoremap <Leader>q' ciw''<Esc>P
 
-" MULIT cursor
-"let g:multi_cursor_use_default_mapping=0
-" let g:multi_cursor_exit_from_insert_mode =0 
-"" Default mapping
-"let g:multi_cursor_start_word_key      = '<C-n>'
-"let g:multi_cursor_select_all_word_key = '<A-n>'
-"let g:multi_cursor_start_key           = 'g<C-n>'
-"let g:multi_cursor_select_all_key      = 'g<A-n>'
-"let g:multi_cursor_next_key            = '<C-n>'
-"let g:multi_cursor_prev_key            = '<C-p>'
-"let g:multi_cursor_skip_key            = '<C-x>'
-"let g:multi_cursor_quit_key            = '<C-l>'
-" Disable deoplete when in multi cursor mode
-"function! Multiple_cursors_before()
-    "let b:deoplete_disable_auto_complete = 1
-"endfunction
-
-"function! Multiple_cursors_after()
-    "let b:deoplete_disable_auto_complete = 0
-"endfunction
-"augroup VimMultiCursors
-  "autocmd!
-  "autocmd User MultipleCursorsPre let g:deoplete#disable_auto_complete=1
-  "autocmd User MultipleCursorsPost let g:deoplete#disable_auto_complete=0
-"augroup END
 
 " Mappings to move lines alt un or down with j and k
 noremap <A-j> :m .+1<CR>==

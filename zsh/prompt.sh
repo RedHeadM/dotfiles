@@ -1,9 +1,25 @@
-# termal promt with extra info: git, dir, virtenv
-# Reference for colors: http://stackoverflow.com/questions/689765/how-can-i-change-the-color-of-my-prompt-in-zsh-different-from-normal-text
+# termal promt with extra info: git, dir, virtenv# Reference for colors: http://stackoverflow.com/questions/689765/how-can-i-change-the-color-of-my-prompt-in-zsh-different-from-normal-text
 
 autoload -U colors && colors
 # git hub integration 
-source ~/dotfiles/zsh/plugins/zsh-git-prompt/zshrc.sh
+#source ~/dotfiles/zsh/plugins/zsh-git-prompt/zshrc.sh
+#source $ZPLUG_HOME/repos/olivierverdier/zsh-git-prompt/zshrc.sh
+
+ZSH_THEME_GIT_PROMPT_PREFIX=", "
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_SEPARATOR=""
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[magenta]%}"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}%{✚ %G%}"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}%{✖ %G%}"
+#ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[yellow]%}%{✻ %G%}"
+ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[yellow]%}%{·%G%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{▴%G%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{▾%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%}%{!%G%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[white]%}%{✔%G%}"
+
+source $ZPLUG_HOME/repos/woefe/git-prompt.zsh/git-prompt.zsh
+
 setopt PROMPT_SUBST
 
 set_prompt() {
@@ -28,13 +44,20 @@ set_prompt() {
 
     # Informative git prompt for zsh
     #PS1+=', '
-    PS1+='$(git_super_status)'
-
+    #PS1+='$(git_super_status)'
+	#PS1+='%B%40<..<%~%b$(gitprompt)'
+	PS1+='$(gitprompt)'
 
     if [ ${#VIRTUAL_ENV} -gt 3 ]
     then
         PS1+=','
         PS1+=$'%{$fg[magenta]%}[${VIRTUAL_ENV:t}]%{$reset_color%}'
+    else
+        venv=$''
+    fi
+	if [[ ! -z $CONDA_PROMPT_MODIFIER ]]; then 
+        PS1+=','
+        PS1+=$'%{$fg[magenta]%}${CONDA_PROMPT_MODIFIER:t}%{$reset_color%}'
     else
         venv=$''
     fi
@@ -63,12 +86,12 @@ set_prompt() {
 
 precmd_functions+=set_prompt
 
-preexec () {
-   (( ${#_elapsed[@]} > 1000 )) && _elapsed=(${_elapsed[@]: -1000})
-   _start=$SECONDS
-}
+#preexec () {
+   #(( ${#_elapsed[@]} > 1000 )) && _elapsed=(${_elapsed[@]: -1000})
+   #_start=$SECONDS
+#}
 
-precmd () {
-   (( _start >= 0 )) && _elapsed+=($(( SECONDS-_start )))
-   _start=-1 
-}
+#precmd () {
+   #(( _start >= 0 )) && _elapsed+=($(( SECONDS-_start )))
+   #_start=-1 
+#}

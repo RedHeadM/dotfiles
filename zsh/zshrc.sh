@@ -1,48 +1,43 @@
-# Vars
-	HISTFILE=~/.zsh_history
-	SAVEHIST=1000
-	setopt inc_append_history # To save every command before it is executed
-	setopt share_history # setopt inc_append_history
+# COLOR 
+if [ ! "$TMUX" ]; then 
+	export TERM=screen-256color
+fi
 
-	git config --global push.default current
+
+# Vars
+HISTFILE=~/.zsh_history
+SAVEHIST=1000
+setopt inc_append_history # To save every command before it is executed
+setopt share_history # setopt inc_append_history
+
+git config --global push.default current
 
 # Aliases
-	alias vim="nvim"
-	alias py="python"
-	alias v="nvim -p"
-	mkdir -p /tmp/log
+alias vim="nvim"
+alias py="python"
+alias v="nvim -p"
+alias tmux='tmux -u'
+alias tm='tmux'
+mkdir -p /tmp/log
 
-	# This is currently causing problems (fails when you run it anywhere that isn't a git project's root directory)
-	# alias vs="v `git status --porcelain | sed -ne 's/^ M //p'`"
+# This is currently causing problems (fails when you run it anywhere that isn't a git project's root directory)
+# alias vs="v `git status --porcelain | sed -ne 's/^ M //p'`"
 
 # Settings
-	export VISUAL=vim
+export VISUAL=vim
 
-source ~/dotfiles/zsh/plugins/fixls.zsh
 
 #Functions
-	# Loop a command and show the output in vim
-	loop() {
-		echo ":cq to quit\n" > /tmp/log/output
-		fc -ln -1 > /tmp/log/program
-		while true; do
-			cat /tmp/log/program >> /tmp/log/output ;
-			$(cat /tmp/log/program) |& tee -a /tmp/log/output ;
-			echo '\n' >> /tmp/log/output
-			vim + /tmp/log/output || break;
-			rm -rf /tmp/log/output
-		done;
-	}
 
- 	# Custom cd
- 	c() {
- 		cd $1;
- 		ls;
- 	}
- 	alias cd="c"
+# Custom cd
+#c() {
+	#cd $1;
+	#ls;
+#}
+#alias cd="c"
 
 # For vim mappings:
-	stty -ixon
+stty -ixon
 
 # Completions
 # These are all the plugin options available: https://github.com/robbyrussell/oh-my-zsh/tree/291e96dcd034750fbe7473482508c08833b168e3/plugins
@@ -50,25 +45,45 @@ source ~/dotfiles/zsh/plugins/fixls.zsh
 # Edit the array below, or relocate it to ~/.zshrc before anything is sourced
 # For help create an issue at github.com/parth/dotfiles
 
-autoload -U compinit
+#autoload -U compinit
 
-plugins=(
-	docker
-)
+#plugins
+#source ~/dotfiles/zsh/plugins/oh-my-zsh/lib/history.zsh
+#source ~/dotfiles/zsh/plugins/oh-my-zsh/lib/key-bindings.zsh
+#source ~/dotfiles/zsh/plugins/oh-my-zsh/lib/completion.zsh
+##source ~/dotfiles/zsh/plugins/vi-mode.plugin.zsh
+#source ~/dotfiles/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source ~/dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-for plugin ($plugins); do
-    fpath=(~/dotfiles/zsh/plugins/oh-my-zsh/plugins/$plugin $fpath)
-done
+#source ~/.modules/antigen/antigen.zsh
+ZPLUG_HOME=~/.zplug
+source $ZPLUG_HOME/init.zsh
 
-compinit
+# Supports oh-my-zsh plugins and the like
+#zplug "plugins/git",   from:oh-my-zsh
+zplug "plugins/pip",   from:oh-my-zsh
+zplug "zsh-users/zsh-autosuggestions"
+#zplug "tarrasch/zsh-command-not-found"
+zplug "esc/conda-zsh-completion"
+zplug "zsh-users/zsh-completions"
+zplug "desyncr/auto-ls"
+zplug "ryanoasis/nerd-fonts"
+zplug "unixorn/git-extra-commands"
+zplug "MichaelAquilina/zsh-you-should-use" # alias reminder if not used
+#zplug "olivierverdier/zsh-git-prompt"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/default.zsh}"
+#zplug "dim-an/cod" # lean autocompletion with --help
+# Then, source plugins and add commands to $PATH
 
-source ~/dotfiles/zsh/plugins/oh-my-zsh/lib/history.zsh
-source ~/dotfiles/zsh/plugins/oh-my-zsh/lib/key-bindings.zsh
-source ~/dotfiles/zsh/plugins/oh-my-zsh/lib/completion.zsh
-#source ~/dotfiles/zsh/plugins/vi-mode.plugin.zsh
-source ~/dotfiles/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/dotfiles/zsh/keybindings.sh
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+	echo; zplug install
+fi
+
+zplug load --verbose
+
+#source ~/dotfiles/zsh/keybindings.sh
 
 # Fix for arrow-key searching
 # start typing + [Up-Arrow] - fuzzy find history forward
@@ -88,6 +103,10 @@ source ~/dotfiles/zsh/prompt.sh
 export PATH=$PATH:$HOME/dotfiles/utils
 
 # caps to esc
-setxkbmap -option caps:escape
+if command -v setxkbmap &> /dev/null
+then
+	setxkbmap -option caps:escape
+if
+
 # source fuzzy search
-source ~/dotfiles/zsh/fzf_func.sh
+#source ~/dotfiles/zsh/fzf_func.sh
