@@ -191,7 +191,8 @@ nvim +'UpdateRemotePlugins' +qa
 
 # 8. install coc plugins
 echo "[step 8] installing coc plugins"
-nvim +'CocInstall coc-python coc-json coc-jedi'
+#nvim +'CocInstall coc-python coc-json coc-jedi'
+nvim +'CocInstall coc-sh coc-json coc-pyright efm-langserver'
 
 
 echo "deploy finished"
