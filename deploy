@@ -182,8 +182,8 @@ nvim +'PlugInstall --sync' +qa
 echo "[step 6] installing python packages: neovim"
 #pip install --user neovim notedown
 # TODO https://www.hassanaskary.com/vim/conda/python/2020/04/27/how-to-setup-neovim-with-python-provider-using-conda.html
-pip3 install --user neovim pynvim pep8 flake8 pyflakes pylint isort
-#pip install --user neovim pynvim pep8 flake8 pyflakes pylint isort
+pip3 install --user neovim pynvim pep8 flake8 pyflakes pylint isort jedi mypy
+#pip install --user neovim pynvim pep8 flake8 pyflakes pylint isort jedi mypy
 
 # 7. postprocessing for semshi
 echo "[step 7] post processing step for installing semshi"

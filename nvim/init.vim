@@ -67,6 +67,7 @@ Plug 'fisadev/FixedTaskList.vim'
 
 " Python autocompletion
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build' } }
 
 " Mulitcusur
 Plug 'mg979/vim-visual-multi', {'branch': 'master'} 
