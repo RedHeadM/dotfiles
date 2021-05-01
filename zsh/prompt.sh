@@ -18,7 +18,7 @@ ZSH_THEME_GIT_PROMPT_AHEAD="%{▾%G%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%}%{!%G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[white]%}%{✔%G%}"
 
-source $ZPLUG_HOME/repos/woefe/git-prompt.zsh/git-prompt.zsh
+#source $ZPLUG_HOME/repos/woefe/git-prompt.zsh/git-prompt.zsh
 
 setopt PROMPT_SUBST
 
@@ -57,7 +57,7 @@ set_prompt() {
     fi
 	if [[ ! -z $CONDA_PROMPT_MODIFIER ]]; then 
         PS1+=','
-        PS1+=$'%{$fg[magenta]%}${CONDA_PROMPT_MODIFIER:t}%{$reset_color%}'
+        PS1+=$'%{$fg[magenta]%}${CONDA_PROMPT_MODIFIER//[[:blank:]]/}%{$reset_color%}'
     else
         venv=$''
     fi
@@ -81,7 +81,7 @@ set_prompt() {
 		#PS1+="%{$fg_bold[red]%}SUDO%{$reset_color%}"
 	#fi
     # end with white ]
-	PS1+="%{$fg[white]%}]: %{$reset_color%}% "
+	PS1+="%{$fg[white]%}] %{$reset_color%}% "
 }
 
 precmd_functions+=set_prompt
