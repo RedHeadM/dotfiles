@@ -12,6 +12,10 @@ write_pathmunge () {
     fi
 }
 
+_exists () {
+    type "$1" &> /dev/null ;
+}
+
 # creat ~/.zshrc if not exitsts
 if [ ! -d "~/.zshrc" ]; then
 	touch ~/.zshrc
@@ -34,7 +38,7 @@ fi
 
 echo "[step 1] installing neovim"
 
-if command -v nvim > /dev/null; then
+if _exists nvim; then
 	echo "nvim has been installed"
 else
     # neovim form source with no root
@@ -58,7 +62,7 @@ fi
 # 2. install node.js
 
 echo "[step 2] installing and node.js"
-if command -v nvm > /dev/null; then
+if _exists nvm; then
 	echo "node has been installed"
 else
 	# nvm environment variables
@@ -111,16 +115,14 @@ echo "[step 9] FZF"
 # Another option is to use fzf extension
 #sudo apt remove -y fzf
 export FZF=$HOME/.fzf
-if [ ! -d $FZF ]; then
+if ! _exists fzf; then
     git clone --depth 1 https://github.com/junegunn/fzf.git $FZF
     $FZF/install --all --no-fish
 	#echo "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh" >> $FZF
 fi
 
-
-# PathPicker
-if ! command -v fpp &> /dev/null    
-then
+# PathPicker 
+if ! _exists fpp; then
 	export FPP_DIR="$HOME/.modules/fpp"                                 
 	echo "fpp will be installed to $FPP_DIR"
 	git clone https://github.com/facebook/PathPicker.git $FPP_DIR
@@ -131,8 +133,7 @@ then
 	write_pathmunge $FPP_DIR ~/.bashrc
 fi
 
-if ! command -v tmux &> /dev/null    
-then
+if ! _exists tmux; then
 	export tmux_dir="$home/.modules/tmux"                                 
 	echo "tmux will be installed to $tmux_dir"
 	git clone https://github.com/tmux/tmux.git $tmux_dir && \
@@ -146,8 +147,7 @@ then
 	write_pathmunge $tmux_dir ~/.bashrc
 fi
 
-if ! command -v conda --version &> /dev/null
-then
+if ! _exists conda; then
 	CONDA_DIR=~/.modules/conda 
 	echo "conda will be installed to $CONDA_DIR"
 	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O conda.sh
@@ -160,8 +160,6 @@ then
 	conda init bash
 	conda init zsh
 fi
-
-
 
 echo "shell ${SHELL}"
 echo "path ${PATH}"

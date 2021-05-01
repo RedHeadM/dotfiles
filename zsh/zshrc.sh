@@ -2,7 +2,6 @@
 if [ ! "$TMUX" ]; then 
 	export TERM=screen-256color
 fi
-
 # Setting fd as the default source for fzf
 # needed For nvim:Files
 if [[ -z "$FZF_DEFAULT_COMMAND" ]]; then
@@ -31,7 +30,7 @@ alias py="python"
 alias v="nvim -p"
 alias tmux='tmux -u'
 alias tm='tmux'
-mkdir -p /tmp/log
+#mkdir -p /tmp/log
 
 # This is currently causing problems (fails when you run it anywhere that isn't a git project's root directory)
 # alias vs="v `git status --porcelain | sed -ne 's/^ M //p'`"
@@ -39,9 +38,7 @@ mkdir -p /tmp/log
 # Settings
 export VISUAL=vim
 
-
 #Functions
-
  #Custom cd
 c() {
 	cd $1;
@@ -53,14 +50,8 @@ alias cd="c"
 # For vim mappings:
 stty -ixon
 
-# Completions
-# These are all the plugin options available: https://github.com/robbyrussell/oh-my-zsh/tree/291e96dcd034750fbe7473482508c08833b168e3/plugins
-#
-# Edit the array below, or relocate it to ~/.zshrc before anything is sourced
-# For help create an issue at github.com/parth/dotfiles
 
-
-ZPLUG_HOME=~/.zplug
+ZPLUG_HOME=~/.zplug # set in deploy skript
 source $ZPLUG_HOME/init.zsh
 
 # Supports oh-my-zsh plugins and the like
@@ -71,7 +62,7 @@ zplug "zsh-users/zsh-autosuggestions"
 #zplug "esc/conda-zsh-completion"
 zplug "zsh-users/zsh-completions"
 #zplug "desyncr/auto-ls"
-zplug "ryanoasis/nerd-fonts"
+#zplug "ryanoasis/nerd-fonts"
 zplug "unixorn/git-extra-commands"
 zplug "MichaelAquilina/zsh-you-should-use" # alias reminder if not used
 #zplug "olivierverdier/zsh-git-prompt"
