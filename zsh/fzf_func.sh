@@ -1,22 +1,5 @@
 # from https://github.com/junegunn/fzf/wiki/examples
 
-# fd - cd to selected directory
-# usage: fcd ; fcd .
-fcd() {
-    local dir
-    # default ~ if not arg 1 
-    dir=$(find ${1:-~} -not -path '*/\.*' -not -path "bin/*"  \
-                   -not -path "lib/*" -type d -print 2> /dev/null | fzf +m) &&
-        if [[ -d "$dir" ]]
-    then
-        #cd -- $dir
-        cd  $dir
-    else
-        cd $(dirname $dir)
-    fi 
-}
-
-
 
 # fkill - kill processes - list only the ones you can kill. Modified the earlier script.
 fkill() {

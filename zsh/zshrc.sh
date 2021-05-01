@@ -45,7 +45,8 @@ export VISUAL=vim
  #Custom cd
 c() {
 	cd $1;
-	ls;
+	#ls;
+	ls -U | head -4
 }
 alias cd="c"
 

@@ -2,6 +2,7 @@
 #FROM haskell:latest
 FROM ubuntu:latest
 
+USER root
 WORKDIR /root
 
 run apt-get update && \
@@ -46,5 +47,5 @@ RUN bash dotfiles/deploy
 # To check that the shell was indeed added: `chsh -l` and you should see it in the  list.
 RUN chsh -s ~/.zshrc
 #RUN /bin/zsh ~/.zshrc
-ENTRYPOINT ["/bin/zsh"] 
-#ENTRYPOINT ["bash"]
+#ENTRYPOINT ["/bin/zsh"] 
+ENTRYPOINT ["tmux"]
