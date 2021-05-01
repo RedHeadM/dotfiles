@@ -29,6 +29,7 @@ RUN apt-get install -y \
   libtool autoconf automake cmake libncurses5-dev g++ pkg-config unzip git libtool-bin gettext  
 # xsel for tmux-yank, copy to clipboard
 # awk is zplug:  zsh plugin manger 
+# byacc bision for tmux form src
 
 #ENV LD_LIBRARY_PATH=/usr/local/lib
 # Need to set these to successfully install oh-my-zsh

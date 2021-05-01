@@ -134,17 +134,17 @@ if ! _exists fpp; then
 fi
 
 if ! _exists tmux; then
-	export tmux_dir="$home/.modules/tmux"                                 
-	echo "tmux will be installed to $tmux_dir"
-	git clone https://github.com/tmux/tmux.git $tmux_dir && \
-	cd $tmux_dir && \
+    export tmux_dir="$HOME/.modules/tmux"                                 
+    echo "tmux will be installed to $tmux_dir"
+    git clone https://github.com/tmux/tmux.git $tmux_dir && \
+    cd $tmux_dir && \
     sh autogen.sh && \
     ./configure && make
-	#cd $fpp_dir/debian && \
-	#./package.sh && \
-	#ls ../fpp_0.7.2_noarch.deb && \
-	write_pathmunge $tmux_dir ~/.zshrc
-	write_pathmunge $tmux_dir ~/.bashrc
+    #cd $fpp_dir/debian && \
+    #./package.sh && \
+    #ls ../fpp_0.7.2_noarch.deb && \
+    write_pathmunge $tmux_dir ~/.zshrc
+    write_pathmunge $tmux_dir ~/.bashrc
 fi
 
 if ! _exists conda; then

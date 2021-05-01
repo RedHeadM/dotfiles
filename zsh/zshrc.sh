@@ -69,7 +69,7 @@ zplug "MichaelAquilina/zsh-you-should-use" # alias reminder if not used
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/default.zsh}"
 #zplug "jeffreytse/zsh-vi-mode"
-zplug "Aloxaf/fzf-tab"
+#zplug "Aloxaf/fzf-tab"
 #zplug "marlonrichert/zsh-autocomplete"
 zplug "dim-an/cod"
 
