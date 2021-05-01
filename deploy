@@ -69,6 +69,7 @@ check_default_shell() {
             touch ~/.profile
             echo "export SHELL="$SHELL >> ~/.profile
             echo "[ -z "$ZSH_VERSION" ] && exec $SHELL -l" >> ~/.profile #
+            echo "source .zshrc" >> ~/.profile #
         fi #
     fi #
 } #

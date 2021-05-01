@@ -42,5 +42,9 @@ COPY . ./dotfiles
 RUN bash dotfiles/install.sh
 RUN bash dotfiles/deploy
 
-ENTRYPOINT ["zsh"]
+# Make ZSH the default shell for the current user in the container
+# To check that the shell was indeed added: `chsh -l` and you should see it in the  list.
+RUN chsh -s ~/.zshrc
+#RUN /bin/zsh ~/.zshrc
+ENTRYPOINT ["/bin/zsh"] 
 #ENTRYPOINT ["bash"]

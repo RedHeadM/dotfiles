@@ -366,6 +366,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 
 " file finder mapping
 nmap ,e :GFiles<CR>
+nmap ,E :Files<CR>
 " tags (symbols) in current file finder mapping
 nmap ,g :BTag<CR>
 " tags (symbols) in all files finder mapping
@@ -377,7 +378,7 @@ nmap ,F :Lines<CR>
 " commands finder mapping
 nmap ,C :Commands<CR>
 " commands show all open buffers
-nmap ,B :Buffers<CR>
+nmap ,b :Buffers<CR>
 " to be able to call CtrlP with default search text
 "function! CtrlPWithSearchText(search_text, ctrlp_command_end)
     "execute ':CtrlP' . a:ctrlp_command_end

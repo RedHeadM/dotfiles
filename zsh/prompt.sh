@@ -1,10 +1,8 @@
 # termal promt with extra info: git, dir, virtenv# Reference for colors: http://stackoverflow.com/questions/689765/how-can-i-change-the-color-of-my-prompt-in-zsh-different-from-normal-text
 
 autoload -U colors && colors
-# git hub integration 
-#source ~/dotfiles/zsh/plugins/zsh-git-prompt/zshrc.sh
-#source $ZPLUG_HOME/repos/olivierverdier/zsh-git-prompt/zshrc.sh
 
+# git integration 
 ZSH_THEME_GIT_PROMPT_PREFIX=", "
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_SEPARATOR=""

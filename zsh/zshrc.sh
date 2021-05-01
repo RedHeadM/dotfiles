@@ -3,6 +3,19 @@ if [ ! "$TMUX" ]; then
 	export TERM=screen-256color
 fi
 
+# Setting fd as the default source for fzf
+# needed For nvim:Files
+if [[ -z "$FZF_DEFAULT_COMMAND" ]]; then
+	if (( $+commands[rg] )); then
+		export FZF_DEFAULT_COMMAND='rg --files --hidden'
+	elif (( $+commands[fd] )); then
+		export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+	elif (( $+commands[ag] )); then
+		export FZF_DEFAULT_COMMAND='ag -l --hidden -g ""'
+	fi
+fi
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 
 # Vars
 HISTFILE=~/.zsh_history
@@ -45,17 +58,7 @@ stty -ixon
 # Edit the array below, or relocate it to ~/.zshrc before anything is sourced
 # For help create an issue at github.com/parth/dotfiles
 
-#autoload -U compinit
 
-#plugins
-#source ~/dotfiles/zsh/plugins/oh-my-zsh/lib/history.zsh
-#source ~/dotfiles/zsh/plugins/oh-my-zsh/lib/key-bindings.zsh
-#source ~/dotfiles/zsh/plugins/oh-my-zsh/lib/completion.zsh
-##source ~/dotfiles/zsh/plugins/vi-mode.plugin.zsh
-#source ~/dotfiles/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#source ~/dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-#source ~/.modules/antigen/antigen.zsh
 ZPLUG_HOME=~/.zplug
 source $ZPLUG_HOME/init.zsh
 
@@ -64,7 +67,7 @@ source $ZPLUG_HOME/init.zsh
 zplug "plugins/pip",   from:oh-my-zsh
 zplug "zsh-users/zsh-autosuggestions"
 #zplug "tarrasch/zsh-command-not-found"
-zplug "esc/conda-zsh-completion"
+#zplug "esc/conda-zsh-completion"
 zplug "zsh-users/zsh-completions"
 #zplug "desyncr/auto-ls"
 zplug "ryanoasis/nerd-fonts"
@@ -73,6 +76,12 @@ zplug "MichaelAquilina/zsh-you-should-use" # alias reminder if not used
 #zplug "olivierverdier/zsh-git-prompt"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/default.zsh}"
+#zplug "jeffreytse/zsh-vi-mode"
+zplug "Aloxaf/fzf-tab"
+#zplug "marlonrichert/zsh-autocomplete"
+zplug "dim-an/cod"
+
+
 #zplug "dim-an/cod" # lean autocompletion with --help
 # Then, source plugins and add commands to $PATH
 
@@ -81,9 +90,10 @@ if ! zplug check --verbose; then
 	echo; zplug install
 fi
 
-zplug load --verbose
+#zplug load --verbose
+zplug load 
 
-#source ~/dotfiles/zsh/keybindings.sh
+source ~/dotfiles/zsh/keybindings.sh
 
 # Fix for arrow-key searching
 # start typing + [Up-Arrow] - fuzzy find history forward
@@ -106,7 +116,5 @@ export PATH=$PATH:$HOME/dotfiles/utils
 if command -v setxkbmap &> /dev/null
 then
 	setxkbmap -option caps:escape
-if
+fi
 
-# source fuzzy search
-#source ~/dotfiles/zsh/fzf_func.sh
