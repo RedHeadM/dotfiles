@@ -67,14 +67,13 @@ Plug 'fisadev/FixedTaskList.vim'
 
 " Python autocompletion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'pappasam/jdd-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build' } }
 
 " Mulitcusur
 Plug 'mg979/vim-visual-multi', {'branch': 'master'} 
 
 " bestter pyton text objects and motions
 " eg. <vaf>: select around fn, <yac> copy around class  
-Plug 'jeetsukumaran/vim-pythonsense'
+"Plug 'jeetsukumaran/vim-pythonsense'
 "Plug 'python-mode/python-mode', { 'branch': 'develop' }
 
 " Automatically close parenthesis, etc
