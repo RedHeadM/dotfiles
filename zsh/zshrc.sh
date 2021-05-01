@@ -29,12 +29,12 @@ export VISUAL=vim
 
 #Functions
 
-# Custom cd
-#c() {
-	#cd $1;
-	#ls;
-#}
-#alias cd="c"
+ #Custom cd
+c() {
+	cd $1;
+	ls;
+}
+alias cd="c"
 
 # For vim mappings:
 stty -ixon
@@ -66,7 +66,7 @@ zplug "zsh-users/zsh-autosuggestions"
 #zplug "tarrasch/zsh-command-not-found"
 zplug "esc/conda-zsh-completion"
 zplug "zsh-users/zsh-completions"
-zplug "desyncr/auto-ls"
+#zplug "desyncr/auto-ls"
 zplug "ryanoasis/nerd-fonts"
 zplug "unixorn/git-extra-commands"
 zplug "MichaelAquilina/zsh-you-should-use" # alias reminder if not used
