@@ -37,3 +37,4 @@ jobs:
             fzf --version
             tmux -V
             fpp --verion
+            zplug --version
