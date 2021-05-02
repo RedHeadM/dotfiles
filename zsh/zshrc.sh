@@ -54,11 +54,11 @@ stty -ixon
 ZPLUG_HOME=~/.zplug # set in deploy skript
 source $ZPLUG_HOME/init.zsh
 # To manage zplug itself like other packages, write the following in your .zshrc
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+#zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # Supports oh-my-zsh plugins and the like
 #zplug "plugins/git",   from:oh-my-zsh
-zplug "plugins/pip",   from:oh-my-zsh
+zplug "plugins/pip", from:oh-my-zsh
 zplug "zsh-users/zsh-autosuggestions"
 #zplug "tarrasch/zsh-command-not-found"
 #zplug "esc/conda-zsh-completion"
@@ -69,7 +69,8 @@ zplug "unixorn/git-extra-commands"
 zplug "MichaelAquilina/zsh-you-should-use" # alias reminder if not used
 #zplug "olivierverdier/zsh-git-prompt"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/default.zsh}"
+#zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/default.zsh}"
+zplug "woefe/git-prompt.zsh"
 #zplug "jeffreytse/zsh-vi-mode"
 #zplug "Aloxaf/fzf-tab"
 #zplug "marlonrichert/zsh-autocomplete"
@@ -80,9 +81,9 @@ zplug "dim-an/cod"
 # Then, source plugins and add commands to $PATH
 
 # Install plugins if there are plugins that have not been installed
-#if ! zplug check --verbose; then
-	#echo; zplug install
-#fi
+if ! zplug check --verbose; then
+    echo; zplug install
+fi
 
 #zplug load --verbose
 zplug load 
