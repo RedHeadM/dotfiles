@@ -2,14 +2,44 @@ write_pathmunge () {
     # only append to path if not set
     # 1 path to bin 
     # 2 file
-    #echo "[ \":\$PATH:\" != *":$1:"* ]" "&& export PATH="\$PATH:$1"" >> $2
-    echo "if ! echo \$PATH | /bin/egrep -q \"(^|:)$1($|:)\" ; then" >> $2
-          echo "    export PATH=\$PATH:"$1 >> $2
-    echo fi >> $2
-    # add for skript
-    if ! echo $PATH | /bin/egrep -q "(^|:)$1($|:)" ; then
-          PATH=$PATH:$1
+    # 2 expend path "before" or "after"
+
+    # set default place: after
+    if [ -z "$3" ]
+    then
+        place=$3
+    else
+        place="after"
     fi
+
+    # check if set in file 
+	if  !  grep -Fxq $1 $2 ; then
+        # write if statement which check if set in PATH
+        echo "if ! echo \$PATH | /bin/egrep -q \"(^|:)$1($|:)\" ; then" >> $2
+            if [ "$place" = "after" ] ; then
+                echo "    export PATH=\$PATH:"$1 >> $2
+            else
+                echo "    export PATH=$1:\$PATH:" >> $2
+            fi
+        echo fi >> $2
+    fi
+    # set PATH for skript if not set before
+    if ! echo $PATH | /bin/egrep -q "(^|:)$1($|:)" ; then
+        if [ "$place" = "after" ] ; then
+            PATH=$PATH:$1
+         else
+            PATH=$1:$PATH
+        fi
+    fi
+}
+
+check_min_version() { 
+    # (1) version was strint
+    # (2) version
+    # useage:   
+    #   if  ! $(check_min_version "$(tmux -V)" 2.9) ; then
+    #   if   $(! _exists tmux)   || ! $(check_min_version "$(tmux -V)" 2.4) ; then
+    echo [ "$(python -c "print(float('$(gettext $1)'.split()[-1])>=float($2))")" == "True" ]
 }
 
 _exists () {
@@ -133,7 +163,10 @@ if ! _exists fpp; then
 	write_pathmunge $FPP_DIR ~/.bashrc
 fi
 
-if ! _exists tmux; then
+python -c "print(float('$(tmux -V)'.split()[-1])>2.7)"
+
+#if [! _exists tmux] || []; then
+if $(! _exists tmux) || ! $(check_min_version "$(tmux -V)" 2.8) ; then
     export tmux_dir="$HOME/.modules/tmux"                                 
     echo "tmux will be installed to $tmux_dir"
     git clone https://github.com/tmux/tmux.git $tmux_dir && \
@@ -143,8 +176,8 @@ if ! _exists tmux; then
     #cd $fpp_dir/debian && \
     #./package.sh && \
     #ls ../fpp_0.7.2_noarch.deb && \
-    write_pathmunge $tmux_dir ~/.zshrc
-    write_pathmunge $tmux_dir ~/.bashrc
+    write_pathmunge $tmux_dir ~/.zshrc before
+    write_pathmunge $tmux_dir ~/.bashrc before
 fi
 
 if ! _exists conda; then
