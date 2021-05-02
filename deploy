@@ -5,13 +5,34 @@ write_pathmunge () {
     # only append to path if not set
     # 1 path to bin 
     # 2 file
-    #echo "[ \":\$PATH:\" != *":$1:"* ]" "&& export PATH="\$PATH:$1"" >> $2
-    echo "if ! echo \$PATH | /bin/egrep -q \"(^|:)$1($|:)\" ; then" >> $2
-          echo "    export PATH=\$PATH:"$1 >> $2
-    echo fi >> $2
-    # add for skript
+    # 2 expend path "before" or "after"
+
+    # set default place: after
+    if [ -z "$3" ]
+    then
+        place=$3
+    else
+        place="after"
+    fi
+
+    # check if set in file 
+	if  !  grep -Fxq $1 $2 ; then
+        # write if statement which check if set in PATH
+        echo "if ! echo \$PATH | /bin/egrep -q \"(^|:)$1($|:)\" ; then" >> $2
+            if [ "$place" = "after" ] ; then
+                echo "    export PATH=\$PATH:"$1 >> $2
+            else
+                echo "    export PATH=$1:\$PATH:" >> $2
+            fi
+        echo fi >> $2
+    fi
+    # set PATH for skript if not set before
     if ! echo $PATH | /bin/egrep -q "(^|:)$1($|:)" ; then
-          PATH=$PATH:$1
+        if [ "$place" = "after" ] ; then
+            PATH=$PATH:$1
+         else
+            PATH=$1:$PATH
+        fi
     fi
 }
 
@@ -157,13 +178,25 @@ install_nvim_plugin_manager
 install_zsh_plugin_manager
 setup_dotfiles
 
-zplug install
+if command -v zplug &> /dev/null
+then
+    zplug install
+else
+    echo "ERROR zplug not found"
+fi
 
 # Initialize TMUX plugin manager is done in dotfiles 
 tmux source ~/.tmux.conf
 
 echo "[step 3] installing node.js packages: neovim and yarn"
-npm install -g neovim yarn
+
+if command -v npm &> /dev/null
+then
+    zplug install
+    npm install -g neovim yarn
+else
+    echo "ERROR npm not found"
+fi
 #npm install -g neovim yarn
 
 # 4. install Plug
