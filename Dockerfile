@@ -49,6 +49,8 @@ RUN bash dotfiles/deploy
 #RUN chsh -s ~/.zshrc
 
 #RUN /bin/zsh ~/.zshrc
+ENTRYPOINT ["/bin/zsh","-i","-c","tmux"] 
 #ENTRYPOINT ["/bin/zsh"] 
-ENTRYPOINT ["tmux"] 
+#ENTRYPOINT ["tmux"] 
+#ENTRYPOINT ["tmux"] 
 #ENTRYPOINT ["tmux"]
