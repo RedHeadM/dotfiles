@@ -32,8 +32,8 @@ jobs:
             bash deploy
             echo "shell ${SHELL}"
             echo "path ${PATH}"
-            (zsh --version
-            nvm --version
+            zsh --version
+            zsh -i -c "nvm --version"
             fzf --version
             tmux -V
             fpp --verion
