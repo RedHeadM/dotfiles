@@ -42,8 +42,8 @@ export VISUAL=vim
  #Custom cd
 c() {
 	cd $1;
-	#ls;
-	ls -U | head -4
+    ls;
+	#ls -U | head -4
 }
 alias cd="c"
 
@@ -53,6 +53,8 @@ stty -ixon
 
 ZPLUG_HOME=~/.zplug # set in deploy skript
 source $ZPLUG_HOME/init.zsh
+# To manage zplug itself like other packages, write the following in your .zshrc
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # Supports oh-my-zsh plugins and the like
 #zplug "plugins/git",   from:oh-my-zsh
@@ -78,9 +80,9 @@ zplug "dim-an/cod"
 # Then, source plugins and add commands to $PATH
 
 # Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-	echo; zplug install
-fi
+#if ! zplug check --verbose; then
+	#echo; zplug install
+#fi
 
 #zplug load --verbose
 zplug load 
