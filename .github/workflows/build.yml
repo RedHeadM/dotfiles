@@ -38,3 +38,9 @@ jobs:
             tmux -V
             fpp --verion
             zplug --version #zsh -i -c "zplug --version"
+        - name: Run Super-Linter
+          uses: github/super-linter@v3
+          env:
+            DEFAULT_BRANCH: main
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
+            
