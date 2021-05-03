@@ -42,9 +42,9 @@ set_prompt() {
 
     # Informative git prompt for zsh
     #PS1+=', '
-    #PS1+='$(git_super_status)'
+    #PS1+='$(git_super_status)'# for zplug "olivierverdier/zsh-git-prompt"
 	#PS1+='%B%40<..<%~%b$(gitprompt)'
-	PS1+='$(gitprompt)'
+	PS1+='$(gitprompt)' # woefe/git-prompt.zsh
 
     if [ ${#VIRTUAL_ENV} -gt 3 ]
     then
@@ -78,8 +78,9 @@ set_prompt() {
 		#PS1+=', '
 		#PS1+="%{$fg_bold[red]%}SUDO%{$reset_color%}"
 	#fi
+    
     # end with white ]
-	PS1+="%{$fg[white]%}] %{$reset_color%}% "
+	PS1+="%{$fg[white]%}]:%{$reset_color%}% "
 }
 
 precmd_functions+=set_prompt

@@ -68,3 +68,6 @@
 	}
 	zle -N open_finder
 	bindkey "^o" open_finder
+
+# zsh-users/zsh-autosuggestions, accept the current suggestion
+bindkey '^e' autosuggest-accept

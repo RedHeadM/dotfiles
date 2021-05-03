@@ -54,7 +54,7 @@ stty -ixon
 ZPLUG_HOME=~/.zplug # set in deploy skript
 source $ZPLUG_HOME/init.zsh
 # To manage zplug itself like other packages, write the following in your .zshrc
-#zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # Supports oh-my-zsh plugins and the like
 #zplug "plugins/git",   from:oh-my-zsh
