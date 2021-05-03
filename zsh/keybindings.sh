@@ -6,7 +6,19 @@
 	zle -N up_widget
 	bindkey "^U" up_widget
 
-# git
+# git with <ctrl g/G>
+	function git_commit() {
+		if [ -n "$BUFFER" ];
+			then
+				BUFFER="git commit -m \"$BUFFER\""
+		fi
+
+				
+		zle accept-line
+	}
+	zle -N git_commit
+	bindkey "^g" git_prepare
+
 	function git_prepare() {
 		if [ -n "$BUFFER" ];
 			then
@@ -21,8 +33,8 @@
 		zle accept-line
 	}
 	zle -N git_prepare
-	bindkey "^g" git_prepare
-
+	bindkey "^G" git_prepare
+    
 # home
    # function goto_home() { 
 		#BUFFER="cd ~/"$BUFFER
