@@ -12,6 +12,11 @@
 			then
 				BUFFER="git commit -m \"$BUFFER\""
 		fi
+
+		if [ -z "$BUFFER" ];
+			then
+				BUFFER="git commit -v"
+		fi
 				
 		zle accept-line
 	}
