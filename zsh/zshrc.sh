@@ -19,11 +19,25 @@ fi
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 
-# Vars
-HISTFILE=~/.zsh_history
-SAVEHIST=1000
-setopt inc_append_history # To save every command before it is executed
-setopt share_history # setopt inc_append_history
+# HISTORY
+#set history size
+export HISTSIZE=10000
+#save history after logout
+export SAVEHIST=10000
+#history file
+export HISTFILE=~/.zhistory
+
+#append into history file
+setopt SHARE_HISTORY # INC_APPEND_HISTORY must be off if used
+#setopt INC_APPEND_HISTORY
+#save only one command if 2 common are same and consistent
+setopt HIST_IGNORE_DUPS
+
+
+setopt HIST_FIND_NO_DUPS
+# following should be turned off, if sharing history via setopt SHARE_HISTORY
+# ensures that commands are added to the history immediately 
+setopt INC_APPEND_HISTORY
 
 git config --global push.default current
 
