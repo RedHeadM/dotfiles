@@ -37,7 +37,7 @@
 		zle accept-line
 	}
 	zle -N git_prepare
-	bindkey "^G" git_prepare
+	bindkey "^p" git_prepare
     
 # home
    # function goto_home() { 
