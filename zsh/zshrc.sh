@@ -13,7 +13,7 @@ fi
 		#export FZF_DEFAULT_COMMAND='ag -l -p ~/dotfiles/.gitignore  -g ""'
         export FZF_DEFAULT_COMMAND='ag -l --hidden -p ~/dotfiles/.gitignore  -g ""'
     elif command -v fd &> /dev/null; then
-		export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+		export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git --exclude .git --ignore-file ~/dotfiles/.gitignore'
 	fi
 #fi
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -29,6 +29,7 @@ git config --global push.default current
 
 # Aliases
 alias vim="nvim"
+alias vi="nvim"
 alias py="python"
 alias v="nvim -p"
 alias tmux='tmux -u'

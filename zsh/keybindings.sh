@@ -53,11 +53,11 @@ function edit_and_run() {
     if [ -n "$BUFFER" ];
     then
         # user start writing
-        BUFFER="vi \"$BUFFER\" "
+        BUFFER="vi \"$BUFFER\""
     else
         # fzf file pick
         #^M or \n is used to represent the Enter key so that the command is run automatically.,cc
-        BUFFER="nvim $(fzf)"
+        BUFFER="vi \$(fzf)"
     fi
         zle accept-line
 }
