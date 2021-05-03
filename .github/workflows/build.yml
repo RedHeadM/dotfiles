@@ -23,24 +23,24 @@ jobs:
 #              PYTORCH_VERSION=${{ matrix.pytorch_version }}
             file: Dockerfile
             push: false
-          timeout-minutes: 50
-        - name: delploy
-          run: |
-            bash deploy
-        - name: version
-          run: |
-            bash deploy
-            echo "shell ${SHELL}"
-            echo "path ${PATH}"
-            zsh --version
-            zsh -i -c "nvm --version"
-            fzf --version
-            tmux -V
-            fpp --verion
-            zplug --version #zsh -i -c "zplug --version"
-        - name: Run Super-Linter
-          uses: github/super-linter@v3
-          env:
-            DEFAULT_BRANCH: main
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
+          timeout-minutes: 10
+        #- name: delploy
+          #run: |
+            #bash deploy
+        #- name: version
+          #run: |
+            #bash deploy
+            #echo "shell ${SHELL}"
+            #echo "path ${PATH}"
+            #zsh --version
+            #zsh -i -c "nvm --version"
+            #fzf --version
+            #tmux -V
+            #fpp --verion
+            #zplug --version #zsh -i -c "zplug --version"
+        #- name: Run Super-Linter
+          #uses: github/super-linter@v3
+          #env:
+            #DEFAULT_BRANCH: main
+            #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
             

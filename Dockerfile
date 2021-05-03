@@ -23,6 +23,7 @@ RUN apt-get install -y \
   tmux \
   xsel \
   neovim \ 
+  ripgrep \ 
   libevent-dev libncurses-dev build-essential libssl-dev libffi-dev bison byacc\
   silversearcher-ag ctags \
   python3 python3-dev python3-pip \
@@ -30,7 +31,7 @@ RUN apt-get install -y \
 # xsel for tmux-yank, copy to clipboard
 # awk is zplug:  zsh plugin manger 
 # byacc bision for tmux form src
-RUN snap install ripgrep --classic
+#RUN snap install ripgrep --classic
 
 #ENV LD_LIBRARY_PATH=/usr/local/lib
 # Need to set these to successfully install oh-my-zsh
