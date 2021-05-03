@@ -4,15 +4,18 @@ if [ ! "$TMUX" ]; then
 fi
 # Setting fd as the default source for fzf
 # needed For nvim:Files
-if [[ -z "$FZF_DEFAULT_COMMAND" ]]; then
-	if (( $+commands[rg] )); then
-		export FZF_DEFAULT_COMMAND='rg --files --hidden'
-	elif (( $+commands[fd] )); then
+#if [[ -z "$FZF_DEFAULT_COMMAND" ]]; then
+    if command -v rg &> /dev/null; then
+        # --no-ingore-vcs to tell it to not ignore version control files
+        # --follow: to include symbolic links
+		export FZF_DEFAULT_COMMAND='rg --files --hidden --no-ignore-vcs --glob "!{node_modules/*,.git/*}"'
+    elif command -v ag &> /dev/null; then
+		#export FZF_DEFAULT_COMMAND='ag -l -p ~/dotfiles/.gitignore  -g ""'
+        export FZF_DEFAULT_COMMAND='ag -l --hidden -p ~/dotfiles/.gitignore  -g ""'
+    elif command -v fd &> /dev/null; then
 		export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
-	elif (( $+commands[ag] )); then
-		export FZF_DEFAULT_COMMAND='ag -l --hidden -g ""'
 	fi
-fi
+#fi
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 
