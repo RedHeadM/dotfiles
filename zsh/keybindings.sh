@@ -12,12 +12,11 @@
 			then
 				BUFFER="git commit -m \"$BUFFER\""
 		fi
-
 				
 		zle accept-line
 	}
 	zle -N git_commit
-	bindkey "^g" git_prepare
+	bindkey "^g" git_commit
 
 	function git_prepare() {
 		if [ -n "$BUFFER" ];
