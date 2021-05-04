@@ -84,7 +84,7 @@ Plug 'heavenshell/vim-pydocstring'
 
 " Surround
 "Plug 'tpope/vim-surround'
-Plug 'machakann/vim-sandwich'
+Plug 'machakann/vim-sandwich' " saiw( makes foo to (foo).
 
 " Indent text object
 Plug 'michaeljsmith/vim-indent-object'
@@ -94,7 +94,7 @@ Plug 'jeetsukumaran/vim-indentwise'
 
 " Indentation based movements
 " alig test vipga=
-Plug 'junegunn/vim-easy-align'
+Plug 'jugunn/vim-easy-align'
 
 " Better language packs
 "Plug 'sheerun/vim-polyglot'
@@ -146,15 +146,13 @@ Plug 'ludovicchabant/vim-gutentags'
 " Highlight last yank for a shork time
 Plug 'machakann/vim-highlightedyank'
 
-Plug 'vim-latex/vim-latex'
-
 " vim and panel movement with <C-h/j/k/l>
 Plug 'christoomey/vim-tmux-navigator'
 
 
 "COLOR and themes 
 Plug 'drewtempelmeyer/palenight.vim' " Theme
-Plug 'ryanoasis/vim-devicons' " filetype glyphs (icons) to various vim plugins
+"Plug 'ryanoasis/vim-devicons' " filetype glyphs (icons) to various vim plugins needs nerd font installed
 "Plug 'fisadev/fisa-vim-colorscheme'
 "Plug 'morhetz/gruvbox'
 "Plug 'dracula/vim'
@@ -233,6 +231,7 @@ endif
 "endif
 
 " THEME
+set encoding=UTF-8
 colorscheme palenight
 " needed so deoplete can auto select the first suggestion
 set completeopt+=noinsert
@@ -778,12 +777,9 @@ noremap K 5k
 " replace word under cursor, globally, with confirmation
 "nnoremap <Leader>k :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 "vnoremap <Leader>k y :%s/<C-r>"//gc<Left><Left><Left>
-nmap <Leader>k <Plug>(Scalpel)
-vmap <Leader>k "xy:Scalpel/\v<<C-R>=@x<CR>>//<Left>
 "<CR>
-
 " remove highlighting on escape>u
-"map <silent> <esc> :nohlsearch<cr>
+map <silent> <esc> :nohlsearch<cr>
 
 
 " Keep selection when indenting/outdenting.

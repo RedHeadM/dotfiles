@@ -92,7 +92,7 @@ zplug "woefe/git-prompt.zsh"
 #zplug "jeffreytse/zsh-vi-mode"
 #zplug "Aloxaf/fzf-tab"
 #zplug "marlonrichert/zsh-autocomplete"
-zplug "dim-an/cod"
+zplug "dim-an/cod" # autocomplete form help
 
 
 #zplug "dim-an/cod" # lean autocompletion with --help

@@ -180,19 +180,19 @@ if $(! _exists tmux) || ! $(check_min_version "$(tmux -V)" 2.8) ; then
     write_pathmunge $tmux_dir ~/.bashrc before
 fi
 
-if ! _exists conda; then
-	CONDA_DIR=~/.modules/conda 
-	echo "conda will be installed to $CONDA_DIR"
-	wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O conda.sh
-	bash conda.sh -b -p $CONDA_DIR
-	rm -f conda.sh
-	$CONDA_DIR/bin/conda init bash
-	$CONDA_DIR/bin/conda init zshrc
-	write_pathmunge $CONDA_DIR/bin ~/.bashrc
-	write_pathmunge $CONDA_DIR/bin ~/.zshrc
-	conda init bash
-	conda init zsh
-fi
+#if ! _exists conda; then
+	#CONDA_DIR=~/.modules/conda 
+	#echo "conda will be installed to $CONDA_DIR"
+	#wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O conda.sh
+	#bash conda.sh -b -p $CONDA_DIR
+	#rm -f conda.sh
+	#$CONDA_DIR/bin/conda init bash
+	#$CONDA_DIR/bin/conda init zshrc
+	#write_pathmunge $CONDA_DIR/bin ~/.bashrc
+	#write_pathmunge $CONDA_DIR/bin ~/.zshrc
+	#conda init bash
+	#conda init zsh
+#fi
 
 echo "shell ${SHELL}"
 echo "path ${PATH}"
