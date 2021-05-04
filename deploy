@@ -98,7 +98,7 @@ check_default_shell() {
 install_tmux_plugin_manager() {
     echo "install tmux plugin manager"
     #if [ -z "${SHELL##*zsh*}" ] ;then
-    if [ ! -f ~/.tmux/plugins/tpm ]; then
+    if [ ! -d ~/.tmux/plugins/tpm ]; then
             echo "Default shell is zsh."
         echo "installing tmux plugin"
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -120,18 +120,32 @@ install_nvim_plugin_manager() {
 }
 
 install_zsh_plugin_manager() {
-    echo "zsh antigen installing plug"
+    echo "zsh plugin manager installing plug"
 	#ANT_DIR=~/.modules/antigen/antigen.zsh
-	export ZPLUG_HOME=~/.zplug
-    if [ ! -d $ZPLUG_HOME ]; then
-        echo "zsh plugin install to $ZPLUG_HOME"
-		#curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-		git clone https://github.com/zplug/zplug $ZPLUG_HOME
-		#write_pathmunge $ZPLUG_HOME ~/.zshrc
-		eval $ZPLUG_HOME/init.zsh
+	#export ZPLUG_HOME=~/.zplug
+    #if [ ! -d $ZPLUG_HOME ]; then
+        #echo "zsh plugin install to $ZPLUG_HOME"
+		##curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+		#git clone https://github.com/zplug/zplug $ZPLUG_HOME
+		##write_pathmunge $ZPLUG_HOME ~/.zshrc
+		#eval $ZPLUG_HOME/init.zsh
+    #else
+        #echo "zsh plug plugin was installed"
+    #fi #
+    # install zinit plugin manager to ~/.zinit/bin
+    #sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+    export ZINK_HOME=~/.zinit/bin
+    if [ ! -d $ZINK_HOME ]; then
+        echo "zsh plugin install to $ZINK_HOME"
+        #curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+        #mkdir $ZINK_HOME
+        git clone https://github.com/zdharma/zinit.git $ZINK_HOME
+        #write_pathmunge $ZPLUG_HOME ~/.zshrc
+        eval $ZINK_HOME/bin/zinit.zsh
     else
-        echo "zsh plug plugin was installed"
+        echo "zsh zink plugin was installed"
     fi #
+
 }
 
 setup_dotfiles() {
