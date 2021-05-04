@@ -134,6 +134,7 @@ install_zsh_plugin_manager() {
     #fi #
     # install zinit plugin manager to ~/.zinit/bin
     #sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+
     export ZINK_HOME=~/.zinit/bin
     if [ ! -d $ZINK_HOME ]; then
         echo "zsh plugin install to $ZINK_HOME"
@@ -192,26 +193,12 @@ install_nvim_plugin_manager
 install_zsh_plugin_manager
 setup_dotfiles
 
-if command -v zplug &> /dev/null
-then
-    zplug install
-else
-    echo "ERROR zplug not found"
-fi
 
 # Initialize TMUX plugin manager is done in dotfiles 
 tmux source ~/.tmux.conf
 
 echo "[step 3] installing node.js packages: neovim and yarn"
-
-if command -v npm &> /dev/null
-then
-    zplug install
-    npm install -g neovim yarn
-else
-    echo "ERROR npm not found"
-fi
-#npm install -g neovim yarn
+npm install -g neovim yarn
 
 # 4. install Plug
 
