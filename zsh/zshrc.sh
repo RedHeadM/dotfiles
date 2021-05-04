@@ -40,6 +40,8 @@ setopt HIST_FIND_NO_DUPS
 setopt INC_APPEND_HISTORY
 
 git config --global push.default current
+# Settings
+export VISUAL=vim
 
 # Aliases
 alias vim="nvim"
@@ -48,13 +50,12 @@ alias py="python"
 alias v="nvim -p"
 alias tmux='tmux -u'
 alias tm='tmux'
-#mkdir -p /tmp/log
+# forgit git log 
+alias gl='glo'
 
+#mkdir -p /tmp/log
 # This is currently causing problems (fails when you run it anywhere that isn't a git project's root directory)
 # alias vs="v `git status --porcelain | sed -ne 's/^ M //p'`"
-
-# Settings
-export VISUAL=vim
 
 #Functions
  #Custom cd
@@ -84,31 +85,24 @@ zinit lucid light-mode for \
 zinit ice from"gh-r" as"program"
 zinit load junegunn/fzf-bin
 
-# ogham/exa, replacement for ls
-zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
-zinit light ogham/exa
-
 # forgit
 #interactive git log viewer (glo), git add with (ga)
-zinit ice wait lucid
+#zinit ice wait lucid
+zinit ice wait"2" lucid  
 zinit load 'wfxr/forgit'
-
-# diff-so-fancy
-zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
-zinit load zdharma/zsh-diff-so-fancy
 
 # Autosuggestions & fast-syntax-highlighting
 zinit ice wait lucid atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
 zinit light zdharma/fast-syntax-highlighting
+
 # zsh-autosuggestions
 zinit ice wait lucid atload"!_zsh_autosuggest_start"
 zinit load zsh-users/zsh-autosuggestions
 
-#zinit ice wait"2" lucid as"alias" 
-#zinit load unixorn/git-extra-commands
 
+# better auto completions with form --help
 zinit ice wait lucid  
-zinit load  dim-an/cod 
+zinit load dim-an/cod 
 
 zinit ice wait lucid  
 zinit load  MichaelAquilina/zsh-you-should-use 

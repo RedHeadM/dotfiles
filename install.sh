@@ -141,7 +141,8 @@ fi
 # 3. install node.js packages via npm
 
 # 9. install fzf 
-echo "[step 9] FZF"
+#echo "[step 9] FZF"
+# moved to zsh plugin manger zink
 # Another option is to use fzf extension
 #sudo apt remove -y fzf
 #export FZF=$HOME/.fzf
