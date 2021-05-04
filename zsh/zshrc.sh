@@ -50,8 +50,11 @@ alias py="python"
 alias v="nvim -p"
 alias tmux='tmux -u'
 alias tm='tmux'
+# GIT
 # forgit git log 
 alias gl='glo'
+alias gs='git status'
+alias gm='git commit -m'
 
 #mkdir -p /tmp/log
 # This is currently causing problems (fails when you run it anywhere that isn't a git project's root directory)
@@ -76,9 +79,9 @@ source ~/.zinit/bin/zinit.zsh
 # lucid – silence the under-prompt messages
 
 # load with not delays
-zinit lucid light-mode for \
-    zsh-users/zsh-completions \
-    woefe/git-prompt.zsh 
+#zinit lucid light-mode for \
+    #zsh-users/zsh-completions \
+    #woefe/git-prompt.zsh 
 
 # Binary release in archive, from GitHub-releases page.
 # After automatic unpacking it provides program "fzf".
@@ -92,26 +95,44 @@ zinit ice wait"2" lucid
 zinit load 'wfxr/forgit'
 
 # Autosuggestions & fast-syntax-highlighting
-zinit ice wait lucid atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
-zinit light zdharma/fast-syntax-highlighting
+#zinit ice wait lucid atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
+#zinit light zdharma/fast-syntax-highlighting
 
 # zsh-autosuggestions
-zinit ice wait lucid atload"!_zsh_autosuggest_start"
-zinit load zsh-users/zsh-autosuggestions
+#zinit ice wait lucid atload"!_zsh_autosuggest_start"
+#zinit load zsh-users/zsh-autosuggestions
 
+# sharkdp/bat used with forgit
+#zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+#zinit light sharkdp/bat
+
+# diff-so-fancy
+zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
+zinit load zdharma/zsh-diff-so-fancy
 
 # better auto completions with form --help
-zinit ice wait lucid  
+zinit ice wait lucid as"program"
 zinit load dim-an/cod 
 
-zinit ice wait lucid  
-zinit load  MichaelAquilina/zsh-you-should-use 
+#zinit ice wait lucid  
+#zinit load  MichaelAquilina/zsh-you-should-use 
 
 # For GNU ls (the binaries can be gls, gdircolors, e.g. on OS X when installing the
 # coreutils package from Homebrew; you can also use https://github.com/ogham/exa)
 # see https://zdharma.github.io/zinit/wiki/LS_COLORS-explanation/
-zinit ice atclone"dircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!'
+zinit ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
+    atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+    atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
 zinit light trapd00r/LS_COLORS
+
+zinit light woefe/git-prompt.zsh
+    #atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" zdharma/fast-syntax-highlighting \
+zinit wait lucid light-mode for \
+    atinit"zicompinit; zicdreplay" zdharma/fast-syntax-highlighting \
+    atload"!_zsh_autosuggest_start"  zsh-users/zsh-autosuggestions \
+    blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions \
+    MichaelAquilina/zsh-you-should-use 
+
 
 #compinit # Refresh installed completions.
 
