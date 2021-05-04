@@ -65,12 +65,11 @@ if [ ! -d $ZSH ]; then
 fi
 
 # 1. install neovim
-
 echo "[step 1] installing neovim"
-
 if _exists nvim; then
 	echo "nvim has been installed"
 else
+    # requires cmake, libtool-bin
     # neovim form source with no root
 	NVIM_HOME="$HOME/.modules/neovim" # /usr/local/nvim
 	NVIM_TMP="$HOME/.modules/neovim_tmp" # /usr/local/nvim
@@ -122,10 +121,11 @@ else
     write_pathmunge "${NVM_DIR}/versions/node/v${NODE_VERSION}/bin/" ~/.bashrc
 	source $HOME/.bashrc
 
-	echo "export NODE_PATH=\"\${NVM_DIR}/v{$NODE_VERSION}/lib/node_modules\"" >> $HOME/.zshrc
-    write_pathmunge "${NVM_DIR}/versions/node/v${NODE_VERSION}/bin/" ~/.zshrc
     # auto added to bashrc
     echo "export NVM_DIR=$NVM_DIR" >> ~/.zshrc
+    echo "export NODE_VERSION=$NODE_VERSION" >> ~/.zshrc
+	echo "export NODE_PATH=\"\${NVM_DIR}/v\${NODE_VERSION}/lib/node_modules\"" >> $HOME/.zshrc
+    write_pathmunge "\${NVM_DIR}/versions/node/v\${NODE_VERSION}/bin/" ~/.zshrc
     echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\"  # This loads nvm" >> ~/.zshrc
     echo "[ -s \"\$NVM_DIR/bash_completion\" ] && \. \"\$NVM_DIR/bash_completion\"  # This loads nvm bash_completion" >> ~/.zshrc
 
@@ -144,12 +144,12 @@ fi
 echo "[step 9] FZF"
 # Another option is to use fzf extension
 #sudo apt remove -y fzf
-export FZF=$HOME/.fzf
-if ! _exists fzf; then
-    git clone --depth 1 https://github.com/junegunn/fzf.git $FZF
-    $FZF/install --all --no-fish
-	#echo "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh" >> $FZF
-fi
+#export FZF=$HOME/.fzf
+#if ! _exists fzf; then
+    #git clone --depth 1 https://github.com/junegunn/fzf.git $FZF
+    #$FZF/install --all --no-fish
+	##echo "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh" >> $FZF
+#fi
 
 # PathPicker 
 if ! _exists fpp; then
@@ -165,8 +165,10 @@ fi
 
 python -c "print(float('$(tmux -V)'.split()[-1])>2.7)"
 
-#if [! _exists tmux] || []; then
+#if ! _exists tmux; then
 if $(! _exists tmux) || ! $(check_min_version "$(tmux -V)" 2.8) ; then
+
+    # requires byacc, automake to bo installed
     export tmux_dir="$HOME/.modules/tmux"                                 
     echo "tmux will be installed to $tmux_dir"
     git clone https://github.com/tmux/tmux.git $tmux_dir && \

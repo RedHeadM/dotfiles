@@ -68,43 +68,58 @@ alias cd="c"
 # For vim mappings:
 stty -ixon
 
+#zinit self-update
+source ~/.zinit/bin/zinit.zsh
+# zinit doc 
+#https://zdharma.github.io/zinit/wiki/Example-Minimal-Setup/
+# lucid – silence the under-prompt messages
 
-ZPLUG_HOME=~/.zplug # set in deploy skript
-source $ZPLUG_HOME/init.zsh
-# To manage zplug itself like other packages, write the following in your .zshrc
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+# load with not delays
+zinit lucid light-mode for \
+    zsh-users/zsh-completions \
+    woefe/git-prompt.zsh 
 
-# Supports oh-my-zsh plugins and the like
-#zplug "plugins/git",   from:oh-my-zsh
-zplug "plugins/pip", from:oh-my-zsh
-zplug "zsh-users/zsh-autosuggestions"
-#zplug "tarrasch/zsh-command-not-found"
-#zplug "esc/conda-zsh-completion"
-zplug "zsh-users/zsh-completions"
-#zplug "desyncr/auto-ls"
-#zplug "ryanoasis/nerd-fonts"
-zplug "unixorn/git-extra-commands"
-zplug "MichaelAquilina/zsh-you-should-use" # alias reminder if not used
-#zplug "olivierverdier/zsh-git-prompt"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-#zplug "woefe/git-prompt.zsh", use:"{git-prompt.zsh,examples/default.zsh}"
-zplug "woefe/git-prompt.zsh"
-#zplug "jeffreytse/zsh-vi-mode"
-#zplug "Aloxaf/fzf-tab"
-#zplug "marlonrichert/zsh-autocomplete"
-zplug "dim-an/cod" # autocomplete form help
+# Binary release in archive, from GitHub-releases page.
+# After automatic unpacking it provides program "fzf".
+zinit ice from"gh-r" as"program"
+zinit load junegunn/fzf-bin
 
+# ogham/exa, replacement for ls
+zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
+zinit light ogham/exa
 
-#zplug "dim-an/cod" # lean autocompletion with --help
-# Then, source plugins and add commands to $PATH
+# forgit
+#interactive git log viewer (glo), git add with (ga)
+zinit ice wait lucid
+zinit load 'wfxr/forgit'
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    echo; zplug install
-fi
+# diff-so-fancy
+zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
+zinit load zdharma/zsh-diff-so-fancy
 
-#zplug load --verbose
-zplug load 
+# Autosuggestions & fast-syntax-highlighting
+zinit ice wait lucid atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
+zinit light zdharma/fast-syntax-highlighting
+# zsh-autosuggestions
+zinit ice wait lucid atload"!_zsh_autosuggest_start"
+zinit load zsh-users/zsh-autosuggestions
+
+#zinit ice wait"2" lucid as"alias" 
+#zinit load unixorn/git-extra-commands
+
+zinit ice wait lucid  
+zinit load  dim-an/cod 
+
+zinit ice wait lucid  
+zinit load  MichaelAquilina/zsh-you-should-use 
+
+# For GNU ls (the binaries can be gls, gdircolors, e.g. on OS X when installing the
+# coreutils package from Homebrew; you can also use https://github.com/ogham/exa)
+# see https://zdharma.github.io/zinit/wiki/LS_COLORS-explanation/
+zinit ice atclone"dircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!'
+zinit light trapd00r/LS_COLORS
+
+#compinit # Refresh installed completions.
 
 source ~/dotfiles/zsh/keybindings.sh
 
