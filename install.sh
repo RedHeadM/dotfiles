@@ -73,6 +73,14 @@ else
     # neovim form source with no root
 	NVIM_HOME="$HOME/.modules/neovim" # /usr/local/nvim
 	NVIM_TMP="$HOME/.modules/neovim_tmp" # /usr/local/nvim
+
+    # creat ~/.zshrc if not exitsts
+    if [ -d "$NVIM_HOME" ]; then
+        rm -rf  $NVIM_HOME
+    fi
+    if [ -d "$NVIM_TMP" ]; then
+        rm -rf  $NVIM_TMP
+    fi
 	printf "Neovim will be installed into this location:\\n"
 	printf "%s\\n" "${NVIM_HOME}"
 
