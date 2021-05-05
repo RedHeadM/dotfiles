@@ -274,6 +274,7 @@ set omnifunc=syntaxcomplete#Complete
 " COC settings for default from git page
 "*****************************************************************************
  "Some servers have issues with backup files, see #649.
+let g:airline#extensions#hunks#enabled = 0
 set hidden
 set cmdheight=2
 set nobackup
