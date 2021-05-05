@@ -77,8 +77,8 @@ else
 	printf "%s\\n" "${NVIM_HOME}"
 
 	git clone https://github.com/neovim/neovim.git ${NVIM_TMP} && \
-	git checkout d9dd30a955073d602741481d48e1c56d1fcae420  && \
 	cd ${NVIM_TMP} && \
+    git checkout d9dd30a955073d602741481d48e1c56d1fcae420  && \ 
     make CMAKE_INSTALL_PREFIX=${NVIM_HOME} &&\
 	make && make install && \
 	cd ../ && rm -rf ${NVIM_TMP}
