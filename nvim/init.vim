@@ -83,8 +83,8 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'heavenshell/vim-pydocstring'
 
 " Surround
-"Plug 'tpope/vim-surround'
-Plug 'machakann/vim-sandwich' " saiw( makes foo to (foo).
+Plug 'tpope/vim-surround'
+"Plug 'machakann/vim-sandwich' " saiw( makes foo to (foo).
 
 " Indent text object
 Plug 'michaeljsmith/vim-indent-object'
