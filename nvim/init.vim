@@ -724,6 +724,9 @@ if (empty($TMUX))
   endif
 endif
 
+" plython dockstring
+nmap <silent> <Leader>P <Plug>(pydocstring)
+
 " theme
 set background=dark
 
