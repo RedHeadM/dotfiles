@@ -198,7 +198,7 @@ setup_dotfiles
 tmux source ~/.tmux.conf
 
 echo "[step 3] installing node.js packages: neovim and yarn"
-npm install -g neovim yarn
+npm install -g neovim yarn pyright
 
 # 4. install Plug
 
@@ -217,8 +217,8 @@ nvim +'PlugInstall --sync' +qa
 echo "[step 6] installing python packages: neovim"
 #pip install --user neovim notedown
 # TODO https://www.hassanaskary.com/vim/conda/python/2020/04/27/how-to-setup-neovim-with-python-provider-using-conda.html
-pip3 install --user neovim pynvim pep8 flake8 pyflakes pylint isort jedi mypy ptpython
-#pip install --user neovim pynvim pep8 flake8 pyflakes pylint isort jedi mypy
+pip3 install --user neovim pynvim pep8 flake8 pyflakes pylint isort jedi mypy ptpython doq
+#pip install --user neovim pynvim pep8 flake8 pyflakes pylint isort jedi doq
 
 # 7. postprocessing for semshi
 echo "[step 7] post processing step for installing semshi"
@@ -227,7 +227,7 @@ nvim +'UpdateRemotePlugins' +qa
 # 8. install coc plugins
 echo "[step 8] installing coc plugins"
 #nvim +'CocInstall coc-python coc-json coc-jedi'
-nvim +'CocInstall coc-sh coc-json coc-pyright coc-yaml coc-yank coc-vimlsp coc-highlight coc-snippets'
+nvim +'CocInstall coc-sh coc-json coc-pyright coc-yaml coc-yank coc-vimlsp coc-highlight coc-snippets coc-pyright'
 
 
 echo "deploy finished"

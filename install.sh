@@ -39,7 +39,7 @@ check_min_version() {
     # useage:   
     #   if  ! $(check_min_version "$(tmux -V)" 2.9) ; then
     #   if   $(! _exists tmux)   || ! $(check_min_version "$(tmux -V)" 2.4) ; then
-    echo [ "$(python -c "print(float('$(gettext $1)'.split()[-1])>=float($2))")" == "True" ]
+    echo [ "$(python -c "print(float(re.sub('[^A-Za-z]+', '','$(gettext $1)').split()[-1])>=float($2))")" == "True" ]
 }
 
 _exists () {
@@ -173,7 +173,6 @@ if ! _exists fpp; then
 	write_pathmunge $FPP_DIR ~/.bashrc
 fi
 
-python -c "print(float('$(tmux -V)'.split()[-1])>2.7)"
 
 #if ! _exists tmux; then
 if $(! _exists tmux) || ! $(check_min_version "$(tmux -V)" 2.8) ; then

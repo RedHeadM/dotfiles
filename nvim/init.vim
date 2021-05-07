@@ -204,8 +204,8 @@ set nu
 set undofile
 set undodir=/tmp
  
-"mac osx clipboard sharing
-set clipboard=unnamed
+"linux mac osx clipboard sharing
+set clipboard=unnamedplus
 " remove ugly vertical lines on window division
 set fillchars+=vert:\
 
@@ -699,13 +699,13 @@ nnoremap <C-l> :nohl<CR><C-l>:echo "Search Cleared"<CR>
 vnoremap <C-c> "+y
 "map <C-v> "+p
 "map <leader>v "+p
-
+ 
 if has('mouse')
    set mouse=a
  endif
 " caps lock to esc
 "nnoremap <Tab> <Esc>
-
+ 
 " True Colors
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -724,8 +724,12 @@ if (empty($TMUX))
   endif
 endif
 
+" plython dockstring
+nmap <silent> <Leader>P <Plug>(pydocstring)
+
 " theme
 set background=dark
+
 " vearch selction with // 
 vnoremap // y/<C-R>"<CR>
 
@@ -788,5 +792,5 @@ vnoremap > >gv
 vnoremap < <gv
 
 " Open tag in new tab, used with gutentags
-:nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
+":nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
 
