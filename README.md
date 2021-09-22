@@ -2,15 +2,30 @@
 
 ZSH, TMUX, and Vim. 
 
+
+zink f
+
 ## TODO
 - use https://github.com/tmux-plugins/tpm
 - install https://github.com/tmux-plugins/tmux-yank
+
 ## Installation
 
 Once the repo is cloned, execute the deploy script:
+
 ```
+# install nvim, tmux, oh my zsh, node , 
+./isntall.sh
+# install plugins managers and dotfiles
 ./deploy
+# tmux plugins install with TMUX_PREFIX+I 
 ```
+### Update zsh 
+* [Zinit](https://zdharma.github.io/zinit/wiki/)
+```
+zinit update
+```
+
 
 This script guides you through the following:
 
@@ -35,34 +50,24 @@ Upon launching a new shell, the first thing that's evaulated is `zshrc_manager.s
 * `cd` has been reassigned to `cd` and `ls`. Every time you navigate to a new directory, it will display the contents of that directory.
 * `v` has been aliased too: `vim -p`. This let's you open multiple files in vim as tabs. 
 
-### Prompt
 
-The prompt takes on the form:
+### Keybindings (tmux and zshrc)
 
-```
-[plugin, plugin, ...]: 
-```
-
-Each plugin is sensitive to where you are and what you're doing, they reveal themselves when it's contextually relevant. Plugins include:
-
-* `PWD plugin`: always present, tells you where you are. Always the first plugin.
-* `Status code plugin`: appears anytime a program returns with a non-zero status code. Tells you what status code the program completed with. 
-* `Git plugin`: appears when you're in a git repository. Tells you what branch you're on, and how many files have been changed since the last commit.
-* `Sudo plugin`: tells you when you can sudo without a password. Or when you're logged in as root.
-* REMOVED `Time plugin`: appears when a program took more than 1s to execute. Tells you how long it took to execute.
-* `REMOVED PID plugin`: appears when you background a task. Tells you what the PID of the task is.
-
-### Keybindings
 | Key Stroke | What It Does |
 |------------|--------------|
-| Ctrl-H     | Runs ``cd ~/`` |
-| Ctrl-K     | Runs ``cd ..`` |
-| Ctrl-G     | Runs ``git add -A; git commit -v && git push`` |
+| TMUX_PREFIX+I     | Install plugins |
+| TMUX_PREFIX+U     | update plugins |
+| TMUX_PREFIX+f     | fpp file picker |
+| TMUX_PREFIX+r     | realaod tmux config |
+| Ctrl-hjkl     | panel navigation |
+| Ctrl-HJKL     | panel resize |
+| Ctrl-g     | terminal text commit -a 
+| Ctrl-p     | terminal text commit -a and push
+| Ctrl-v     | fzf search and open file
 | Ctrl-V     | Runs ``fc``. Takes last command and puts it in a vim buffer. |
 | Ctrl-S     | Add's ``sudo`` to the beginning of the buffer. |
-| Ctrl-L     | Run's ``ls``. |
-| Ctrl-O     | open finder|
-| Ctrl-P     | Equivalent to pressing ``up arrow``. |
+| Ctrl-u     | `` cd ..``
+| Ctrl-O     | open finder
 
 ### Plugins
 
@@ -88,7 +93,23 @@ Each plugin is sensitive to where you are and what you're doing, they reveal the
 * Status bar tells you date, time, user, and hostname. Especially useful with nested ssh sessions.
 * hjkl to navigate windows
 * HJKL to resize window
-*
+
 ## nvvim installation:
 - http://nvim.fisadev.com/
 
+### Prompt
+
+The prompt takes on the form:
+
+```
+[plugin, plugin, ...]: 
+```
+
+Each plugin is sensitive to where you are and what you're doing, they reveal themselves when it's contextually relevant. Plugins include:
+
+* `PWD plugin`: always present, tells you where you are. Always the first plugin.
+* `Status code plugin`: appears anytime a program returns with a non-zero status code. Tells you what status code the program completed with. 
+* `Git plugin`: appears when you're in a git repository. Tells you what branch you're on, and how many files have been changed since the last commit.
+* `Sudo plugin`: tells you when you can sudo without a password. Or when you're logged in as root.
+* REMOVED `Time plugin`: appears when a program took more than 1s to execute. Tells you how long it took to execute.
+* `REMOVED PID plugin`: appears when you background a task. Tells you what the PID of the task is.

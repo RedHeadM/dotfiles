@@ -97,7 +97,7 @@ else
 fi
 
 
-# 2. install node.js
+# 2. install node.js (for CoC with neovim)
 
 echo "[step 2] installing and node.js"
 if _exists nvm; then
@@ -151,8 +151,7 @@ fi
 
 # 9. install fzf 
 #echo "[step 9] FZF"
-# moved to zsh plugin manger zink
-# Another option is to use fzf extension
+#  moved to zsh plugin manger zink
 #sudo apt remove -y fzf
 #export FZF=$HOME/.fzf
 #if ! _exists fzf; then
