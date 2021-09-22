@@ -83,8 +83,8 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'heavenshell/vim-pydocstring'
 
 " Surround
-Plug 'tpope/vim-surround'
-"Plug 'machakann/vim-sandwich' " saiw( makes foo to (foo).
+"Plug 'tpope/vim-surround'
+Plug 'machakann/vim-sandwich' " saiw( makes foo to (foo).
 
 " Indent text object
 Plug 'michaeljsmith/vim-indent-object'
@@ -348,11 +348,11 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+nmap <F3> <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>F  <Plug>(coc-format-selected)
+nmap <leader>F  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -468,7 +468,6 @@ nnoremap <F5> :call <SID>ToggleSpellLang()<CR>
 " NERDTree -----------------------------
 
 " toggle nerdtree display
-map <F3> :NERDTreeToggle<CR>
 " open nerdtree with the current file selected
 "nmap ,t :NERDTreeFind<CR>
 nmap ,t :NERDTreeToggle<CR>
