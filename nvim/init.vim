@@ -94,7 +94,7 @@ Plug 'jeetsukumaran/vim-indentwise'
 
 " Indentation based movements
 " alig test vipga=
-Plug 'jugunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 
 " Better language packs
 "Plug 'sheerun/vim-polyglot'
