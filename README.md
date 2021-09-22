@@ -13,7 +13,19 @@ Once the repo is cloned, execute the deploy script:
 ./deploy
 # tmux plugins install with TMUX_PREFIX+I 
 ```
-### Update zsh 
+### language server
+Coc set up config with :CocConfig, py example:
+* pyright as linter
+```.json
+{
+  "pyright.enable": true,
+  "python.linting.enabled": true,
+  "python.formatting.provider": "black",
+  "python.pythonPath": "/home/merklinm/.virtualenvs/seg/bin/python",
+  "python.analysis.typeCheckingMode": "off"
+}
+```
+### Update zsh plugins
 * [init update](https://zdharma.github.io/zinit/wiki/)
 ```
 zinit update
