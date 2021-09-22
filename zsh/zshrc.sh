@@ -55,6 +55,7 @@ alias tm='tmux'
 alias gl='glo'
 alias gs='git status'
 alias gm='git commit -m'
+#alias l='git commit -m'
 
 #mkdir -p /tmp/log
 # This is currently causing problems (fails when you run it anywhere that isn't a git project's root directory)
@@ -114,6 +115,10 @@ zinit load zdharma/zsh-diff-so-fancy
 zinit ice wait lucid as"program"
 zinit load dim-an/cod 
 
+# exa, modern ls
+#zinit ice from"gh-r" as"program" mv"exa* -> exa"
+#zinit load ogham/exa
+
 #zinit ice wait lucid  
 #zinit load  MichaelAquilina/zsh-you-should-use 
 
@@ -121,20 +126,25 @@ zinit load dim-an/cod
 # coreutils package from Homebrew; you can also use https://github.com/ogham/exa)
 # see https://zdharma.github.io/zinit/wiki/LS_COLORS-explanation/
 zinit ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
-    atpull'%atclone' pick"clrs.zsh" nocompile'!' \
-    atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
+ atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+ atload='zstyle ":completion:*" list-colors ${(s.:.)LS_COLORS}' # <- no `\` here to work with fzf tab
 zinit light trapd00r/LS_COLORS
 
+zinit light Aloxaf/fzf-tab 
+
+# git promt setup in prompt.sh
 zinit light woefe/git-prompt.zsh
+
     #atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" zdharma/fast-syntax-highlighting \
+
 zinit wait lucid light-mode for \
     atinit"zicompinit; zicdreplay" zdharma/fast-syntax-highlighting \
     atload"!_zsh_autosuggest_start"  zsh-users/zsh-autosuggestions \
     blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions \
     MichaelAquilina/zsh-you-should-use 
 
-
 #compinit # Refresh installed completions.
+
 
 source ~/dotfiles/zsh/keybindings.sh
 
