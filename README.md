@@ -2,13 +2,6 @@
 
 ZSH, TMUX, and Vim. 
 
-
-zink f
-
-## TODO
-- use https://github.com/tmux-plugins/tpm
-- install https://github.com/tmux-plugins/tmux-yank
-
 ## Installation
 
 Once the repo is cloned, execute the deploy script:
@@ -21,7 +14,7 @@ Once the repo is cloned, execute the deploy script:
 # tmux plugins install with TMUX_PREFIX+I 
 ```
 ### Update zsh 
-* [Zinit](https://zdharma.github.io/zinit/wiki/)
+* [init update](https://zdharma.github.io/zinit/wiki/)
 ```
 zinit update
 ```
@@ -37,7 +30,6 @@ This script guides you through the following:
 
 Pretty convenient for configuring new servers.
 
-# Sumary of Changes
 
 ## Basic runtime opperations 
 
@@ -68,6 +60,8 @@ Upon launching a new shell, the first thing that's evaulated is `zshrc_manager.s
 | Ctrl-S     | Add's ``sudo`` to the beginning of the buffer. |
 | Ctrl-u     | `` cd ..``
 | Ctrl-O     | open finder
+| Ctrl-t     | fzf  pick file 
+| Alt-c     | fzf cd to dir 
 
 ### Plugins
 
@@ -81,24 +75,8 @@ Upon launching a new shell, the first thing that's evaulated is `zshrc_manager.s
 * [install fzf] (https://github.com/junegunn/fzf) 
 * Leader key has ben remapped to `,`
  
-### fzf update
-* git: cd ~/.fzf && git pull && ./install
-* vim-plug: :PlugUpdate fzf
-## [Tmux](https://en.wikipedia.org/wiki/Tmux)
-
-* isntall [plugins](https://github.com/tmux-plugins/tpm): install with PREFIX+I
-* `%` has been remapped to `v`.
-* Use vim movement keys for moving between panes. 
-* Copy buffer is coppied to xclip.
-* Status bar tells you date, time, user, and hostname. Especially useful with nested ssh sessions.
-* hjkl to navigate windows
-* HJKL to resize window
-
-## nvvim installation:
-- http://nvim.fisadev.com/
 
 ### Prompt
-
 The prompt takes on the form:
 
 ```
