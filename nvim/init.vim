@@ -160,6 +160,12 @@ Plug 'drewtempelmeyer/palenight.vim' " Theme
 "Plug 'ayu-theme/ayu-vim'
 "Plug 'sonph/onehalf', {'rtp': 'vim/'}
 "Plug 'rakr/vim-one'
+"
+" better highlighting
+" :TSInstall <language_to_install>
+" no diff with Coc
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
