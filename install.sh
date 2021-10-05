@@ -39,7 +39,7 @@ check_min_version() {
     # useage:   
     #   if  ! $(check_min_version "$(tmux -V)" 2.9) ; then
     #   if   $(! _exists tmux)   || ! $(check_min_version "$(tmux -V)" 2.4) ; then
-    echo [ "$(python -c "print(float(re.sub('[^A-Za-z]+', '','$(gettext $1)').split()[-1])>=float($2))")" == "True" ]
+    echo [ "$(python -c "import re; print(float(re.sub('[^A-Za-z]+', '','$(gettext $1)').split()[-1])>=float($2))")" == "True" ]
 }
 
 _exists () {
