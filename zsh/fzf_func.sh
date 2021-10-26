@@ -30,5 +30,13 @@ fkill() {
 #}
 
 nvkill(){
-    kill -9 $(nvidia-smi | grep 'python' | awk '{print $5 }' | fzf )
+
+    kill -9 $(echo $(nvidia-smi | grep 'python' | awk '{print "pid: "$5 " gpu: " $2 " name: "$7 }'| fzf -m | awk '{print $2}'))
+    #local pid
+    #pid=$(nvidia-smi | grep 'python' | awk '{print $5 }'| fzf -m)
+
+    #if [ "x$pid" != "x" ]
+    #then
+        #echo $pid | xargs kill -${1:-9}
+    #fi  
 }

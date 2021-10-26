@@ -148,6 +148,7 @@ zinit wait lucid light-mode for \
 
 
 source ~/dotfiles/zsh/keybindings.sh
+source ~/dotfiles/zsh/fzf_func.sh
 
 # Fix for arrow-key searching
 # start typing + [Up-Arrow] - fuzzy find history forward
