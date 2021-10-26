@@ -28,3 +28,7 @@ fkill() {
      ##vim $file +$line
   ##fi
 #}
+
+nvkill(){
+    kill -9 $(nvidia-smi | grep 'python' | awk '{print $5 }' | fzf )
+}

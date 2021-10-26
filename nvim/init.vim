@@ -65,8 +65,6 @@ Plug 'fisadev/FixedTaskList.vim'
 " Completion from other opened files
 "Plug 'Shougo/context_filetype.vim'
 
-" Python autocompletion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Mulitcusur
 Plug 'mg979/vim-visual-multi', {'branch': 'master'} 
@@ -167,6 +165,8 @@ Plug 'drewtempelmeyer/palenight.vim' " Theme
 "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 
+" Python autocompletion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()

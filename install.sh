@@ -65,10 +65,12 @@ if [ ! -d $ZSH ]; then
 fi
 
 # 1. install neovim
-echo "[step 1] installing neovim"
-if _exists nvim; then
-	echo "nvim has been installed"
-else
+#if _exists nvim; then
+	#echo "nvim has been installed"
+#else
+
+if ! _exists nvim; then
+    echo "[step 1] installing neovim"
     # requires cmake, libtool-bin
     # neovim form source with no root
 	NVIM_HOME="$HOME/.modules/neovim" # /usr/local/nvim
@@ -88,6 +90,7 @@ else
 	cd ${NVIM_TMP} && \
     #git checkout d9dd30a955073d602741481d48e1c56d1fcae420  && \ 
     git checkout release-0.5  && \ 
+    #git checkout release-0.4  && \ 
     make CMAKE_INSTALL_PREFIX=${NVIM_HOME} &&\
 	make && make install && \
 	cd ../ && rm -rf ${NVIM_TMP}

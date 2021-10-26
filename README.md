@@ -8,7 +8,7 @@ Once the repo is cloned, execute the deploy script:
 
 ```
 # install nvim, tmux, oh my zsh, node , 
-./isntall.sh
+bash ./isntall.sh (sh might not work)
 # install plugins managers and dotfiles
 ./deploy
 # tmux plugins install with TMUX_PREFIX+I 
