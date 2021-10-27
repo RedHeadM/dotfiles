@@ -16,27 +16,14 @@ fkill() {
     fi  
 }
 
-# fuzzy grep open via ag with line number
-#fgrep() {
-  ##local file
-  ##local line
-
-  ##read -r file line <<<"$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1, $2}')"
-
-  ##if [[ -n $file ]]
-  ##then
-     ##vim $file +$line
-  ##fi
-#}
-
 nvkill(){
+    local pid
+    pid=$(echo $(nvidia-smi | grep 'python' | awk '{print "pid: "$5 " gpu: " $2 " name: "$7 }'\
+        | fzf -m \
+        | awk '{print $2}')) # last filter out pid  
 
-    kill -9 $(echo $(nvidia-smi | grep 'python' | awk '{print "pid: "$5 " gpu: " $2 " name: "$7 }'| fzf -m | awk '{print $2}'))
-    #local pid
-    #pid=$(nvidia-smi | grep 'python' | awk '{print $5 }'| fzf -m)
-
-    #if [ "x$pid" != "x" ]
-    #then
-        #echo $pid | xargs kill -${1:-9}
-    #fi  
+    if [ "x$pid" != "x" ]
+    then
+        echo $pid | xargs kill -${1:-9}
+    fi  
 }
