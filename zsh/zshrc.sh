@@ -148,6 +148,11 @@ zinit wait lucid light-mode for \
 # A syntax-highlighting pager for git, diff, and grep output
 #zinit ice wait"2" from"gh-r" as"program" mv"delta* -> delta" pick"delta/delta"
 #zinit light dandavison/delta
+# git config --global interactive.diffFilter "diff-so-fancy --patch"
+# diff so fancy, install:
+#git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+#git config --global interactive.diffFilter "diff-so-fancy --patch"
+zinit ice from"gh-r" as"program" pick"diff-so-fancy"; zinit light so-fancy/diff-so-fancy
 
 
 source ~/dotfiles/zsh/keybindings.sh
