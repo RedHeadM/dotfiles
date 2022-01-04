@@ -73,17 +73,8 @@ alias cd="c"
 # For vim mappings:
 stty -ixon
 
-#zinit self-update
-# DONE at installtion now
-# source ~/.zinit/bin/zinit.zsh
-# zinit doc 
-#https://zdharma.github.io/zinit/wiki/Example-Minimal-Setup/
-# lucid – silence the under-prompt messages
-
-# load with not delays
-#zinit lucid light-mode for \
-    #zsh-users/zsh-completions \
-    #woefe/git-prompt.zsh 
+# ZINIT - UPGINS
+# https://github.com/zdharma-continuum/zinit/wiki/%F0%9F%A7%8A-Recommended-ices
 
 # Binary release in archive, from GitHub-releases page.
 # After automatic unpacking it provides program "fzf".
@@ -150,6 +141,13 @@ zinit wait lucid light-mode for \
     MichaelAquilina/zsh-you-should-use 
 
 #compinit # Refresh installed completions.
+# A cat(1) clone with syntax highlighting and Git integration.
+#zinit ice wait from"gh-r" as"program" mv"bat* -> bat" pick"bat/bat"
+#zinit light sharkdp/bat
+
+# A syntax-highlighting pager for git, diff, and grep output
+#zinit ice wait"2" from"gh-r" as"program" mv"delta* -> delta" pick"delta/delta"
+#zinit light dandavison/delta
 
 
 source ~/dotfiles/zsh/keybindings.sh
