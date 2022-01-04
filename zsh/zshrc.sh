@@ -74,7 +74,8 @@ alias cd="c"
 stty -ixon
 
 #zinit self-update
-source ~/.zinit/bin/zinit.zsh
+# DONE at installtion now
+# source ~/.zinit/bin/zinit.zsh
 # zinit doc 
 #https://zdharma.github.io/zinit/wiki/Example-Minimal-Setup/
 # lucid – silence the under-prompt messages
@@ -97,7 +98,7 @@ zinit load 'wfxr/forgit'
 
 # Autosuggestions & fast-syntax-highlighting
 #zinit ice wait lucid atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
-#zinit light zdharma/fast-syntax-highlighting
+#zinit light zdharma-continuum/fast-syntax-highlighting
 
 # zsh-autosuggestions
 #zinit ice wait lucid atload"!_zsh_autosuggest_start"
@@ -109,7 +110,7 @@ zinit load 'wfxr/forgit'
 
 # diff-so-fancy
 zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
-zinit load zdharma/zsh-diff-so-fancy
+zinit load zdharma-continuum/zsh-diff-so-fancy
 
 # better auto completions with form --help
 zinit ice wait lucid as"program"
@@ -136,11 +137,15 @@ zinit light Aloxaf/fzf-tab
 # git promt setup in prompt.sh
 zinit light woefe/git-prompt.zsh
 
-    #atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" zdharma/fast-syntax-highlighting \
+    #atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" zdharma-continuum/fast-syntax-highlighting \
+
+# fix for error zsh-syntax-highlighting: unhandled ZLE widget 'autosuggest-accept'
+# https://gitter.im/zdharma/zinit?at=5fe95372de60814315495d48
+zinit ice wait"0a" lucid atload'_zsh_autosuggest_start; bindkey "^e" autosuggest-accept;'
+zinit light zsh-users/zsh-autosuggestions
 
 zinit wait lucid light-mode for \
-    atinit"zicompinit; zicdreplay" zdharma/fast-syntax-highlighting \
-    atload"!_zsh_autosuggest_start"  zsh-users/zsh-autosuggestions \
+    atinit"zicompinit; zicdreplay" zdharma-continuum/fast-syntax-highlighting \
     blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions \
     MichaelAquilina/zsh-you-should-use 
 
