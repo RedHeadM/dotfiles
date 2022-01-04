@@ -1,5 +1,5 @@
 # requirements:
-# sudo apt-get install -y build-essential cmake autotools-dev automake libtool curl libunibilium4 libtool-bin lua5.3
+# sudo apt-get install -y build-essential cmake autotools-dev automake libtool curl libunibilium4 libtool-bin lua5.3 zsh
 
 write_pathmunge () {
     # only append to path if not set
