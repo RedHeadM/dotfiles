@@ -135,23 +135,24 @@ install_zsh_plugin_manager() {
     # install zinit plugin manager to ~/.zinit/bin
     #sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
-    export ZINK_HOME=~/.zinit/bin
+    ZINK_HOME=~/.zinit/zinit.git
     if [ ! -d $ZINK_HOME ]; then
         echo "zsh plugin install to $ZINK_HOME"
         #curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-        #mkdir $ZINK_HOME
-	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+        mkdir -p $ZINK_HOME
+        #mkdir -p "$(dirname $ZINIT_HOME)"
+        git clone https://github.com/zdharma-continuum/zinit.git "$ZINK_HOME"
         #write_pathmunge $ZPLUG_HOME ~/.zshrc
-        eval $ZINK_HOME/bin/zinit.zsh
+        #eval $ZINK_HOME/bin/zinit.zsh
+		printf "source \"${ZINK_HOME}/zinit.zsh\"\n" >> ~/.zshrc
     else
-        echo "zsh zink plugin was installed"
+        echo "zsh zink plugin was installed: $ZINK_HOME"
     fi #
 
 }
 
 setup_dotfiles() {
     echo "setup for dotfile path: nvim, tmux, zsh "
-
     # backup old files
     #[ ! -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.old
     #[ ! ~/.tmux.conf ] && mv ~/.tmux.conf ~/.tmux.conf.old
@@ -186,48 +187,53 @@ setup_dotfiles() {
     fi
 }
 
+setup_neovim() {
+    install_nvim_plugin_manager
+    echo "setup neovim"
+    # 4. install Plug
+
+    # 5. install plugins via Plug
+    echo "[step 5] installing plugins"
+    if [[ ! -d $HOME/.config/nvim ]]; then
+        mkdir -p $HOME/.config/nvim
+    fi
+    #if [[ ! -f $HOME/.config/nvim/init.vim ]]; then
+        #wget https://gist.githubusercontent.com/wsntxxn/5bbe7856a472985d82f62e1b0895ce60/raw/fc7db25e1af2b9dae8969021c52c21ce06be3bb5/init.vim -P $HOME/.config/nvim/
+    #fi
+
+    nvim +'PlugInstall --sync' +qa
+
+    # 6. install packages via pip
+    echo "[step 6] installing python packages: neovim"
+    #pip install --user neovim notedown
+    # TODO https://www.hassanaskary.com/vim/conda/python/2020/04/27/how-to-setup-neovim-with-python-provider-using-conda.html
+    pip3 install --user neovim pynvim pep8 flake8 pyflakes pylint isort jedi mypy ptpython doq yapf black
+    #pip install --user neovim pynvim pep8 flake8 pyflakes pylint isort jedi doq
+
+    # 7. postprocessing for semshi
+    echo "[step 7] post processing step for installing semshi"
+    nvim +'UpdateRemotePlugins' +qa 
+
+    # 8. install coc plugins
+    echo "[step 8] installing coc plugins"
+    #nvim +'CocInstall coc-python coc-json coc-jedi'
+    nvim +'CocInstall coc-sh coc-json coc-pyright coc-yaml coc-yank coc-vimlsp coc-highlight coc-snippets '
+
+    echo "[step 3] installing node.js packages: neovim and yarn"
+    npm install -g neovim yarn pyright
+}
+
 #check_default_shell
-check_default_shell 
-install_tmux_plugin_manager
-install_nvim_plugin_manager
+#check_default_shell 
+#install_tmux_plugin_manager
+#install_nvim_plugin_manager
 install_zsh_plugin_manager
-setup_dotfiles
+#setup_neovim
+#setup_dotfiles
 
 
 # Initialize TMUX plugin manager is done in dotfiles 
 tmux source ~/.tmux.conf
-
-echo "[step 3] installing node.js packages: neovim and yarn"
-npm install -g neovim yarn pyright
-
-# 4. install Plug
-
-# 5. install plugins via Plug
-echo "[step 5] installing plugins"
-if [[ ! -d $HOME/.config/nvim ]]; then
-    mkdir -p $HOME/.config/nvim
-fi
-#if [[ ! -f $HOME/.config/nvim/init.vim ]]; then
-    #wget https://gist.githubusercontent.com/wsntxxn/5bbe7856a472985d82f62e1b0895ce60/raw/fc7db25e1af2b9dae8969021c52c21ce06be3bb5/init.vim -P $HOME/.config/nvim/
-#fi
-
-nvim +'PlugInstall --sync' +qa
-
-# 6. install packages via pip
-echo "[step 6] installing python packages: neovim"
-#pip install --user neovim notedown
-# TODO https://www.hassanaskary.com/vim/conda/python/2020/04/27/how-to-setup-neovim-with-python-provider-using-conda.html
-pip3 install --user neovim pynvim pep8 flake8 pyflakes pylint isort jedi mypy ptpython doq yapf black
-#pip install --user neovim pynvim pep8 flake8 pyflakes pylint isort jedi doq
-
-# 7. postprocessing for semshi
-echo "[step 7] post processing step for installing semshi"
-nvim +'UpdateRemotePlugins' +qa 
-
-# 8. install coc plugins
-echo "[step 8] installing coc plugins"
-#nvim +'CocInstall coc-python coc-json coc-jedi'
-nvim +'CocInstall coc-sh coc-json coc-pyright coc-yaml coc-yank coc-vimlsp coc-highlight coc-snippets '
 
 
 echo "deploy finished"
