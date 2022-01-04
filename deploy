@@ -140,7 +140,7 @@ install_zsh_plugin_manager() {
         echo "zsh plugin install to $ZINK_HOME"
         #curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
         #mkdir $ZINK_HOME
-        git clone https://github.com/zdharma/zinit.git $ZINK_HOME
+	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
         #write_pathmunge $ZPLUG_HOME ~/.zshrc
         eval $ZINK_HOME/bin/zinit.zsh
     else
