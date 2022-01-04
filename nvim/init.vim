@@ -121,7 +121,7 @@ Plug 'mhinz/vim-signify'
 Plug 'vim-scripts/YankRing.vim'
 
 " Linters
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 " TODO is it running on save? or when?
 " TODO not detecting errors, just style, is it using pylint?
 
@@ -506,19 +506,18 @@ let g:NERDTreeIndicatorMapCustom = {
 " show pending tasks list
 map <F2> :TaskList<CR>
 
-" Neomake ------------------------------
 
 " Run linter on write
 autocmd! BufWritePost * Neomake
 
 " Check code as python3 by default
-let g:neomake_python_python_maker = neomake#makers#ft#python#python()
-let g:neomake_python_flake8_maker = neomake#makers#ft#python#flake8()
-let g:neomake_python_python_maker.exe = 'python3 -m py_compile'
-let g:neomake_python_flake8_maker.exe = 'python3 -m flake8'
+"let g:neomake_python_python_maker = neomake#makers#ft#python#python()
+"let g:neomake_python_flake8_maker = neomake#makers#ft#python#flake8()
+"let g:neomake_python_python_maker.exe = 'python3 -m py_compile'
+"let g:neomake_python_flake8_maker.exe = 'python3 -m flake8'
 " pyton Virtual Environments package:
 "let g:python_host_prog = '/usr/bin/python2.7'
-"let g:python3_host_prog = '/usr/bin/python3.5'
+let g:python3_host_prog = '/usr/bin/python3.8'
 " Fzf ------------------------------
 
 " set fzf's default input to ripgrep instead of find. This also removes
