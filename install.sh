@@ -1,3 +1,6 @@
+# requirements:
+# sudo apt-get install -y build-essential cmake autotools-dev automake libtool curl libunibilium4 libtool-bin lua5.3
+
 write_pathmunge () {
     # only append to path if not set
     # 1 path to bin 
@@ -39,7 +42,7 @@ check_min_version() {
     # useage:   
     #   if  ! $(check_min_version "$(tmux -V)" 2.9) ; then
     #   if   $(! _exists tmux)   || ! $(check_min_version "$(tmux -V)" 2.4) ; then
-    echo [ "$(python -c "import re; print(float(re.sub('[^A-Za-z]+', '','$(gettext $1)').split()[-1])>=float($2))")" == "True" ]
+    echo [ "$(python3 -c "import re; print(float(re.sub('[^A-Za-z]+', '','$(gettext $1)').split()[-1])>=float($2))")" == "True" ]
 }
 
 _exists () {
