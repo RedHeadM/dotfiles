@@ -506,9 +506,9 @@ let g:NERDTreeIndicatorMapCustom = {
 " show pending tasks list
 map <F2> :TaskList<CR>
 
-
+" neomake linter
 " Run linter on write
-autocmd! BufWritePost * Neomake
+"autocmd! BufWritePost * Neomake
 
 " Check code as python3 by default
 "let g:neomake_python_python_maker = neomake#makers#ft#python#python()
