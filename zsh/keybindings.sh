@@ -4,7 +4,7 @@
 		zle accept-line
 	}
 	zle -N up_widget
-	bindkey "^U" up_widget
+	bindkey "^o" up_widget
 
 # git with <ctrl g/G>
 	function git_commit() {
@@ -84,14 +84,14 @@ bindkey "^s" add_sudo
 function open_finder() {
     # open finder gui window for the current dir 
     if [ -x "$(command -v nautilus)" ]; then
-        nautilus .
+        nautilus . &
     elif [ -x "$(command -v open)" ]; then
         # open on max osx
         open .
     fi
 }
 zle -N open_finder
-bindkey "^o" open_finder
+bindkey "^f" open_finder
 
 # zsh-users/zsh-autosuggestions, accept the current suggestion
 bindkey '^e' autosuggest-accept
