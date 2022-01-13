@@ -55,7 +55,7 @@ alias tm='tmux'
 alias gl='glo'
 alias gs='git status'
 alias gm='git commit -m'
-alias gfp='gf && gp'
+alias gfp='gf && git pull'
 #alias l='git commit -m'
 
 #mkdir -p /tmp/log
