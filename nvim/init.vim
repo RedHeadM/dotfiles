@@ -202,6 +202,8 @@ syntax on
 "let g:indentLine_char = '┊'
  let g:indentLine_char = '│'
 let g:indentLine_color_term = 239
+" no auto qoute remove for .json etc
+let g:indentLine_setConceal = 0
 " interactive find replace preview
 set inccommand=nosplit
 " show line numbers
