@@ -80,6 +80,12 @@ function add_sudo() {
 zle -N add_sudo
 bindkey "^s" add_sudo
 
+function open_todo() {
+    vi ~/my.todo
+}
+zle -N open_todo
+bindkey "^z" open_todo
+
 # open finder
 function open_finder() {
     # open finder gui window for the current dir 
