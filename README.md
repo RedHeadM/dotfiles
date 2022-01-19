@@ -70,10 +70,14 @@ Upon launching a new shell, the first thing that's evaulated is `zshrc_manager.s
 | Ctrl-v     | fzf search and open file
 | Ctrl-V     | Runs ``fc``. Takes last command and puts it in a vim buffer. |
 | Ctrl-S     | Add's ``sudo`` to the beginning of the buffer. |
-| Ctrl-u     | `` cd ..``
+| Ctrl-o     | `` cd ..``
 | Ctrl-O     | open finder
 | Ctrl-t     | fzf  pick file 
-| Alt-c     | fzf cd to dir 
+| Alt-c     | fzf cd to dir
+
+### git 
+git diff print better installed with zinit and configure with: 
+[diff-so-fancy](https://github.com/so-fancy/diff-so-fancy)
 
 ### Plugins
 
