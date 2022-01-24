@@ -12,6 +12,8 @@ bash ./isntall.sh (sh might not work)
 # install plugins managers and dotfiles
 ./deploy
 # tmux plugins install with TMUX_PREFIX+I 
+# install https://github.com/so-fancy/diff-so-fancy manual
+
 ```
 ### language server
 Coc set up config with :CocConfig, py example:
