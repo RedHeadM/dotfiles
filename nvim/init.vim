@@ -164,6 +164,8 @@ Plug 'drewtempelmeyer/palenight.vim' " Theme
 " no diff with Coc
 "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+" l syntax highlighting that I use for C++
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Python autocompletion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
