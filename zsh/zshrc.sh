@@ -105,7 +105,7 @@ zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
 zinit load zdharma-continuum/zsh-diff-so-fancy
 
 # better auto completions with form --help
-zinit ice wait lucid as"program"
+zinit ice wait"2" lucid as"program"
 zinit load dim-an/cod 
 
 # exa, modern ls
