@@ -109,3 +109,17 @@ Each plugin is sensitive to where you are and what you're doing, they reveal the
 * `Sudo plugin`: tells you when you can sudo without a password. Or when you're logged in as root.
 * REMOVED `Time plugin`: appears when a program took more than 1s to execute. Tells you how long it took to execute.
 * `REMOVED PID plugin`: appears when you background a task. Tells you what the PID of the task is.
+### ssh key note
+
+file `~/.ssh/config` example how to config ssh keys
+```config
+Host github.com
+HostName github.com
+IdentityFile ~/.ssh/github_id_ras
+User git
+
+Host gitlab.com
+HostName gitlab.com
+IdentityFile ~/.ssh/gitlab_id_rsa
+User git
+```
