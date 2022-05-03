@@ -109,7 +109,7 @@ install_node () {
     # 2. install node.js (for CoC with neovim)
     # 3. install node.js packages via npm
     echo "[step 2] installing and node.js"
-    if _exists nvm; then
+    if _exists node; then
         echo "node has been installed"
     else
         # nvm environment variables
@@ -207,10 +207,10 @@ install_conda () {
     fi
 }
 
-#install_nvim
+install_nvim
 install_node
 install_fpp
-#install_conda
+install_conda
 #install_tmux
 
 echo "shell ${SHELL}"
