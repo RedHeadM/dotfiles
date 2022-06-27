@@ -31,6 +31,8 @@ Coc set up config with :CocConfig, py example:
 * [init update](https://zdharma.github.io/zinit/wiki/)
 ```
 zinit update
+# if comint error occurs run compint
+zinit cclear
 ```
 
 
