@@ -155,6 +155,8 @@ zinit wait lucid light-mode for \
 #git config --global interactive.diffFilter "diff-so-fancy --patch"
 zinit ice from"gh-r" as"program" pick"diff-so-fancy"; zinit light so-fancy/diff-so-fancy
 
+zinit ice from"gh-r" as"program" pick"glow_1.4.1_linux_x86_64.tar.gz" extract"glow_1.4.1_linux_x86_64.tar.gz"; zinit light charmbracelet/glow
+
 
 source ~/dotfiles/zsh/keybindings.sh
 source ~/dotfiles/zsh/fzf_func.sh
