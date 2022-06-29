@@ -217,10 +217,10 @@ setup_neovim() {
     # 8. install coc plugins
     echo "[step 8] installing coc plugins"
     #nvim +'CocInstall coc-python coc-json coc-jedi'
-    nvim +'CocInstall coc-sh coc-json coc-pyright coc-yaml coc-yank coc-vimlsp coc-highlight coc-snippets '
+    nvim +'CocInstall coc-sh coc-json coc-pyright coc-yaml coc-yank coc-vimlsp coc-highlight coc-snippets coc-toml coc-clangd coc-toml'
 
     echo "[step 3] installing node.js packages: neovim and yarn"
-    npm install -g neovim yarn pyright
+    npm install -g neovim yarn pyright coc-toml
 }
 
 #check_default_shell
