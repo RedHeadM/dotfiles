@@ -125,3 +125,19 @@ HostName gitlab.com
 IdentityFile ~/.ssh/gitlab_id_rsa
 User git
 ```
+
+## ssh keys example
+
+update `~/.ssh/config`
+
+```
+Host github.com
+HostName github.com
+IdentityFile ~/.ssh/github_id_ras
+User git
+
+Host gitlab.com
+HostName gitlab.com
+IdentityFile ~/.ssh/gitlab_id_rsa
+User git
+```
