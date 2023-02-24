@@ -1,5 +1,7 @@
+#!/bin/sh
 # requirements:
 # sudo apt-get install -y build-essential cmake autotools-dev automake libtool curl libunibilium4 libtool-bin lua5.3 zsh
+# run with sh install.sh
 
 write_pathmunge () {
     # only append to path if not set
@@ -62,10 +64,19 @@ fi
 # 0. oh-my-zsh shell 
 # requires zsh to be installed
 echo "[step 10] zsh"
-export ZSH=$HOME/.oh-my-zsh
-if [ ! -d $ZSH ]; then
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
+
+install_zsh () {
+    export ZSH=$HOME/.oh-my-zsh
+    #if [ ! -d $ZSH ]; then
+        #sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    #fi
+
+    if ! _exists zsh; then
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    else
+        echo "zsh previously  installed"
+    fi
+}
 
 # 1. install neovim
 #if _exists nvim; then
@@ -93,7 +104,7 @@ install_nvim () {
         git clone https://github.com/neovim/neovim.git ${NVIM_TMP} && \
         cd ${NVIM_TMP} && \
         #git checkout d9dd30a955073d602741481d48e1c56d1fcae420  && \ 
-        git checkout release-0.5  && \ 
+        git checkout release-0.8  && \ 
         #git checkout release-0.4  && \ 
         make CMAKE_INSTALL_PREFIX=${NVIM_HOME} &&\
         make && make install && \
@@ -207,10 +218,15 @@ install_conda () {
     fi
 }
 
-install_nvim
-install_node
-install_fpp
-install_conda
+
+source "/home/markus/.zinit/zinit.git/zinit.zsh"
+source '/home/markus/dotfiles/zsh/zshrc_manager.sh'
+
+install_zsh
+#install_nvim
+#install_node
+#install_fpp
+#install_conda
 #install_tmux
 
 echo "shell ${SHELL}"
