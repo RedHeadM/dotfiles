@@ -84,7 +84,7 @@ install_zsh () {
 #else
 
 install_nvim () {
-    if ! _exists nvim; then
+    #if ! _exists nvim; then
         echo "[step 1] installing neovim"
         # requires cmake, libtool-bin
         # neovim form source with no root
@@ -103,17 +103,16 @@ install_nvim () {
 
         git clone https://github.com/neovim/neovim.git ${NVIM_TMP} && \
         cd ${NVIM_TMP} && \
-        #git checkout d9dd30a955073d602741481d48e1c56d1fcae420  && \ 
         git checkout release-0.8  && \ 
-        #git checkout release-0.4  && \ 
-        make CMAKE_INSTALL_PREFIX=${NVIM_HOME} &&\
-        make && make install && \
-        cd ../ && rm -rf ${NVIM_TMP}
+        make CMAKE_C_FLAGS_RELEASE=-O3 CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=${NVIM_HOME} &&\
+        #make && make install && \
+        make install && \
+        #cd ../ && rm -rf ${NVIM_TMP}
         write_pathmunge "${NVIM_HOME}/bin/" ~/.bashrc
         write_pathmunge "${NVIM_HOME}/bin/" ~/.zshrc
         #source ~/.bashrc
         source $HOME/.bashrc
-    fi
+    #fi
 }
 
 install_node () {
@@ -222,8 +221,8 @@ install_conda () {
 source "/home/markus/.zinit/zinit.git/zinit.zsh"
 source '/home/markus/dotfiles/zsh/zshrc_manager.sh'
 
-install_zsh
-#install_nvim
+#install_zsh
+install_nvim
 #install_node
 #install_fpp
 #install_conda

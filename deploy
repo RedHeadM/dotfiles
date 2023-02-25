@@ -225,8 +225,8 @@ setup_neovim() {
 
 #check_default_shell
 #check_default_shell 
-install_tmux_plugin_manager
-install_nvim_plugin_manager
+#install_tmux_plugin_manager
+#install_nvim_plugin_manager
 #install_zsh_plugin_manager
 #setup_neovim
 #setup_dotfiles
