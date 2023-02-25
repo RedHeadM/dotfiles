@@ -82,7 +82,7 @@ require('lazy').setup({
   },
 
   { -- Theme inspired by Atom
-    'drewtempelmeyer/palenight.vim',
+    'kyazdani42/nvim-palenight.lua',
     priority = 1000,
     -- config = function()
     --   vim.cmd.colorscheme 'palenight'
@@ -185,6 +185,7 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+vim.o.background = "dark"
 
 -- [[ Basic Keymaps ]]
 
