@@ -120,8 +120,8 @@ install_node () {
     # 3. install node.js packages via npm
     echo "[step 2] installing and node.js"
     if _exists node; then
-        echo "node has been installed"
-    else
+    #     echo "node has been installed"
+    # else
         # nvm environment variables
         export NVM_DIR="$HOME/.modules/node"
         #export NODE_VERSION=15.14.0
@@ -130,9 +130,7 @@ install_node () {
         printf "Node.js will be installed into this location:\\n"
         printf "%s\\n" "${NVM_DIR}"
 
-        if [[ ! -d ${NVM_DIR} ]]; then
-            mkdir -p ${NVM_DIR}
-        fi
+        mkdir -p ${NVM_DIR}
         # install nvm
         # https://github.com/creationix/nvm#install-script
         # https://github.com/nvm-sh/nvm
@@ -222,8 +220,8 @@ source "/home/markus/.zinit/zinit.git/zinit.zsh"
 source '/home/markus/dotfiles/zsh/zshrc_manager.sh'
 
 #install_zsh
-install_nvim
-#install_node
+#install_nvim
+install_node
 #install_fpp
 #install_conda
 #install_tmux
@@ -233,7 +231,7 @@ echo "path ${PATH}"
 echo "[step END] print versions"
 echo $(zsh --version)
 echo "nvm "$(nvm --version)
-echo $(nvim --version)
+# echo $(nvim --version)
 #echo $(fzf --version)
 echo $(tmux -V)
 echo $(fpp --verion)
