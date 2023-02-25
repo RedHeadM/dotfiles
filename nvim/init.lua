@@ -478,3 +478,4 @@ cmp.setup {
 -- TODO: 
 -- jumpmovment https://www.youtube.com/watch?v=2KLFjhGjmbI&ab_channel=CodetotheMoon
 -- fzf symoles, word search
+-- debug prints https://github.com/andrewferrier/debugprint.nvim
