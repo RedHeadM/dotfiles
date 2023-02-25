@@ -375,10 +375,18 @@ end
 --
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
+-- see https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  -- pyright = {},
+  bashls = {},
+  yamlls = {},
+  pyright = {},
+  dockerls = {},
+  clangd = {},
+  cmake = {}, 
+  marksman = {}, -- markdown
+  taplo = {}, -- TOML
   -- rust_analyzer = {},
   -- tsserver = {},
 
@@ -405,6 +413,7 @@ local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
+  automatic_installation = true
 }
 
 mason_lspconfig.setup_handlers {
