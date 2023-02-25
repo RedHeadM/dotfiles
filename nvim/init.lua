@@ -474,3 +474,6 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+-- TODO: 
+-- jumpmovment https://www.youtube.com/watch?v=2KLFjhGjmbI&ab_channel=CodetotheMoon
+-- fzf symoles, word search
