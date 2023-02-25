@@ -113,36 +113,36 @@ require('lazy').setup({
     },
   },
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+-- "gc" to comment visual regions/lines
+{ 'numToStr/Comment.nvim', opts = {} },
 
-  -- Fuzzy Finder (files, lsp, etc)
-  { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
+-- Fuzzy Finder (files, lsp, etc)
+{ 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
 
-  -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-  -- Only load if `make` is available. Make sure you have the system
-  -- requirements installed.
-  {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    -- NOTE: If you are having trouble with this installation,
-    --       refer to the README for telescope-fzf-native for more instructions.
-    build = 'make',
-    cond = function()
-      return vim.fn.executable 'make' == 1
-    end,
+-- Fuzzy Finder Algorithm which requires local dependencies to be built.
+-- Only load if `make` is available. Make sure you have the system
+-- requirements installed.
+{
+  'nvim-telescope/telescope-fzf-native.nvim',
+  -- NOTE: If you are having trouble with this installation,
+  --       refer to the README for telescope-fzf-native for more instructions.
+  build = 'make',
+  cond = function()
+    return vim.fn.executable 'make' == 1
+  end,
+},
+
+{ -- Highlight, edit, and navigate code
+  'nvim-treesitter/nvim-treesitter',
+  dependencies = {
+    'nvim-treesitter/nvim-treesitter-textobjects',
   },
+  config = function()
+    pcall(require('nvim-treesitter.install').update { with_sync = true })
+  end,
+},
 
-  { -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-    },
-    config = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
-    end,
-  },
-
-  { import = 'custom.plugins' },
+ -- import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -200,24 +200,24 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
+callback = function()
+  vim.highlight.on_yank()
+end,
+group = highlight_group,
+pattern = '*',
 })
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
+defaults = {
+  mappings = {
+    i = {
+      ['<C-u>'] = false,
+      ['<C-d>'] = false,
     },
   },
+},
 }
 
 -- Enable telescope fzf native, if installed
@@ -227,11 +227,11 @@ pcall(require('telescope').load_extension, 'fzf')
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
+-- You can pass additional configuration to telescope to change theme, layout, etc.
+require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+  winblend = 10,
+  previewer = false,
+})
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 
@@ -245,10 +245,10 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
-  -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim' },
+-- Add languages to be installed here that you want installed for treesitter
+ensure_installed = {'bash', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim','cmake','json','latex','markdown','make','toml','comment' },
 
-  -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
 
   highlight = { enable = true },
@@ -384,7 +384,7 @@ local servers = {
   pyright = {},
   dockerls = {},
   clangd = {},
-  cmake = {}, 
+  -- neocmake = {}, 
   marksman = {}, -- markdown
   taplo = {}, -- TOML
   -- rust_analyzer = {},
