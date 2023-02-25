@@ -81,13 +81,22 @@ require('lazy').setup({
     end,
   },
 
+  { -- Theme inspired by Atom
+    'drewtempelmeyer/palenight.vim',
+    priority = 1000,
+    -- config = function()
+    --   vim.cmd.colorscheme 'palenight'
+    -- end,
+  },
+
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        -- theme = 'onedark',
+        theme = 'palenight',
         component_separators = '|',
         section_separators = '',
       },
