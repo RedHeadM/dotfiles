@@ -125,6 +125,10 @@ zinit light trapd00r/LS_COLORS
 
 # Replace zsh's default completion selection menu with fzf!
 zinit light Aloxaf/fzf-tab 
+# zsh-fzf-history-search
+zinit ice lucid wait'0'
+zinit light joshskidmore/zsh-fzf-history-search
+
 
 # git promt setup in prompt.sh
 zinit light woefe/git-prompt.zsh
@@ -153,7 +157,7 @@ zinit wait lucid light-mode for \
 # diff so fancy, install:
 #git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 #git config --global interactive.diffFilter "diff-so-fancy --patch"
-zinit ice from"gh-r" as"program" pick"diff-so-fancy"; zinit light so-fancy/diff-so-fancy
+# zinit ice from"gh-r" as"program" pick"diff-so-fancy"; zinit light so-fancy/diff-so-fancy
 
 zinit ice from"gh-r" as"program" pick"glow_1.4.1_linux_x86_64.tar.gz" extract"glow_1.4.1_linux_x86_64.tar.gz"; zinit light charmbracelet/glow
 
