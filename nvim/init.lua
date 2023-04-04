@@ -322,6 +322,9 @@ vim.keymap.set('v', 'H', '^', { desc = 'Move begining of Line' })
 vim.keymap.set('v', 'L', 'g_')
 vim.keymap.set('n', 'J', '5j')
 vim.keymap.set('n', 'K', '5k')
+
+vim.keymap.set('v', 'J', '5j')
+vim.keymap.set('v', 'K', '5k')
 -- Keep selection when indenting/outdenting.
 vim.keymap.set('v', '>', '>gv')
 vim.keymap.set('v', '<', '<gv')
