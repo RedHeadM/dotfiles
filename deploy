@@ -202,25 +202,12 @@ setup_neovim() {
         #wget https://gist.githubusercontent.com/wsntxxn/5bbe7856a472985d82f62e1b0895ce60/raw/fc7db25e1af2b9dae8969021c52c21ce06be3bb5/init.vim -P $HOME/.config/nvim/
     #fi
 
-    nvim +'PlugInstall --sync' +qa
-
     # 6. install packages via pip
     echo "[step 6] installing python packages: neovim"
     #pip install --user neovim notedown
     # TODO https://www.hassanaskary.com/vim/conda/python/2020/04/27/how-to-setup-neovim-with-python-provider-using-conda.html
-    pip3 install --user neovim pynvim pep8 flake8 pyflakes pylint isort jedi mypy ptpython doq yapf black
-    #pip install --user neovim pynvim pep8 flake8 pyflakes pylint isort jedi doq
+    pip install --user neovim pynvim pep8 flake8 pyflakes pylint isort jedi mypy ptpython doq yapf black
 
-    # 7. postprocessing for semshi
-    echo "[step 7] post processing step for installing semshi"
-    nvim +'UpdateRemotePlugins' +qa 
-
-    # 8. install coc plugins
-    echo "[step 8] installing coc plugins"
-    #nvim +'CocInstall coc-python coc-json coc-jedi'
-    nvim +'CocInstall coc-sh coc-json coc-pyright coc-yaml coc-yank coc-vimlsp coc-highlight coc-snippets coc-toml coc-clangd coc-toml'
-
-    echo "[step 3] installing node.js packages: neovim and yarn"
     npm install -g neovim yarn pyright coc-toml
     }
 
