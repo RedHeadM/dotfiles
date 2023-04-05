@@ -25,7 +25,6 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
-
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
@@ -330,6 +329,24 @@ vim.keymap.set('v', '>', '>gv')
 vim.keymap.set('v', '<', '<gv')
 
 -- LSP settings.
+-- LSP python pyright. set virtualenv
+---
+--
+--
+nvim_lsp = require('lspconfig')
+nvim_lsp.pyright.setup({
+    before_init = function(_, config)
+        print("foo")
+        -- local p
+        -- if vim.env.VIRTUAL_ENV then
+        --     p = lsp_util.path.join(vim.env.VIRTUAL_ENV, "bin", "python")
+        -- else
+        --     p = find_cmd("python3", ".venv/bin", config.root_dir)
+        -- end
+        -- config.settings.python.pythonPath = p
+        config.settings.python.pythonPath = "/home/merkmrde/.pyenv/versions/torch_examples/bin/python"
+    end,
+})
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
@@ -421,13 +438,30 @@ mason_lspconfig.setup {
   automatic_installation = true
 }
 
+lsp_path = require('lspconfig').util.path
 mason_lspconfig.setup_handlers {
   function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-    }
+    if server_name == "pyright" then
+      -- pyrigh set automatically pyenv if setup
+      require('lspconfig')[server_name].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = servers[server_name],
+        before_init = function(_, config)
+          if vim.env.VIRTUAL_ENV then
+            local p = lsp_path.join(vim.env.VIRTUAL_ENV, "bin", "python")
+            config.settings.python.pythonPath = p
+          end
+        end,
+      }
+
+    else
+      require('lspconfig')[server_name].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = servers[server_name],
+      }
+    end
   end,
 }
 
