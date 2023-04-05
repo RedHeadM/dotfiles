@@ -108,16 +108,7 @@ install_tmux_plugin_manager() {
     fi #
 } #
 
-install_nvim_plugin_manager() {
-    echo "nvim installing plug"
-    if [ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]; then
-        sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-               https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-    else
-        echo "nvim plug plugin was installed"
-    fi #
-}
 
 install_zsh_plugin_manager() {
     echo "zsh plugin manager installing plug"
@@ -189,7 +180,6 @@ setup_dotfiles() {
 }
 
 setup_neovim() {
-    install_nvim_plugin_manager
     echo "setup neovim"
     # 4. install Plug
 
@@ -214,7 +204,6 @@ setup_neovim() {
 #check_default_shell
 #check_default_shell 
 #install_tmux_plugin_manager
-#install_nvim_plugin_manager
 #install_zsh_plugin_manager
 #setup_neovim
 #setup_dotfiles
