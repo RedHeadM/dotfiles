@@ -111,8 +111,11 @@ require('lazy').setup({
       show_trailing_blankline_indent = false,
     },
   },
-
--- "gc" to comment visual regions/lines
+{
+    "machakann/vim-sandwich",
+    event = "VeryLazy",
+},
+-- "gcc" in normal mode and "gc" to comment visual regions/lines
 { 'numToStr/Comment.nvim', opts = {} },
 
 -- Fuzzy Finder (files, lsp, etc)
