@@ -183,7 +183,8 @@ setup_dotfiles() {
 		printf "source '$HOME/dotfiles/zsh/zshrc_manager.sh'\n" >> ~/.zshrc
 		# overwrite
 		printf "source-file $HOME/dotfiles/tmux/tmux.conf" > ~/.tmux.conf
-		printf "so $HOME/dotfiles/nvim/init.vim" > ~/.config/nvim/init.vim
+		# printf "so $HOME/dotfiles/nvim/init.vim" > ~/.config/nvim/init.vim # old vim config
+                printf "dofile(\"$HOME/dotfiles/nvim/init.lua\")" > ~/.config/nvim/init.lua
     fi
 }
 
@@ -221,7 +222,7 @@ setup_neovim() {
 
     echo "[step 3] installing node.js packages: neovim and yarn"
     npm install -g neovim yarn pyright coc-toml
-}
+    }
 
 #check_default_shell
 #check_default_shell 
