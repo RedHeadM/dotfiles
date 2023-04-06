@@ -115,6 +115,7 @@ require('lazy').setup({
     "machakann/vim-sandwich",
     event = "VeryLazy",
 },
+
 -- "gcc" in normal mode and "gc" to comment visual regions/lines
 { 'numToStr/Comment.nvim', opts = {} },
 
@@ -132,6 +133,26 @@ require('lazy').setup({
   cond = function()
     return vim.fn.executable 'make' == 1
   end,
+},
+
+-- Nvimtree (File Explorer)
+{
+  'nvim-tree/nvim-tree.lua',
+  -- lazy = true,
+    event = "VeryLazy",
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+  },
+},
+
+-- Git diff
+{
+  'sindrets/diffview.nvim',
+  -- lazy = true,
+    event = "VeryLazy",
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+  },
 },
 
 { -- Highlight, edit, and navigate code
@@ -513,9 +534,39 @@ cmp.setup {
   },
 }
 
+
+---- TODO move to nvim-tree-config.lua
+-- disable netrw at the very start of your init.lua (strongly advised)
+--
+-- [[ search telescope ]]
+
+-- vim.keymap.set('n', '<leader>p', require("nvim-tree.api").tree.toggle(), { desc = '[p] toogle file tree' })
+vim.keymap.set('n', '<leader>t', ':NvimTreeToggle<CR>', { desc = '[t] file tree toogle' })
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+-- empty setup using defaults
+require("nvim-tree").setup()
+
+-- OR setup with some options
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 -- TODO: 
 -- jumpmovment https://www.youtube.com/watch?v=2KLFjhGjmbI&ab_channel=CodetotheMoon
 -- fzf symoles, word search
 -- debug prints https://github.com/andrewferrier/debugprint.nvim
+-- git add visual blocks https://vi.stackexchange.com/questions/10368/git-fugitive-how-to-git-add-a-visually-selected-chunk-of-code
+--
+
