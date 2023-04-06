@@ -1,6 +1,11 @@
 #!/bin/sh
 # requirements:
 # sudo apt-get install -y build-essential cmake autotools-dev automake libtool curl libunibilium4 libtool-bin lua5.3 zsh
+# gettext
+#  sudo apt-get install xsel # or xclip # for tmux yank 
+#  sudo appt-get install ripgrept-get install ripgrep
+# sudo apt-get install mercurial # Requirements sindrets/diffview.nvim 
+# 
 # run with sh install.sh
 
 write_pathmunge () {
