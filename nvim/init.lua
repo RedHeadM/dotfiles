@@ -273,7 +273,7 @@ require('nvim-treesitter.configs').setup {
 ensure_installed = {'bash', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'yaml', 'vim','cmake','json','latex','markdown','make','toml','comment','dockerfile','diff', 'vimdoc','diff','cmake'},
 
 -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-  auto_install = false,
+  auto_install = true,
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
