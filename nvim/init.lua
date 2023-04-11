@@ -141,6 +141,17 @@ require('lazy').setup({
   -- lazy = true,
     event = "VeryLazy",
   dependencies = {
+    'nvim-lua/plenary.nvim',
+    'nvim-treesitter/nvim-treesitter',
+  },
+},
+
+-- auto debug prints
+{
+  'ThePrimeagen/refactoring.nvim',
+  -- lazy = true,
+  event = "VeryLazy",
+  dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
 },
@@ -567,6 +578,35 @@ require("nvim-tree").setup({
 -- jumpmovment https://www.youtube.com/watch?v=2KLFjhGjmbI&ab_channel=CodetotheMoon
 -- fzf symoles, word search
 -- debug prints https://github.com/andrewferrier/debugprint.nvim
+-- alternative debug prints https://github.com/ThePrimeagen/refactoring.nvim 
 -- git add visual blocks https://vi.stackexchange.com/questions/10368/git-fugitive-how-to-git-add-a-visually-selected-chunk-of-code
 --
 
+-- ThePrimeagen/refactoring.nvim  debug prints
+-- You can also use below = true here to to change the position of the printf
+-- statement (or set two remaps for either one). This remap must be made in normal mode.
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>rp",
+	":lua require('refactoring').debug.printf({below = false})<CR>",
+	{ noremap = true }
+)
+
+-- Print var refactoring
+require('refactoring').setup({
+  -- overriding printf statement for cpp
+  print_var_statements = {
+      -- add a custom printf statement for cpp
+      python = {
+          'print(f"%s {%s = }")'
+      }
+  }
+})
+
+-- Remap in normal mode and passing { normal = true } will automatically find the variable under the cursor and print it
+vim.api.nvim_set_keymap("n", "<leader>rv", ":lua require('refactoring').debug.print_var({ normal = true })<CR>", { noremap = true , desc = '[r]efactoring print [v]ar'})
+-- Remap in visual mode will print whatever is in the visual selection
+vim.api.nvim_set_keymap("v", "<leader>rv", ":lua require('refactoring').debug.print_var({})<CR>", { noremap = true, desc = '[r]efactoring print [v]ar' })
+
+-- Cleanup function: this remap should be made in normal mode
+vim.api.nvim_set_keymap("n", "<leader>rc", ":lua require('refactoring').debug.cleanup({})<CR>", { desc = '[r]efactoring [c]clean' })
