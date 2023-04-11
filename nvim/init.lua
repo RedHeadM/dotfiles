@@ -433,7 +433,7 @@ local servers = {
   marksman = {}, -- markdown
   texlab = {}, -- latex
   taplo = {}, -- TOML
-  -- rust_analyzer = {},
+  azure_pipelines_ls = {},
   -- tsserver = {},
 
   lua_ls = {
