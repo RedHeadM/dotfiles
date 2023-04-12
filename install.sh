@@ -106,9 +106,13 @@ install_nvim () {
         printf "Neovim will be installed into this location:\\n"
         printf "%s\\n" "${NVIM_HOME}"
 
+        # set compiler with with env var not CMAKE_C(XX)_COMPILER
+        # see https://stackoverflow.com/questions/17275348/how-to-specify-new-gcc-path-for-cmake
         git clone https://github.com/neovim/neovim.git ${NVIM_TMP} && \
         cd ${NVIM_TMP} && \
-        git checkout release-0.8  && \ 
+        export CC=gcc-10  && \ 
+        export CXX=g++-10  && \
+        git checkout release-0.9  && \ 
         make CMAKE_C_FLAGS_RELEASE=-O3 CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=${NVIM_HOME} &&\
         #make && make install && \
         make install && \
