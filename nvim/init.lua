@@ -364,24 +364,6 @@ vim.keymap.set('v', '>', '>gv')
 vim.keymap.set('v', '<', '<gv')
 
 -- LSP settings.
--- LSP python pyright. set virtualenv
----
---
---
-nvim_lsp = require('lspconfig')
-nvim_lsp.pyright.setup({
-    before_init = function(_, config)
-        print("foo")
-        -- local p
-        -- if vim.env.VIRTUAL_ENV then
-        --     p = lsp_util.path.join(vim.env.VIRTUAL_ENV, "bin", "python")
-        -- else
-        --     p = find_cmd("python3", ".venv/bin", config.root_dir)
-        -- end
-        -- config.settings.python.pythonPath = p
-        config.settings.python.pythonPath = "/home/merkmrde/.pyenv/versions/torch_examples/bin/python"
-    end,
-})
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
