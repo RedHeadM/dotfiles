@@ -572,22 +572,14 @@ require("nvim-tree").setup({
 require('refactoring').setup({
     prompt_func_return_type = {
         python = false,
-        go = true,
         cpp = true,
         c = true,
-        java = true,
-        php = true,
-        rust = true
     },
     -- prompt for function parameters
     prompt_func_param_type = {
         python = false,
-        go = true,
         cpp = true,
         c = true,
-        java = true,
-        php = true,
-        rust = true,
     },
   -- overriding printf statement for cpp
   print_var_statements = {
@@ -611,6 +603,6 @@ vim.api.nvim_set_keymap("v", "<leader>rd", ":lua require('refactoring').debug.pr
 -- Cleanup function: this remap should be made in normal mode
 vim.api.nvim_set_keymap("n", "<leader>rc", ":lua require('refactoring').debug.cleanup({})<CR>", { desc = '[r]efactoring [c]clean' })
 -- Remaps for the refactoring operations currently offered by the plugin
-vim.api.nvim_set_keymap("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false, desc = '[r]efactoring: extract [f]unction'  })
+vim.api.nvim_set_keymap("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false, desc = '[r]efactoring: extract [f]unction'  })
 -- vim.api.nvim_set_keymap("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false, desc = '[r]efactoring: [e]xtract function to [f]ile'})
 vim.api.nvim_set_keymap("v", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], {noremap = true, silent = true, expr = false, desc = '[r]efactoring: extract [v]ar'})
