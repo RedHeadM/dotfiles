@@ -54,12 +54,20 @@ function edit_and_run() {
     then
         # user start writing
         BUFFER="vi \"$BUFFER\""
+	zle accept-line
     else
         # fzf file pick
         #^M or \n is used to represent the Enter key so that the command is run automatically.,cc
-        BUFFER="vi \$(fzf)"
+	selected_file=$(eval $FZF_DEFAULT_COMMAND | fzf)
+	if [ -z "$selected_file" ]
+	then
+		# echo "\$var is empty"
+	else
+		# nothing selected
+		BUFFER="vi $selected_file"
+		zle accept-line
+	fi
     fi
-        zle accept-line
 }
 zle -N edit_and_run
 bindkey "^v" edit_and_run
