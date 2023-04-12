@@ -139,14 +139,14 @@ require('lazy').setup({
 {
   'nvim-tree/nvim-tree.lua',
   -- lazy = true,
-    event = "VeryLazy",
+    -- event = "VeryLazy",
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
   },
 },
 
--- auto debug prints
+-- refactoring and auto debug prints
 {
   'ThePrimeagen/refactoring.nvim',
   -- lazy = true,
@@ -585,15 +585,28 @@ require("nvim-tree").setup({
 -- ThePrimeagen/refactoring.nvim  debug prints
 -- You can also use below = true here to to change the position of the printf
 -- statement (or set two remaps for either one). This remap must be made in normal mode.
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>rp",
-	":lua require('refactoring').debug.printf({below = false})<CR>",
-	{ noremap = true }
-)
 
 -- Print var refactoring
 require('refactoring').setup({
+    prompt_func_return_type = {
+        python = false,
+        go = true,
+        cpp = true,
+        c = true,
+        java = true,
+        php = true,
+        rust = true
+    },
+    -- prompt for function parameters
+    prompt_func_param_type = {
+        python = false,
+        go = true,
+        cpp = true,
+        c = true,
+        java = true,
+        php = true,
+        rust = true,
+    },
   -- overriding printf statement for cpp
   print_var_statements = {
       -- add a custom printf statement for cpp
@@ -602,11 +615,20 @@ require('refactoring').setup({
       }
   }
 })
-
--- Remap in normal mode and passing { normal = true } will automatically find the variable under the cursor and print it
-vim.api.nvim_set_keymap("n", "<leader>rv", ":lua require('refactoring').debug.print_var({ normal = true })<CR>", { noremap = true , desc = '[r]efactoring print [v]ar'})
+-- require("telescope").load_extension("refactoring")
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>rp",
+	":lua require('refactoring').debug.printf({below = false})<CR>",
+	{ noremap = true, desc = '[r]efactoring [p]rint' }
+)
+-- Remap in normal mode and passing { normal = prue } will automatically find the variable under the cursor and print it
+vim.api.nvim_set_keymap("n", "<leader>rd", ":lua require('refactoring').debug.print_var({ normal = true })<CR>", { noremap = true , desc = '[r]efactoring print [debug] var'})
 -- Remap in visual mode will print whatever is in the visual selection
-vim.api.nvim_set_keymap("v", "<leader>rv", ":lua require('refactoring').debug.print_var({})<CR>", { noremap = true, desc = '[r]efactoring print [v]ar' })
-
+vim.api.nvim_set_keymap("v", "<leader>rd", ":lua require('refactoring').debug.print_var({})<CR>", { noremap = true, desc = '[r]efactoring print [d]ebug var' })
 -- Cleanup function: this remap should be made in normal mode
 vim.api.nvim_set_keymap("n", "<leader>rc", ":lua require('refactoring').debug.cleanup({})<CR>", { desc = '[r]efactoring [c]clean' })
+-- Remaps for the refactoring operations currently offered by the plugin
+vim.api.nvim_set_keymap("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false, desc = '[r]efactoring: extract [f]unction'  })
+-- vim.api.nvim_set_keymap("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false, desc = '[r]efactoring: [e]xtract function to [f]ile'})
+vim.api.nvim_set_keymap("v", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], {noremap = true, silent = true, expr = false, desc = '[r]efactoring: extract [v]ar'})
