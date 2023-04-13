@@ -57,6 +57,8 @@ alias gs='git status'
 alias gm='git commit -m'
 alias gfp='gf && git pull'
 #alias l='git commit -m'
+#exa --time-style=long-iso --git -g
+alias l="exa --time-style=long-iso --git -g"
 
 #mkdir -p /tmp/log
 # This is currently causing problems (fails when you run it anywhere that isn't a git project's root directory)
@@ -66,10 +68,14 @@ alias gfp='gf && git pull'
  #Custom cd
 c() {
 	cd $1;
-    ls;
-	#ls -U | head -4
+	if ! command -v exa &> /dev/null
+	then
+		ls; # fallback
+	else
+		l; # exa 
+	fi
 }
-alias cd="c"
+# alias cd="c"
 
 # For vim mappings:
 stty -ixon
@@ -109,8 +115,10 @@ zinit ice wait"2" lucid as"program"
 zinit load dim-an/cod 
 
 # exa, modern ls
-#zinit ice from"gh-r" as"program" mv"exa* -> exa"
-#zinit load ogham/exa
+# zinit ice from"gh-r" as"program" mv"exa* -> exa"
+# zinit load ogham/exa
+zinit ice as"command" from"gh-r" bpick"exa-linux-x86_64-musl-*" pick"bin/exa"
+zinit light ogham/exa
 
 #zinit ice wait lucid  
 #zinit load  MichaelAquilina/zsh-you-should-use 
