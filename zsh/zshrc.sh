@@ -58,7 +58,8 @@ alias gm='git commit -m'
 alias gfp='gf && git pull'
 #alias l='git commit -m'
 #exa --time-style=long-iso --git -g
-alias l="exa --time-style=long-iso --git -g"
+alias l="exa --time-style=long-iso --git --icons -l" 
+alias ls="exa --time-style=long-iso --git"
 
 #mkdir -p /tmp/log
 # This is currently causing problems (fails when you run it anywhere that isn't a git project's root directory)
@@ -68,12 +69,7 @@ alias l="exa --time-style=long-iso --git -g"
  #Custom cd
 c() {
 	cd $1;
-	if ! command -v exa &> /dev/null
-	then
-		ls; # fallback
-	else
-		l; # exa 
-	fi
+	ls;
 }
 # alias cd="c"
 

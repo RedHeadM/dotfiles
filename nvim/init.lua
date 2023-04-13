@@ -231,6 +231,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -344,9 +345,9 @@ ensure_installed = {'bash', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 't
 }
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float,{  desc = '[e]xpand diagnostic'})
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {  desc = 'Goto prev [d]iagnostic'})
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {  desc = 'Goto next [d]iagnostic'})
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, {  desc = '[e]xpand diagnostic'})
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {  desc = '[q]quickfix document list diagnostic'})
 
 -- [[Movment]]
@@ -583,7 +584,7 @@ require('refactoring').setup({
   print_var_statements = {
       -- add a custom printf statement for cpp
       python = {
-          'print(f"%s {%s = }")'
+          'print(f"DEBUG: %s {%s}")'
       }
   }
 })
