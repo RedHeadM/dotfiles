@@ -202,11 +202,11 @@ setup_neovim() {
     }
 
 #check_default_shell
-#check_default_shell 
-#install_tmux_plugin_manager
-#install_zsh_plugin_manager
+check_default_shell 
+install_tmux_plugin_manager
+install_zsh_plugin_manager
 #setup_neovim
-#setup_dotfiles
+setup_dotfiles
 
 
 # Initialize TMUX plugin manager is done in dotfiles 
