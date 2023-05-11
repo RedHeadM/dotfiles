@@ -15,7 +15,9 @@
 
 		if [ -z "$BUFFER" ];
 			then
-				BUFFER="git commit -v"
+				# BUFFER="git commit -v"
+				# open vim with fugitive.vim in full screen
+				BUFFER="vi -c ':Git |:on'"
 		fi
 				
 		zle accept-line
