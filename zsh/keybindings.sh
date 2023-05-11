@@ -17,7 +17,8 @@
 			then
 				# BUFFER="git commit -v"
 				# open vim with fugitive.vim in full screen
-				BUFFER="vi -c ':Git |:on'"
+				# alias to "vi -c ':Git |:on'"
+				BUFFER="gfug"
 		fi
 				
 		zle accept-line
