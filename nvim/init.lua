@@ -183,7 +183,14 @@ require('lazy').setup({
 -- See `:help vim.o`
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
+-- disable highlight with ESC
+vim.api.nvim_set_keymap(
+	"n",
+	"<esc>",
+	":noh <CR>",
+	{ noremap = true, desc = '[esc] disable highlight' }
+)
 
 -- Make line numbers default
 vim.wo.number = true
