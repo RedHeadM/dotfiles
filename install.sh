@@ -1,5 +1,4 @@
-#!/bin/sh
-# requirements:
+#!/bin/sh # requirements:
 # sudo apt-get install -y build-essential cmake autotools-dev automake libtool curl libunibilium4 libtool-bin lua5.3 zsh
 # gettext
 #  sudo apt-get install xsel # or xclip # for tmux yank 
@@ -224,13 +223,44 @@ install_conda () {
     fi
 }
 
+install_pyenv () {
+    PYENV_ROOT=~/.modules/pyenv 
+    # if command -v pyenv &> /dev/null
+    # then
+    #     echo "pyenv was installed before, it will not be installed"
+    #     exit 1
+    # fi
+    #
+    echo "pyenv installed to "$PYENV_ROOT" "
+
+    apt-get update && apt-get install -y git-core wget curl build-essential
+    apt-get install -y libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev ca-certificates  llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev mecab-ipadic-utf8
+    curl https://pyenv.run | bash
+    export PATH="$PYENV_ROOT/.pyenv/bin:$PATH"
+    pyenv update
+    pyenv --version
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"nfigure && make -C src
+
+    # if [ -e ~/.zshrc ]
+    # then
+    #     echo "zsh setup"
+    #     echo "export PYENV_ROOT=\"$PYENV_ROOT/.pyenv\"" >> ~/.zprofile
+    #     echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zprofile
+    #     #echo 'eval "$(pyenv init --path)"' >> ~/.zprofile
+    #     echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
+    #     echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+    # fi
+}
+
 
 source "/home/markus/.zinit/zinit.git/zinit.zsh"
 source '/home/markus/dotfiles/zsh/zshrc_manager.sh'
 
 #install_zsh
-#install_nvim
-install_node
+# install_nvim
+# install_node
+install_pyenv
 #install_fpp
 #install_conda
 #install_tmux
