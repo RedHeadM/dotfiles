@@ -185,7 +185,7 @@ require('lazy').setup({
 -- Set highlight on search
 vim.o.hlsearch = true
 -- disable highlight with ESC
-vim.api.nvim_set_keymap(
+vim.keymap.set(
 	"n",
 	"<esc>",
 	":noh <CR>",
@@ -250,6 +250,14 @@ group = highlight_group,
 pattern = '*',
 })
 
+
+-- controll C to save
+vim.keymap.set(
+	{ 'n', 'v','i' },
+	"<C-s>",
+	":w <CR> ",
+	{ noremap = true, desc = '[esc] disable highlight' }
+)
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
