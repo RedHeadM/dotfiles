@@ -51,11 +51,25 @@ function ros2_bbnv_setup() {
 zle -N ros2_bbnv_setup
 bindkey "^w" ros2_bbnv_setup
 
-function ros2_real_robot_setup() {
-	export ROS_DOMAIN_ID=0
-	export ROS_LOCALHOST_ONLY=0 
-	export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+function ros2_topic_completion() {
+    topic_selected="$(ros2_fzf_topic_select)"
+	if [ -z "$topic_selected" ]
+	then
+		return
+	fi
+    if [ -n "$BUFFER" ];
+    then
+        # user start writing
+	#
+        BUFFER="$BUFFER $topic_selected"
+    else
+        BUFFER="ros2 topic echo $topic_selected"
+    fi
+    zle accept-line
 }
+zle -N ros2_topic_completion
+bindkey "^t" ros2_topic_completion
+
     
 # home
    # function goto_home() { 
