@@ -40,6 +40,22 @@ function git_prepare() {
 }
 zle -N git_prepare
 bindkey "^p" git_prepare
+
+function ros2_bbnv_setup() {
+	echo "[INFO] ros2_bbnv_setup start"
+	source /opt/ros/humble/setup.zsh
+	source /opt/bbnv/setup.zsh
+	echo "[INFO] ros2_bbnv_setup end"
+	zle accept-line
+}
+zle -N ros2_bbnv_setup
+bindkey "^w" ros2_bbnv_setup
+
+function ros2_real_robot_setup() {
+	export ROS_DOMAIN_ID=0
+	export ROS_LOCALHOST_ONLY=0 
+	export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+}
     
 # home
    # function goto_home() { 
