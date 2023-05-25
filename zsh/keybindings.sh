@@ -87,7 +87,7 @@ function edit_and_run() {
     if [ -n "$BUFFER" ];
     then
         # user start writing
-        BUFFER="vi \"$BUFFER\""
+        BUFFER="vi $BUFFER"
 	zle accept-line
     else
         # fzf file pick
