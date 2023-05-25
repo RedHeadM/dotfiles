@@ -1,45 +1,45 @@
 # dir up with arrow
-	function up_widget() {
-		BUFFER="cd .."
-		zle accept-line
-	}
-	zle -N up_widget
-	bindkey "^o" up_widget
+function up_widget() {
+	BUFFER="cd .."
+	zle accept-line
+}
+zle -N up_widget
+bindkey "^o" up_widget
 
 # git with <ctrl g/G>
-	function git_commit() {
-		if [ -n "$BUFFER" ];
-			then
-				BUFFER="git commit -m \"$BUFFER\""
-		fi
+function git_commit() {
+	if [ -n "$BUFFER" ];
+		then
+			BUFFER="git commit -m \"$BUFFER\""
+	fi
 
-		if [ -z "$BUFFER" ];
-			then
-				# BUFFER="git commit -v"
-				# open vim with fugitive.vim in full screen
-				BUFFER="vi -c ':Git |:on'"
-		fi
-				
-		zle accept-line
-	}
-	zle -N git_commit
-	bindkey "^g" git_commit
+	if [ -z "$BUFFER" ];
+		then
+			# BUFFER="git commit -v"
+			# open vim with fugitive.vim in full screen
+			BUFFER="vi -c ':Git |:on'"
+	fi
+			
+	zle accept-line
+}
+zle -N git_commit
+bindkey "^g" git_commit
 
-	function git_prepare() {
-		if [ -n "$BUFFER" ];
-			then
-				BUFFER="git commit -a -m \"$BUFFER\" && git push"
-		fi
+function git_prepare() {
+	if [ -n "$BUFFER" ];
+		then
+			BUFFER="git commit -a -m \"$BUFFER\" && git push"
+	fi
 
-		if [ -z "$BUFFER" ];
-			then
-				BUFFER="git add -u && git commit -v && git push"
-		fi
-				
-		zle accept-line
-	}
-	zle -N git_prepare
-	bindkey "^p" git_prepare
+	if [ -z "$BUFFER" ];
+		then
+			BUFFER="git add -u && git commit -v && git push"
+	fi
+			
+	zle accept-line
+}
+zle -N git_prepare
+bindkey "^p" git_prepare
     
 # home
    # function goto_home() { 
