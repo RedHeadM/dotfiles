@@ -82,7 +82,7 @@ stty -ixon
 # Binary release in archive, from GitHub-releases page.
 # After automatic unpacking it provides program "fzf".
 zinit ice from"gh-r" as"program"
-zinit load junegunn/fzf-bin
+zinit load junegunn/fzf
 
 # forgit
 #interactive git log viewer (glo), git add with (ga)
