@@ -41,6 +41,7 @@ function ros2_topic_preview(){
 function ros2_fzf_topic_select(){
     topic_seleted=$(ros2 topic list | fzf --height 40% --preview "\echo \"TOPIC: {}\" && \
         ros2 topic info {} && \
+        echo \"---\" && \
         ros2 topic echo --once {} | head -n 25")
-    echo $topic_seleted
+    echo $topic_seleted  
 }

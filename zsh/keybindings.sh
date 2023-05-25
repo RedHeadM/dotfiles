@@ -52,16 +52,18 @@ zle -N ros2_bbnv_setup
 bindkey "^w" ros2_bbnv_setup
 
 function ros2_topic_completion() {
+   
     topic_selected="$(ros2_fzf_topic_select)"
 	if [ -z "$topic_selected" ]
 	then
+		# no seletion do nothing
 		return
 	fi
     if [ -n "$BUFFER" ];
     then
         # user start writing
-	#
-        BUFFER="$BUFFER $topic_selected"
+	BUFFER="${BUFFER} $topic_selected"
+	BUFFER="$BUFFER" | xargs
     else
         BUFFER="ros2 topic echo $topic_selected"
     fi
