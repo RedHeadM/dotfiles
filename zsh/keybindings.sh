@@ -42,6 +42,9 @@ zle -N git_prepare
 bindkey "^p" git_prepare
 
 function ros2_bbnv_setup() {
+	export ROS_VERSION=2
+	export ROS_PYTHON_VERSION=3
+	export ROS_DISTRO=humble
 	echo "[INFO] ros2_bbnv_setup start"
 	source /opt/ros/humble/setup.zsh
 	source /opt/bbnv/setup.zsh
