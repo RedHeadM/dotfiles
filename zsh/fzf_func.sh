@@ -39,9 +39,15 @@ function ros2_topic_preview(){
 }
 
 function ros2_fzf_topic_select(){
-    topic_seleted=$(ros2 topic list | fzf --height 40% --preview "\echo \"TOPIC: {}\" && \
-        ros2 topic info {} && \
-        echo \"---\" && \
-        ros2 topic echo --once {} | head -n 25")
+    topic_seleted=$(ros2 topic list | fzf --header "ROS2 Topic List fzf" --height 50% \
+        --preview "\echo \"TOPIC: {}\" | batcat --style changes -l yaml --color=always  --paging never && \
+            ros2 topic info {} | batcat --style changes -l yaml --color=always  --paging never && \
+            echo \"---\" && \
+            ros2 topic echo --once {} | head -n 25 | batcat --style changes -l yaml --color=always  --paging never"
+        )
     echo $topic_seleted  
+}
+
+function path_pretty_print(){
+    echo "${PATH//:/$'\n'}"
 }
