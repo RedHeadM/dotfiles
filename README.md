@@ -141,3 +141,6 @@ HostName gitlab.com
 IdentityFile ~/.ssh/gitlab_id_rsa
 User git
 ```
+
+## Issues
+- pyright lSP and `opencv-python` missing import fix https://github.com/emacs-lsp/lsp-pyright/issues/41

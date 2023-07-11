@@ -183,7 +183,14 @@ require('lazy').setup({
 -- See `:help vim.o`
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
+-- disable highlight with ESC
+vim.keymap.set(
+	"n",
+	"<esc>",
+	":noh <CR>",
+	{ noremap = true, desc = '[esc] disable highlight' }
+)
 
 -- Make line numbers default
 vim.wo.number = true
@@ -243,6 +250,14 @@ group = highlight_group,
 pattern = '*',
 })
 
+
+-- controll C to save
+vim.keymap.set(
+	{ 'n', 'v','i' },
+	"<C-s>",
+	":w <CR> ",
+	{ noremap = true, desc = '[esc] disable highlight' }
+)
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
