@@ -99,8 +99,8 @@ zinit load 'wfxr/forgit'
 #zinit load zsh-users/zsh-autosuggestions
 
 # sharkdp/bat used with forgit
-#zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
-#zinit light sharkdp/bat
+zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zinit light sharkdp/bat
 
 # diff-so-fancy
 zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
@@ -115,6 +115,7 @@ zinit load dim-an/cod
 # zinit load ogham/exa
 zinit ice as"command" from"gh-r" bpick"exa-linux-x86_64-musl-*" pick"bin/exa"
 zinit light ogham/exa
+
 
 #zinit ice wait lucid  
 #zinit load  MichaelAquilina/zsh-you-should-use 
