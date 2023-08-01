@@ -61,6 +61,9 @@ alias gfp='gf && git pull'
 alias l="exa --time-style=long-iso --git --icons -l" 
 alias ls="exa --time-style=long-iso --git"
 
+# open vim with fugitive.vim in full screen
+alias gfug="vi -c ':Git |:on'"
+
 #mkdir -p /tmp/log
 # This is currently causing problems (fails when you run it anywhere that isn't a git project's root directory)
 # alias vs="v `git status --porcelain | sed -ne 's/^ M //p'`"
