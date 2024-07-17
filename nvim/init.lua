@@ -145,14 +145,14 @@ require('lazy').setup({
   },
 },
 
-{
-  'nvim-treesitter/nvim-treesitter-context',
-  lazy = true,
-    -- event = "VeryLazy",
-  dependencies = {
-    'nvim-treesitter/nvim-treesitter',
-  },
-},
+-- {
+--   'nvim-treesitter/nvim-treesitter-context',
+--   lazy = true,
+--     -- event = "VeryLazy",
+--   dependencies = {
+--     'nvim-treesitter/nvim-treesitter',
+--   },
+-- },
 
 -- refactoring and auto debug prints
 {
@@ -379,22 +379,22 @@ ensure_installed = {'bash', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 't
   },
 }
 
-require'treesitter-context'.setup{
-  enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-  max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-  min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-  line_numbers = true,
-  multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
-  trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-  mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
-  -- Separator between context and content. Should be a single character string, like '-'.
-  -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-  separator = nil,
-  zindex = 20, -- The Z-index of the context window
-  on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-}
-
-vim.keymap.set('n', '<leader>n', function() require("treesitter-context").go_to_context() end, {silent = true,  desc = 'Goto [c]ontext'})
+-- require'treesitter-context'.setup{
+--   enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+--   max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+--   min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+--   line_numbers = true,
+--   multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
+--   trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+--   mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
+--   -- Separator between context and content. Should be a single character string, like '-'.
+--   -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+--   separator = nil,
+--   zindex = 20, -- The Z-index of the context window
+--   on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+-- }
+--
+-- vim.keymap.set('n', '<leader>n', function() require("treesitter-context").go_to_context() end, {silent = true,  desc = 'Goto [c]ontext'})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {  desc = 'Goto prev [d]iagnostic'})
@@ -461,6 +461,7 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
+
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -472,7 +473,26 @@ local servers = {
   -- gopls = {},
   bashls = {},
   yamlls = {},
-  pyright = {},
+  -- pyright = {},-- python
+  pylsp  = {-- python
+    -- https://jdhao.github.io/2023/07/22/neovim-pylsp-setup/
+    plugins = {
+        -- formatter options
+        black = { enabled = true },
+        autopep8 = { enabled = false },
+        yapf = { enabled = false },
+        -- linter options
+        pylint = { enabled = true, executable = "pylint" },
+        pyflakes = { enabled = false },
+        pycodestyle = { enabled = false },
+        -- type checker
+        pylsp_mypy = { enabled = true },
+        -- auto-completion options
+        jedi_completion = { fuzzy = true },
+        -- import sorting
+        pyls_isort = { enabled = true },
+    },
+  },
   dockerls = {},
   clangd = {}, -- C++
   cmake = {},
@@ -481,7 +501,6 @@ local servers = {
   taplo = {}, -- TOML
   azure_pipelines_ls = {},
   -- tsserver = {},
-
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
