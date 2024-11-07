@@ -292,8 +292,75 @@ vim.keymap.set(
 	{ noremap = true, desc = '[esc] disable highlight' }
 )
 -- [[ Configure Telescope ]]
+-- fn to shorten file path:https://github.com/nvim-telescope/telescope.nvim/issues/2014#issuecomment-1873229658
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "TelescopeResults",
+	callback = function(ctx)
+		vim.api.nvim_buf_call(ctx.buf, function()
+			vim.fn.matchadd("TelescopeParent", "\t\t.*$")
+			vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
+		end)
+	end,
+})
+-- shortenPath function to shorten a path to a specified maximum length
+function shortenPath(path, maxLength)
+    -- Default maxLength to 20 if not provided
+    maxLength = maxLength or 20
+
+    -- Split the path into components using "/" as the separator
+    local parts = {}
+    for part in string.gmatch(path, "[^/]+") do
+        table.insert(parts, part)
+    end
+
+    -- If the path is already within maxLength characters, return it unchanged
+    if #path <= maxLength then
+        return path
+    end
+
+    -- Initialize the shortened path with the first directory
+    local shortened = { parts[1] }
+    local length = #parts[1]
+
+    -- Iterate over the middle directories, keeping the last part intact
+    local i = 2
+    while i < #parts do
+        local middle_length = length + 3 + #parts[#parts]  -- +3 for "/.../"
+        if middle_length + #parts[i] + #parts[#parts] <= maxLength then
+            -- Add the middle part if adding it doesn't exceed maxLength
+            table.insert(shortened, parts[i])
+            length = length + 1 + #parts[i]  -- +1 for "/"
+        else
+            -- If adding the next part would exceed maxLength, break here
+            table.insert(shortened, "...")
+            break
+        end
+        i = i + 1
+    end
+
+    -- Add the last directory part to the shortened path
+    table.insert(shortened, parts[#parts])
+
+    -- Join the components back together with "/"
+    return table.concat(shortened, "/")
+end
+
+local function filenameFirst(_, path)
+	local tail = vim.fs.basename(path)
+	local parent = vim.fs.dirname(path)
+	if parent == "." then return tail end
+        parent= shortenPath(parent, 40)
+        -- parent = string.format("%s\t\t%s", parent, tail)
+	-- return string.format("%s\t\t%s", tail, parent)
+	return string.format("%s/%s", parent, tail)
+end
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
+pickers = {
+    find_files = {
+            path_display = filenameFirst,
+    }
+	},
 defaults = {
   mappings = {
     i = {
@@ -332,7 +399,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
 -- Add languages to be installed here that you want installed for treesitter
-ensure_installed = {'bash', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'yaml', 'vim','cmake','json','latex','markdown','make','toml','comment','dockerfile','diff', 'vimdoc','diff','cmake'},
+ensure_installed = {'bash', 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'yaml', 'vim','cmake','json','markdown','make','toml','comment','dockerfile','diff', 'vimdoc','diff','cmake'},
 
 -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = true,
@@ -512,7 +579,7 @@ local servers = {
   clangd = {}, -- C++
   cmake = {},
   marksman = {}, -- markdown
-  texlab = {}, -- latex
+  -- texlab = {}, -- latex
   taplo = {}, -- TOML
   azure_pipelines_ls = {},
   -- tsserver = {},
